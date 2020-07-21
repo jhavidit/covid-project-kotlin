@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            tools:context=".LoginActivity">
+
+            <ImageView
+                android:layout_width="105dp"
+                android:layout_height="196dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:contentDescription="@string/login_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/login_image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/enter_your_email_id"
+                android:textColor="#707070"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background">
+
+                    <ImageView
+                        android:id="@+id/email_image"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="13dp"
+                        android:contentDescription="@string/email_icon"
+                        android:src="@drawable/email_icon"
+                        android:tint="#707070" />
+
+                    <EditText
+                        android:id="@+id/emailId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_toEndOf="@id/email_image"
+                        android:layout_toRightOf="@id/email_image"
+                        android:background="#F1F1F1"
+                        android:inputType="textEmailAddress"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:ignore="Autofill,LabelFor" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/invalid_email_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/invalid_email_id"
+                android:textColor="#DB4437"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/enter_your_password"
+                android:textColor="#707070"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background">
+
+                    <ImageView
+                        android:id="@+id/password_image"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="13dp"
+                        android:contentDescription="@string/password_icon"
+                        android:src="@drawable/password_icon"
+                        android:tint="#707070" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etPasswordLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/password_image"
+                        android:layout_toRightOf="@id/password_image"
+                        android:gravity="center_vertical"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginRight="3dp"
+                            android:background="#F1F1F1"
+                            android:inputType="textPassword"
+                            android:textSize="14sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                android:background="@drawable/submit_button_background"
+                android:text="@string/sign_in"
+                android:textAllCaps="false"
+                android:textColor="#99FFFFFF" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>
