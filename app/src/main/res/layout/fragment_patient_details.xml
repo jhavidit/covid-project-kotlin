@@ -435,23 +435,29 @@
                         android:textStyle="bold"
                         android:layout_toRightOf="@id/id_status" />
 
-                    <Button
-                        android:shadowColor="@color/white"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="0dp"
                         android:layout_below="@id/title_declined"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_marginEnd="17dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="32dp"
+                        app:cardBackgroundColor="#008DB9"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/button_bg"
-                        android:fontFamily="@font/sen_bold"
-                        android:text="Submit"
-                        android:textAllCaps="false"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:layout_marginRight="17dp"
-                        android:layout_marginLeft="16dp" />
+                        app:cardCornerRadius="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="Submit"
+                            android:textColor="#fff"
+                            android:textSize="16sp" />
+                    </androidx.cardview.widget.CardView>
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
