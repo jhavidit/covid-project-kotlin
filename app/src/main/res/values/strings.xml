@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Covid Tracker</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="diagnosis_pending">Diagnosis Pending</string>
     <string name="_345">345</string>
