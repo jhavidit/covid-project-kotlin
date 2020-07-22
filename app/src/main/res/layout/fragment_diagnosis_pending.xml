@@ -5,8 +5,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="16dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -172,9 +171,12 @@
                 android:layout_below="@id/recycler_view"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="#F1F1F1"
-                app:cardCornerRadius="4dp">
+                app:cardCornerRadius="4dp"
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

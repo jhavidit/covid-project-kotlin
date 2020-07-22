@@ -9,10 +9,48 @@
         android:id="@+id/diagnosisPendingFragment"
         android:name="com.dsckiet.covidtracker.DiagnosisPendingFragment"
         android:label="DiagnosisPendingFragment"
-        tools:layout="@layout/fragment_diagnosis_pending"/>
+        tools:layout="@layout/fragment_diagnosis_pending">
+        <action
+            android:id="@+id/action_diagnosisPendingFragment_to_diagnosisCompleteFragment"
+            app:destination="@id/diagnosisCompleteFragment" />
+        <action
+            android:id="@+id/action_diagnosisPendingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_diagnosisPendingFragment_to_patientDetailsFragment"
+            app:destination="@id/patientDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.dsckiet.covidtracker.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_diagnosisPendingFragment"
+            app:destination="@id/diagnosisPendingFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_diagnosisCompleteFragment"
+            app:destination="@id/diagnosisCompleteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientDetailsFragment"
+        android:name="com.dsckiet.covidtracker.PatientDetailsFragment"
+        android:label="PatientDetailsFragment"
+        tools:layout="@layout/fragment_patient_details">
+        <action
+            android:id="@+id/action_patientDetailsFragment_to_diagnosisPendingFragment"
+            app:destination="@id/diagnosisPendingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diagnosisCompleteFragment"
+        android:name="com.dsckiet.covidtracker.DiagnosisCompleteFragment"
+        android:label="DiagnosisCompleteFragment"
+        tools:layout="@layout/fragment_diagnosis_complete">
+        <action
+            android:id="@+id/action_diagnosisCompleteFragment_to_diagnosisPendingFragment"
+            app:destination="@id/diagnosisPendingFragment" />
+        <action
+            android:id="@+id/action_diagnosisCompleteFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

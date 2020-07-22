@@ -7,4 +7,5 @@
     <color name="black">#424242</color>
     <color name="textColor">#707070</color>
     <color name="white">#F1F1F1</color>
+<!--    Combine common color names & references using Ctrl+Shift+R-->
 </resources>
