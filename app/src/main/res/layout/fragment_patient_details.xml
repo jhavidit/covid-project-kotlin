@@ -1,120 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="40dp"
         tools:context=".MainActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="10.4dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="41dp"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/vector" />
-
-            <TextView
-                android:id="@+id/title"
+            <LinearLayout
+                android:id="@+id/profile_group"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="10.6dp"
-                android:layout_toEndOf="@id/back_button"
-                android:fontFamily="@font/sen_extrabold"
-                android:text="Patients Details"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_back_btn" />
+
+                <TextView
+                    android:id="@+id/dp_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/sen_extrabold"
+                    android:text="@string/patient_details"
+                    android:textColor="#008DB9"
+                    android:textSize="28sp" />
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/patient_card_top"
+                android:id="@+id/doc_profile_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:layout_marginLeft="41dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="41dp"
+                android:layout_below="@id/profile_group"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="#008DB9"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardElevation="8dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/blue">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/patient_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="19dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/sen_reg"
-                        android:text="P1AS56"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/patient_name"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/patient_id"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_toStartOf="@id/call_button"
-                        android:fontFamily="@font/sen_extrabold"
-                        android:text="Rohan Mehta"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                    <TextView
-                        android:id="@+id/patient_gender_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/patient_name"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="20dp"
-                        android:fontFamily="@font/sen_reg"
-                        android:text="Male | 62 years old"
-                        android:textColor="#ffffff"
-                        android:textSize="12sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="@string/pt51s1"
+                            android:textColor="#fff"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/sen_extrabold"
+                            android:text="@string/rohan_mehta"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="@string/male_62_years_old"
+                            android:textColor="#fff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/call_button"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="20dp"
-                        android:src="@drawable/grp_14" />
-
-
-                </RelativeLayout>
-
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginLeft="12dp"
+                        android:src="@drawable/doct_img" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/title_personInfo"
                 android:layout_width="match_parent"
-                android:layout_height="19dp"
-                android:layout_below="@id/patient_card_top"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/doc_profile_card"
                 android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/sen_bold"
-                android:text="Personal Information"
+                android:text="@string/personal_information"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -122,9 +120,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_personInfo"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="32dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="@null">
 
@@ -138,9 +136,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Phone No"
+                        android:text="@string/phone_no"
                         android:textSize="12sp" />
 
                     <TextView
@@ -149,9 +148,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_phone"
                         android:layout_marginStart="16sp"
+                        android:layout_marginLeft="16sp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/sen_bold"
-                        android:text="9867412325"
+                        android:text="@string/_9867412325"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -160,9 +160,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="166dp"
+                        android:layout_marginLeft="166dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="District"
+                        android:text="@string/district"
                         android:textSize="12sp" />
 
                     <TextView
@@ -171,9 +172,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_phone"
                         android:layout_marginStart="166sp"
+                        android:layout_marginLeft="166sp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/sen_bold"
-                        android:text="Ghaziabad"
+                        android:text="@string/ghaziabad"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -183,9 +185,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/patient_district"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Address"
+                        android:text="@string/address"
                         android:textSize="12sp" />
 
                     <TextView
@@ -194,10 +197,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_adress"
                         android:layout_marginStart="16sp"
+                        android:layout_marginLeft="16sp"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/sen_bold"
-                        android:text="13/78, Vikas Nagar, Modi Nagar "
+                        android:text="@string/address_info"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </RelativeLayout>
@@ -206,12 +210,13 @@
             <TextView
                 android:id="@+id/title_treatmentInfo"
                 android:layout_width="match_parent"
-                android:layout_height="19dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/patient_card_mid"
                 android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/sen_bold"
-                android:text="Treatment Information"
+                android:text="@string/treatment_information"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -222,9 +227,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_treatmentInfo"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="32dp"
                 android:layout_marginBottom="23dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="@null">
@@ -239,9 +244,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Lab Name"
+                        android:text="@string/lab_name"
                         android:textSize="12sp" />
 
                     <TextView
@@ -250,9 +256,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_labName"
                         android:layout_marginStart="16sp"
+                        android:layout_marginLeft="16sp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/sen_bold"
-                        android:text="Dayalchand Labs, ITS Muradnagar,"
+                        android:text="@string/dayalchand_labs_its_muradnagar"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -262,9 +269,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/labName"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Select Severity Level"
+                        android:text="@string/select_severity_level"
                         android:textSize="12sp" />
 
                     <RadioButton
@@ -273,6 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_severityLevel"
                         android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
                         android:layout_marginTop="4dp"
                         android:scaleX="0.75"
                         android:scaleY="0.75"
@@ -284,12 +293,12 @@
                         android:layout_below="@id/title_severityLevel"
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/L1"
+                        android:layout_toRightOf="@id/L1"
                         android:fontFamily="@font/sen_reg"
-                        android:text="L1"
+                        android:text="@string/l1"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
 
                     <RadioButton
                         android:id="@+id/L2"
@@ -297,8 +306,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_severityLevel"
                         android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_marginTop="4dp"
                         android:layout_toEndOf="@id/L1"
+                        android:layout_toRightOf="@id/L1"
                         android:scaleX="0.75"
                         android:scaleY="0.75"
                         android:textColor="@color/black" />
@@ -309,8 +320,9 @@
                         android:layout_below="@id/title_severityLevel"
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/L2"
+                        android:layout_toRightOf="@id/L2"
                         android:fontFamily="@font/sen_reg"
-                        android:text="L2"
+                        android:text="@string/l2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -321,8 +333,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_severityLevel"
                         android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_marginTop="4dp"
                         android:layout_toEndOf="@+id/L2"
+                        android:layout_toRightOf="@+id/L2"
                         android:scaleX="0.75"
                         android:scaleY="0.75"
                         android:textColor="@color/black" />
@@ -333,8 +347,9 @@
                         android:layout_below="@id/title_severityLevel"
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/L3"
+                        android:layout_toRightOf="@id/L3"
                         android:fontFamily="@font/sen_reg"
-                        android:text="L3"
+                        android:text="@string/l3"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -345,9 +360,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/L1"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="14dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Add a comment"
+                        android:text="@string/add_a_comment"
                         android:textSize="12sp" />
 
                     <androidx.cardview.widget.CardView
@@ -356,8 +372,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_comment"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginEnd="17dp"
+                        android:layout_marginRight="17dp"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="@null">
 
@@ -380,9 +398,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/comment_box"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Assigned Hospital"
+                        android:text="@string/assigned_hospital"
                         android:textSize="12sp"
                         android:visibility="gone" />
 
@@ -392,9 +411,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_hospital"
                         android:layout_marginStart="16sp"
+                        android:layout_marginLeft="16sp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/sen_bold"
-                        android:text="Modi Hospital, China"
+                        android:text="@string/modi_hospital_china"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:visibility="gone" />
@@ -405,9 +425,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/comment_box"
                         android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Declined to come?"
+                        android:text="@string/declined_to_come"
                         android:textSize="12sp" />
 
                     <RadioButton
@@ -416,8 +437,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/comment_box"
                         android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
                         android:layout_marginTop="8dp"
                         android:layout_toEndOf="@id/title_declined"
+                        android:layout_toRightOf="@id/title_declined"
                         android:scaleX="0.75"
                         android:scaleY="0.75"
                         android:textColor="@color/black" />
@@ -428,24 +451,24 @@
                         android:layout_below="@id/comment_box"
                         android:layout_marginTop="13dp"
                         android:layout_toEndOf="@id/id_status"
+                        android:layout_toRightOf="@id/id_status"
                         android:fontFamily="@font/sen_reg"
-                        android:text="Yes"
+                        android:text="@string/yes"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_toRightOf="@id/id_status" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardElevation="0dp"
                         android:layout_below="@id/title_declined"
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginRight="32dp"
-                        app:cardBackgroundColor="#008DB9"
                         android:layout_marginBottom="16dp"
-                        app:cardCornerRadius="8dp">
+                        app:cardBackgroundColor="#008DB9"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -454,7 +477,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_marginBottom="12dp"
                             android:fontFamily="@font/sen_bold"
-                            android:text="Submit"
+                            android:text="@string/submit"
                             android:textColor="#fff"
                             android:textSize="16sp" />
                     </androidx.cardview.widget.CardView>

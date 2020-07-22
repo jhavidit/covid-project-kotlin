@@ -86,7 +86,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/sen_bold"
-                            android:text="Male | 36 years"
+                            android:text="@string/male_62_years_old"
                             android:textColor="#fff"
                             android:textSize="16sp" />
                     </LinearLayout>
