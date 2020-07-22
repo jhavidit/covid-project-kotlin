@@ -275,90 +275,66 @@
                         android:text="@string/select_severity_level"
                         android:textSize="12sp" />
 
-                    <RadioButton
-                        android:id="@+id/L1"
+                    <LinearLayout
+                        android:id="@+id/radio_buttons"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title_severityLevel"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginLeft="14dp"
-                        android:layout_marginTop="4dp"
-                        android:scaleX="0.75"
-                        android:scaleY="0.75"
-                        android:textColor="@color/black" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title_severityLevel"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/L1"
-                        android:layout_toRightOf="@id/L1"
-                        android:fontFamily="@font/sen_reg"
-                        android:text="@string/l1"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RadioButton
+                                android:id="@+id/L1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_marginLeft="14dp"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/sen_bold"
+                                android:scaleX="0.75"
+                                android:scaleY="0.75"
+                                android:text="@string/l1"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
 
-                    <RadioButton
-                        android:id="@+id/L2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title_severityLevel"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_toEndOf="@id/L1"
-                        android:layout_toRightOf="@id/L1"
-                        android:scaleX="0.75"
-                        android:scaleY="0.75"
-                        android:textColor="@color/black" />
+                            <RadioButton
+                                android:id="@+id/L2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/sen_bold"
+                                android:scaleX="0.75"
+                                android:scaleY="0.75"
+                                android:text="@string/l2"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title_severityLevel"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/L2"
-                        android:layout_toRightOf="@id/L2"
-                        android:fontFamily="@font/sen_reg"
-                        android:text="@string/l2"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/L3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title_severityLevel"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_toEndOf="@+id/L2"
-                        android:layout_toRightOf="@+id/L2"
-                        android:scaleX="0.75"
-                        android:scaleY="0.75"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title_severityLevel"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/L3"
-                        android:layout_toRightOf="@id/L3"
-                        android:fontFamily="@font/sen_reg"
-                        android:text="@string/l3"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                            <RadioButton
+                                android:id="@+id/L3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/sen_bold"
+                                android:scaleX="0.75"
+                                android:scaleY="0.75"
+                                android:text="@string/l3"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+                        </RadioGroup>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/title_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/L1"
+                        android:layout_below="@id/radio_buttons"
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="14dp"
