@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import android.widget.ScrollView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.dsckiet.covidtracker.databinding.FragmentPatientDetailsBinding
 
 class PatientDetailsFragment : Fragment() {
@@ -16,11 +20,8 @@ class PatientDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val patientId = arguments?.getString("id")
-//        val patientName = arguments?.getString("name")
-//        val patientAge = arguments?.getString("age")
-//        binding.patientId.text = patientId.toString()
-//        binding.patientName.text = patientName.toString()
-//        binding.patientGenderAge.text = "Male" + patientAge
+        binding.backBtn.setOnClickListener{
+            it.findNavController().navigate(R.id.action_patientDetailsFragment_to_diagnosisPendingFragment)
+        }
     }
 }
