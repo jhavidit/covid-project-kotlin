@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".PatientDeclinedFragment">
+
+            <TextView
+                android:id="@+id/dp_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/sen_extrabold"
+                android:text="Patients Declined"
+                android:textColor="#008DB9"
+                android:textSize="28sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/examine_pending_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dp_text"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="#008DB9"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:fontFamily="@font/sen_extrabold"
+                        android:text="@string/_345"
+                        android:textColor="#fff"
+                        android:textSize="40sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/sen_bold"
+                        android:text="Number of patients who were declined to be examined by the doctor"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/examine_pending_card"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/sen_bold"
+                android:text="@string/patients_list"
+                android:textColor="#424242"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/list_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text3"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sen_regular"
+                    android:text="@string/patient_id"
+                    android:textColor="#424242" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginLeft="36dp"
+                    android:fontFamily="@font/sen_regular"
+                    android:text="@string/name"
+                    android:textColor="#424242" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="146dp"
+                    android:layout_marginLeft="146dp"
+                    android:fontFamily="@font/sen_regular"
+                    android:text="@string/age"
+                    android:textColor="#424242" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_header"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                tools:listitem="@layout/item_view_patient_declined" />
+
+        </RelativeLayout>
+    </ScrollView>
+</layout>

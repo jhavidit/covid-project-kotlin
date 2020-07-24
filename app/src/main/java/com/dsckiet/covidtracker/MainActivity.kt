@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     0 -> {
                         binding.bottomNav.setCurrentActiveItem(0)
                         if(previousNavigationPosition == 1) {
-                            navController.navigate(R.id.action_diagnosisCompleteFragment_to_diagnosisPendingFragment)
+                            navController.navigate(R.id.action_patientDeclinedFragment_to_diagnosisPendingFragment)
                         } else {
                             navController.navigate(R.id.action_profileFragment_to_diagnosisPendingFragment)
                         }
@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity() {
                     1 -> {
                         binding.bottomNav.setCurrentActiveItem(1)
                         if(previousNavigationPosition == 0) {
-                            navController.navigate(R.id.action_diagnosisPendingFragment_to_diagnosisCompleteFragment)
+                            navController.navigate(R.id.action_diagnosisPendingFragment_to_patientDeclinedFragment)
                         } else {
-                            navController.navigate(R.id.action_profileFragment_to_diagnosisCompleteFragment)
+                            navController.navigate(R.id.action_profileFragment_to_patientDeclinedFragment)
                         }
                         previousNavigationPosition = position
                     }
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                         if(previousNavigationPosition == 0) {
                             navController.navigate(R.id.action_diagnosisPendingFragment_to_profileFragment)
                         } else {
-                            navController.navigate(R.id.action_diagnosisCompleteFragment_to_profileFragment)
+                            navController.navigate(R.id.action_patientDeclinedFragment_to_profileFragment)
                         }
                         previousNavigationPosition = position
                     }
