@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:id="@+id/main_r_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,7 +39,7 @@
                 app:bt_active="true"
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
-                app:bt_icon="@drawable/ic_icon_pending"
+                app:bt_icon="@drawable/icon_pending"
                 app:bt_title="Pending" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
@@ -52,7 +52,7 @@
                 app:bt_active="true"
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
-                app:bt_icon="@drawable/ic_icon_complete"
+                app:bt_icon="@drawable/icon_complete"
                 app:bt_title="Complete" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
@@ -65,7 +65,7 @@
                 app:bt_active="true"
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
-                app:bt_icon="@drawable/ic_icon_profile"
+                app:bt_icon="@drawable/icon_profile"
                 app:bt_title="Profile" />
 
         </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
