@@ -12,13 +12,16 @@
         tools:layout="@layout/fragment_diagnosis_pending">
         <action
             android:id="@+id/action_diagnosisPendingFragment_to_diagnosisCompleteFragment"
-            app:destination="@id/diagnosisCompleteFragment" />
+            app:destination="@id/patientDeclinedFragment" />
         <action
             android:id="@+id/action_diagnosisPendingFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_diagnosisPendingFragment_to_patientDetailsFragment"
             app:destination="@id/patientDetailsFragment" />
+        <action
+            android:id="@+id/action_diagnosisPendingFragment_to_patientDeclinedFragment"
+            app:destination="@id/patientDeclinedFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -29,8 +32,8 @@
             android:id="@+id/action_profileFragment_to_diagnosisPendingFragment"
             app:destination="@id/diagnosisPendingFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_diagnosisCompleteFragment"
-            app:destination="@id/diagnosisCompleteFragment" />
+            android:id="@+id/action_profileFragment_to_patientDeclinedFragment"
+            app:destination="@id/patientDeclinedFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientDetailsFragment"
@@ -42,15 +45,15 @@
             app:destination="@id/diagnosisPendingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/diagnosisCompleteFragment"
-        android:name="com.dsckiet.covidtracker.DiagnosisCompleteFragment"
-        android:label="DiagnosisCompleteFragment"
-        tools:layout="@layout/fragment_diagnosis_complete">
+        android:id="@+id/patientDeclinedFragment"
+        android:name="com.dsckiet.covidtracker.PatientDeclinedFragment"
+        android:label="PatientDeclinedFragment"
+        tools:layout="@layout/fragment_patient_declined">
         <action
-            android:id="@+id/action_diagnosisCompleteFragment_to_diagnosisPendingFragment"
+            android:id="@+id/action_patientDeclinedFragment_to_diagnosisPendingFragment"
             app:destination="@id/diagnosisPendingFragment" />
         <action
-            android:id="@+id/action_diagnosisCompleteFragment_to_profileFragment"
+            android:id="@+id/action_patientDeclinedFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

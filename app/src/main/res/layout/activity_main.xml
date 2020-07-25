@@ -43,7 +43,7 @@
                 app:bt_title="Pending" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/toggle_complete"
+                android:id="@+id/toggle_declined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -53,7 +53,7 @@
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
                 app:bt_icon="@drawable/icon_complete"
-                app:bt_title="Complete" />
+                app:bt_title="Declined" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_profile"
