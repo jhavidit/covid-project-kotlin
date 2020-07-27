@@ -7,28 +7,23 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dsckiet.covid_project_demo.SocketInstance
 import com.dsckiet.covidtracker.databinding.FragmentDiagnosisPendingBinding
 import com.dsckiet.covidtracker.model.PendingPatient
-import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
-import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.net.URISyntaxException
-import java.util.*
-import kotlin.collections.ArrayList
 
 class DiagnosisPendingFragment : Fragment() {
     private var mSocket: Socket? = null
     private var data: JSONObject? = null
-    private var patientData:JSONArray?=null
-    lateinit var list:ArrayList<PendingPatient>
+    private var patientData: JSONArray? = null
+    lateinit var list: ArrayList<PendingPatient>
 
 
     private lateinit var binding: FragmentDiagnosisPendingBinding
@@ -43,12 +38,15 @@ class DiagnosisPendingFragment : Fragment() {
     }
 
 
-    private fun generatePendingPatientList(data: JSONArray):ArrayList<PendingPatient> {
+    private fun generatePendingPatientList(data: JSONArray): ArrayList<PendingPatient> {
         val list = ArrayList<PendingPatient>()
 
-        for(i in 0 until data.length())
-        {
-            list+= PendingPatient(data.getJSONObject(i).getString("name"),data.getJSONObject(i).getString("caseId"),data.getJSONObject(i).getInt("age"))
+        for (i in 0 until data.length()) {
+            list += PendingPatient(
+                data.getJSONObject(i).getString("name"),
+                data.getJSONObject(i).getString("caseId"),
+                data.getJSONObject(i).getInt("age")
+            )
         }
         return list
     }
@@ -56,7 +54,8 @@ class DiagnosisPendingFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val app: SocketInstance = activity?.application as SocketInstance
-        mSocket = app.getMSocket() //socket instance
+        if (app != null)
+            mSocket = app.getMSocket() //socket instance
 
         mSocket?.connect()
         val options = IO.Options()
@@ -79,13 +78,12 @@ class DiagnosisPendingFragment : Fragment() {
         }
         mSocket!!.on("PATIENTS_POOL_FOR_DOCTOR") { args ->    //requesting patient details
             data = args[0] as JSONObject
-            Log.d("test",data.toString())
-            if(data!=null)
-            {
-                patientData=data!!.getJSONArray("patients")
-                list=generatePendingPatientList(patientData!!)
+            Log.d("test", data.toString())
+            if (data != null) {
+                patientData = data!!.getJSONArray("patients")
+                list = generatePendingPatientList(patientData!!)
                 activity?.runOnUiThread {
-                    binding.recyclerView.visibility= VISIBLE
+                    binding.recyclerView.visibility = VISIBLE
                     binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
                     binding.recyclerView.adapter = PendingListAdapter(requireContext(), list)
                 }
@@ -95,7 +93,7 @@ class DiagnosisPendingFragment : Fragment() {
                 binding.recyclerView.visibility = GONE
             }
 
-        }.on(Socket.EVENT_RECONNECT){args ->
+        }.on(Socket.EVENT_RECONNECT) { args ->
             try {
                 mSocket?.emit(
                     "patientsPoolForDoctor", jsonObject1
@@ -113,7 +111,6 @@ class DiagnosisPendingFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
 
 
     override fun onDestroy() {
