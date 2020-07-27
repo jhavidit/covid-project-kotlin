@@ -94,12 +94,14 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginLeft="12dp"
-                        android:src="@drawable/doct_img" />
+                        android:layout_marginStart="50dp"
+                        android:contentDescription="@string/dialer"
+                        android:layout_marginLeft="50dp"
+                        android:src="@drawable/grp_14"
+                        android:tint="@android:color/white" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
