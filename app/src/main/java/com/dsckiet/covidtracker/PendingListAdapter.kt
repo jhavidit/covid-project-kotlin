@@ -9,9 +9,10 @@ import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.dsckiet.covidtracker.model.PendingPatient
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class PendingListAdapter(ctx: Context, private val listItem: List<TempDataClass>) :
+class PendingListAdapter(ctx: Context, private val listItem: List<PendingPatient>) :
     RecyclerView.Adapter<PendingListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,15 +22,15 @@ class PendingListAdapter(ctx: Context, private val listItem: List<TempDataClass>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = listItem[position]
-        holder.patientId.text = currentItem.patientId
-        holder.patientAge.text = currentItem.patientAge.toString()
-        holder.patientName.text = currentItem.patientName
+        holder.patientId.text = currentItem.caseId
+        holder.patientAge.text = currentItem.age.toString()
+        holder.patientName.text = currentItem.name
         holder.patientCard.setOnClickListener {
             val patientId = holder.patientId.text.toString()
             val patientName = holder.patientName.text.toString()
             val patientAge = holder.patientAge.text.toString()
-            it.findNavController().navigate(R.id.action_diagnosisPendingFragment_to_patientDetailsFragment,
-                bundleOf(patientId to "id", patientAge to "age", patientName to "name"))
+            it.findNavController().navigate(R.id.action_diagnosisPendingFragment_to_patientDetailsFragment
+            )
         }
     }
 
