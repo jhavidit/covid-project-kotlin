@@ -1,12 +1,13 @@
 package com.dsckiet.covidtracker
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Intent
-import android.opengl.Visibility
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.dsckiet.covidtracker.Authentication.LoginAPI
@@ -34,37 +35,67 @@ class LoginActivity : AppCompatActivity() {
         if (token.isNullOrBlank()) {
 
             auth_button.setOnClickListener {
-                auth_button.visibility = View.GONE
-                progress_login.visibility = View.VISIBLE
-                val email = username_input.text.toString()
-                val password = password_input.text.toString()
-                val user = RequestModel(
-                    email,
-                    password
-                )
-                //Login Request
-                val cb = object : Callback<ResponseModel> {
-                    override fun onResponse(
-                        call: Call<ResponseModel>,
-                        response: Response<ResponseModel>
-                    ) {
-                        val loginResponse = response.body()
+                binding.invalidPassword.visibility = GONE
+                binding.invalidEmailId.visibility = GONE
+                binding.usernameInputLayout.boxStrokeColor = Color.parseColor("#707070")
+                binding.passwordInputLayout.boxStrokeColor = Color.parseColor("#707070")
 
-                        if (loginResponse?.message == "success" && !loginResponse.error) {
 
-                            val h = response.headers().get("x-auth-token")
-                            tokenManager.saveAuthToken(h!!)
-                            progress_login.visibility = View.GONE
-                            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                if (binding.usernameInput.text!!.isEmpty()) {
+                    binding.invalidEmailId.visibility = VISIBLE
+                    binding.invalidEmailId.text = "Email can not be empty"
+                    binding.usernameInputLayout.boxStrokeColor = Color.RED
+                } else if (binding.passwordInput.text!!.length < 6) {
+                    binding.invalidPassword.visibility = VISIBLE
+                    binding.invalidPassword.text = "Password too small"
+                    binding.passwordInputLayout.boxStrokeColor = Color.RED
+                } else if (!binding.usernameInput.text!!.contains(
+                        "@",
+                        true
+                    ) || !binding.usernameInput.text!!.contains(".", true)
+                ) {
+                    binding.invalidEmailId.visibility = VISIBLE
+                    binding.invalidEmailId.text = "Invalid Email ID"
+                    binding.usernameInputLayout.boxStrokeColor = Color.RED
+                } else {
+
+                    auth_button.visibility = GONE
+                    progress_login.visibility = VISIBLE
+                    val email = username_input.text.toString().trim()
+                    val password = password_input.text.toString().trim()
+                    val user = RequestModel(
+                        email,
+                        password
+                    )
+                    //Login Request
+                    val cb = object : Callback<ResponseModel> {
+                        override fun onResponse(
+                            call: Call<ResponseModel>,
+                            response: Response<ResponseModel>
+                        ) {
+                            val loginResponse = response.body()
+
+                            if (loginResponse?.message == "success" && !loginResponse.error) {
+
+                                val h = response.headers().get("x-auth-token")
+                                tokenManager.saveAuthToken(h!!)
+                                binding.progressLogin.visibility = View.GONE
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            } else {
+                                binding.progressLogin.visibility = GONE
+                                binding.invalidPassword.visibility = VISIBLE
+                                binding.invalidPassword.text = "Invalid email id or Password"
+                                binding.authButton.visibility = VISIBLE
+                            }
+                        }
+
+                        @SuppressLint("LogNotTimber")
+                        override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                            Log.i("Request", "Failure")
                         }
                     }
-
-                    @SuppressLint("LogNotTimber")
-                    override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                        Log.i("Request","Failure")
-                    }
+                    LoginAPI.retrofitService.sendUserData(user).enqueue(cb)
                 }
-                LoginAPI.retrofitService.sendUserData(user).enqueue(cb)
             }
         } else {
 

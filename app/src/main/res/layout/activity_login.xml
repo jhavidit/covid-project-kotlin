@@ -5,7 +5,7 @@
 
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -40,6 +40,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username_input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +55,6 @@
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#707070"
-                app:errorEnabled="true"
                 app:startIconDrawable="@drawable/email_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -93,6 +93,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +109,6 @@
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#707070"
                 app:endIconMode="password_toggle"
-                app:errorEnabled="true"
                 app:startIconDrawable="@drawable/password_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -119,6 +119,18 @@
                     android:inputType="textPassword"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/invalid_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/sen_reg"
+                android:text="@string/invalid_email_id"
+                android:textColor="#DB4437"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <ProgressBar
                 android:id="@+id/progress_login"
@@ -149,5 +161,5 @@
                 app:backgroundTint="#0082bc" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

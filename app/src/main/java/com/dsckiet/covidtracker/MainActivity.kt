@@ -14,7 +14,7 @@ import com.dsckiet.covidtracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var previousNavigationPosition: Int = 0
 
@@ -29,31 +29,42 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CALL_PHONE)
-            != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CALL_PHONE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
 
             // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CALL_PHONE)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.CALL_PHONE
+                )
+            ) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(
+                    this,
                     arrayOf(Manifest.permission.CALL_PHONE),
-                    42)
+                    42
+                )
             }
         } else {
             // Permission has already been granted
 
         }
     }
+
     //TODO:: Needs to be update permissions checking
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
         if (requestCode == 42) {
             // If request is cancelled, the result arrays are empty.
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -68,12 +79,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
-        binding.bottomNav.setNavigationChangeListener{_, position ->
-            if(previousNavigationPosition != position){
-                when(position){
+        binding.bottomNav.setNavigationChangeListener { _, position ->
+            if (previousNavigationPosition != position) {
+                when (position) {
                     0 -> {
                         binding.bottomNav.setCurrentActiveItem(0)
-                        if(previousNavigationPosition == 1) {
+                        if (previousNavigationPosition == 1) {
                             navController.navigate(R.id.action_patientDeclinedFragment_to_diagnosisPendingFragment)
                         } else {
                             navController.navigate(R.id.action_profileFragment_to_diagnosisPendingFragment)
@@ -82,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     1 -> {
                         binding.bottomNav.setCurrentActiveItem(1)
-                        if(previousNavigationPosition == 0) {
+                        if (previousNavigationPosition == 0) {
                             navController.navigate(R.id.action_diagnosisPendingFragment_to_patientDeclinedFragment)
                         } else {
                             navController.navigate(R.id.action_profileFragment_to_patientDeclinedFragment)
@@ -91,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     2 -> {
                         binding.bottomNav.setCurrentActiveItem(2)
-                        if(previousNavigationPosition == 0) {
+                        if (previousNavigationPosition == 0) {
                             navController.navigate(R.id.action_diagnosisPendingFragment_to_profileFragment)
                         } else {
                             navController.navigate(R.id.action_patientDeclinedFragment_to_profileFragment)
@@ -104,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(previousNavigationPosition != 0) {
+        if (previousNavigationPosition != 0) {
             binding.bottomNav.setCurrentActiveItem(0)
             previousNavigationPosition = 0
             navController.popBackStack(R.id.diagnosisPendingFragment, false)

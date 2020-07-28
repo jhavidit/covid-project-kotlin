@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dsckiet.covid_project_demo.SocketInstance
@@ -45,7 +46,11 @@ class DiagnosisPendingFragment : Fragment() {
             list += PendingPatient(
                 data.getJSONObject(i).getString("name"),
                 data.getJSONObject(i).getString("caseId"),
-                data.getJSONObject(i).getInt("age")
+                data.getJSONObject(i).getInt("age"),
+                data.getJSONObject(i).getString("gender"),
+                data.getJSONObject(i).getString("phone"),
+                data.getJSONObject(i).getString("address"),
+                data.getJSONObject(i).getJSONObject("lab").getString("name")
             )
         }
         return list
@@ -54,8 +59,7 @@ class DiagnosisPendingFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val app: SocketInstance = activity?.application as SocketInstance
-        if (app != null)
-            mSocket = app.getMSocket() //socket instance
+        mSocket = app.getMSocket() //socket instance
 
         mSocket?.connect()
         val options = IO.Options()
@@ -77,20 +81,33 @@ class DiagnosisPendingFragment : Fragment() {
             e.printStackTrace()
         }
         mSocket!!.on("PATIENTS_POOL_FOR_DOCTOR") { args ->    //requesting patient details
-            data = args[0] as JSONObject
-            Log.d("test", data.toString())
+            if (args[0] != null)
+                data = args[0] as JSONObject
+
             if (data != null) {
+                Log.d("test", data.toString())
                 patientData = data!!.getJSONArray("patients")
                 list = generatePendingPatientList(patientData!!)
                 activity?.runOnUiThread {
+                    binding.animationView.visibility = GONE
                     binding.recyclerView.visibility = VISIBLE
                     binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
                     binding.recyclerView.adapter = PendingListAdapter(requireContext(), list)
                 }
+            } else {
+                activity?.runOnUiThread {
+                    Toast.makeText(requireContext(), "No patient available", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
+
+
         }.on(Socket.EVENT_DISCONNECT) { args ->
             activity?.runOnUiThread {
                 binding.recyclerView.visibility = GONE
+                binding.animationView.visibility = VISIBLE
+                binding.diagnosisPendingCount.text = ""
+                Toast.makeText(requireContext(), "Internet Unavailable", Toast.LENGTH_SHORT).show()
             }
 
         }.on(Socket.EVENT_RECONNECT) { args ->

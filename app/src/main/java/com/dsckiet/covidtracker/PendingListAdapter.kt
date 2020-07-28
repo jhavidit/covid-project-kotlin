@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsckiet.covidtracker.model.PendingPatient
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class PendingListAdapter(ctx: Context, private val listItem: List<PendingPatient>) :
+class PendingListAdapter(val ctx: Context, private val listItem: List<PendingPatient>) :
     RecyclerView.Adapter<PendingListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -29,7 +30,22 @@ class PendingListAdapter(ctx: Context, private val listItem: List<PendingPatient
             val patientId = holder.patientId.text.toString()
             val patientName = holder.patientName.text.toString()
             val patientAge = holder.patientAge.text.toString()
-            it.findNavController().navigate(R.id.action_diagnosisPendingFragment_to_patientDetailsFragment
+            val patientContact = currentItem.phone
+            val patientGender = currentItem.gender
+            val patientAddress = currentItem.address
+            val patientLabName = currentItem.labName
+            val bundle = bundleOf(
+                "id" to patientId,
+                "name" to patientName,
+                "age" to patientAge,
+                "contact" to patientContact,
+                "gender" to patientGender,
+                "address" to patientAddress,
+                "labName" to patientLabName
+            )
+
+            it.findNavController().navigate(
+                R.id.action_diagnosisPendingFragment_to_patientDetailsFragment, bundle
             )
         }
     }
