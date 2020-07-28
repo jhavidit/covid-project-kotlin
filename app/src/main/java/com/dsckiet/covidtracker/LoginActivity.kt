@@ -3,9 +3,11 @@ package com.dsckiet.covidtracker
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.dsckiet.covidtracker.Authentication.LoginAPI
 import com.dsckiet.covidtracker.Authentication.Model.RequestModel
@@ -30,8 +32,10 @@ class LoginActivity : AppCompatActivity() {
         val token = tokenManager.getAuthToken()
 
         if (token.isNullOrBlank()) {
-            auth_button.setOnClickListener {
 
+            auth_button.setOnClickListener {
+                auth_button.visibility = View.GONE
+                progress_login.visibility = View.VISIBLE
                 val email = username_input.text.toString()
                 val password = password_input.text.toString()
                 val user = RequestModel(
@@ -50,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
 
                             val h = response.headers().get("x-auth-token")
                             tokenManager.saveAuthToken(h!!)
+                            progress_login.visibility = View.GONE
                             startActivity(Intent(this@LoginActivity,MainActivity::class.java))
                         }
                     }
