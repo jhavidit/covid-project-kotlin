@@ -28,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="41dp"
                 android:layout_marginLeft="41dp"
-                android:fontFamily="@font/sen_bold"
                 android:layout_marginTop="50dp"
+                android:fontFamily="@font/sen_bold"
                 android:text="@string/enter_your_email_id"
                 android:textColor="#707070"
                 android:textSize="12sp"
@@ -50,8 +50,8 @@
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
-                app:errorEnabled="true"
                 app:boxStrokeColor="#707070"
+                app:errorEnabled="true"
                 app:startIconDrawable="@drawable/email_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -69,8 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="41dp"
                 android:layout_marginLeft="41dp"
-                android:fontFamily="@font/sen_reg"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/sen_reg"
                 android:text="@string/invalid_email_id"
                 android:textColor="#DB4437"
                 android:textSize="14sp"
@@ -82,8 +82,8 @@
                 android:layout_marginStart="41dp"
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/enter_your_password"
                 android:fontFamily="@font/sen_bold"
+                android:text="@string/enter_your_password"
                 android:textColor="#707070"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -97,7 +97,6 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="42dp"
-                app:errorEnabled="true"
                 android:layout_marginRight="42dp"
                 app:boxBackgroundColor="#f1f1f1"
                 app:boxCornerRadiusBottomEnd="8dp"
@@ -106,6 +105,7 @@
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#707070"
                 app:endIconMode="password_toggle"
+                app:errorEnabled="true"
                 app:startIconDrawable="@drawable/password_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
