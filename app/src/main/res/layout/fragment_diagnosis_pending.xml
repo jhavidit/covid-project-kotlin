@@ -50,7 +50,6 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginLeft="4dp"
                         android:fontFamily="@font/sen_extrabold"
-                        android:text="@string/_345"
                         android:textColor="#fff"
                         android:textSize="40sp" />
 
@@ -104,7 +103,8 @@
                 android:fontFamily="@font/sen_bold"
                 android:text="@string/_09_07_2020"
                 android:textColor="#424242"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,7 +118,8 @@
                 android:fontFamily="@font/sen_bold"
                 android:text="@string/_20_new_patients"
                 android:textColor="#424242"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/list_header"
@@ -156,15 +157,25 @@
                     android:textColor="#424242" />
             </LinearLayout>
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_below="@id/list_header"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/heartbeat_loading"
+                app:lottie_speed="1" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/list_header"
+                android:layout_below="@id/animationView"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_view" />
 
             <androidx.cardview.widget.CardView
