@@ -47,19 +47,37 @@ class PatientDetailsActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:${binding.patientPhoneNo.text.toString()}"))
             startActivity(intent)
         }
-
-        var level: String = "l1"
+        var level = ""
         var isDeclined: Boolean = false
+        //radio buttons clicks
+        binding.radioGroupDetails.setOnCheckedChangeListener { _, isCheckedID ->
+            var  isChecked = binding.L1.isChecked || binding.L2.isChecked || binding.L3.isChecked
+            if(isChecked) {
+                binding.declineToCome.isChecked = false
+            }
+        }
+        //initial checkbox false
+        binding.declineToCome.isChecked = false
+        //Check box checks
+        binding.declineToCome.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                binding.radioGroupDetails.clearCheck()
+                isDeclined = true
+            }else{
+                isDeclined = false
+            }
+        }
+        //Radio Button Checks
         when {
+            binding.L1.isChecked -> level = "l1"
             binding.L2.isChecked -> level = "l2"
             binding.L3.isChecked -> level = "l3"
         }
         val comments: String = binding.commentBox.toString()
-        if (decline_to_come.isChecked()) isDeclined = true
-        else if (!decline_to_come.isChecked()) isDeclined = false
+
 
         binding.submitForm.setOnClickListener {
-            if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked) {
+            if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked && !binding.declineToCome.isChecked) {
                 Toast.makeText(
                     this, "Please assign a severity level to the patient !",
                     Toast.LENGTH_LONG
