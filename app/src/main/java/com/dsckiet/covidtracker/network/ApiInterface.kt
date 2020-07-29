@@ -21,7 +21,7 @@ private val moshi = Moshi.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl("https://f614f84d0bf6.ngrok.io")
+    .baseUrl(BASE_URL)
     .client(OkHttpClient.Builder().build())
     .build()
 
