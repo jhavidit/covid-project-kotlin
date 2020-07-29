@@ -43,16 +43,20 @@ class DiagnosisPendingFragment : Fragment() {
         val list = ArrayList<PendingPatient>()
 
         for (i in 0 until data.length()) {
-            list += PendingPatient(
-                data.getJSONObject(i).getString("name"),
-                data.getJSONObject(i).getString("caseId"),
-                data.getJSONObject(i).getInt("age"),
-                data.getJSONObject(i).getString("gender"),
-                data.getJSONObject(i).getString("phone"),
-                data.getJSONObject(i).getString("address"),
-                data.getJSONObject(i).getJSONObject("lab").getString("name"),
-                data.getJSONObject(i).getString("district")
-            )
+            try {
+                list += PendingPatient(
+                    data.getJSONObject(i).getString("name"),
+                    data.getJSONObject(i).getString("caseId"),
+                    data.getJSONObject(i).getInt("age"),
+                    data.getJSONObject(i).getString("gender"),
+                    data.getJSONObject(i).getString("phone"),
+                    data.getJSONObject(i).getString("address"),
+                    data.getJSONObject(i).getString("lab"),
+                    data.getJSONObject(i).getString("district")
+                )
+            } catch (e: JSONException) {
+                println("json exception : ${e.message}")
+            }
         }
         return list
     }

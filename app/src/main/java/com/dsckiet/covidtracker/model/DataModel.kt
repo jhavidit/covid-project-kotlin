@@ -23,7 +23,7 @@ data class PendingPatient(
     val phone:String="",
     val address:String="",
     val labName:String="",
-    val district: String
+    val district: String=""
 ) :Parcelable
 
 @Parcelize
