@@ -23,7 +23,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class PatientDeclinedFragment : Fragment() {
 
     private lateinit var binding: FragmentPatientDeclinedBinding
@@ -43,12 +42,10 @@ class PatientDeclinedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         authToken = TokenManager(requireContext())
         getDeclinedPatientData()
-        binding.recyclerView.adapter = PatientDeclinedAdapter(requireContext(), list)
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.setHasFixedSize(true)
     }
 
     private fun getDeclinedPatientData() {
+        val list = ArrayList<PatientDetails> ()
         PatientsApi.retrofitService.getPatientsData(token = authToken.getAuthToken().toString())
             .enqueue(
                 object : Callback<ResponseModel> {
@@ -62,10 +59,23 @@ class PatientDeclinedFragment : Fragment() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
-                        list = response.body()?.data as ArrayList<PatientDetails>
-                        println(list)
-                        binding.countDecPatients.text = list.size.toString()
-                        Log.d("fetch_success","fetch_success, response: ${response.code()}")
+                        val listResponse = response.body()
+                        val listData: List<PatientDetails>? = listResponse?.data
+                        if (listData != null) {
+                            for(data: PatientDetails in listData) {
+                                list.add(PatientDetails(data.phoneNo, data.district, data.address, data.name, data.age
+                                , data.gender, data.lab, data.patientId))
+                            }
+                            binding.recyclerView.adapter = PatientDeclinedAdapter(requireContext(), list)
+                            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                            binding.recyclerView.setHasFixedSize(true)
+                            binding.countDecPatients.text = listData.size.toString()
+                    //                        val listData: List<PatientDetails> = response.body()!!
+                            //for(data: List<PatientDetails> in listData)
+                            //binding.countDecPatients.text = list.size.toString()
+                                Log.d("fetch_success","fetch_success, response: ${listData}")
+                            println("fetch status: response body = ${response.body()} and response code = ${response.code()}")
+                        }
                     }
                 }
             )

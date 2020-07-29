@@ -13,6 +13,7 @@ import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
 import com.dsckiet.covidtracker.model.AssignPatientLevel
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
+import kotlinx.android.synthetic.main.activity_patient_details.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +29,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         tokenManager = TokenManager(this)
         val patientData = intent.extras?.getBundle("patientData")
         val patientId = patientData?.getString("id")
-        binding.patientId.text = patientId
+        binding.patientId.text = patientId?.substring(0, 5) + "..."
         binding.patientName.text = patientData?.getString("name")
         val patientAge = patientData?.getString("age")
         var patientGender = patientData?.getString("gender")
@@ -38,7 +39,9 @@ class PatientDetailsActivity : AppCompatActivity() {
         binding.patientDistrict.text = patientData?.getString("district")
         binding.patientAddress.text = patientData?.getString("address")
         binding.labName.text = patientData?.getString("labName")
-        beginPatientDiagnosis(patientId.toString())
+
+        val pageToken = patientData?.getString("pageToken")
+        if(pageToken == "0") beginPatientDiagnosis(patientId.toString())
 
         binding.docProfileCard.setOnClickListener {
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:${binding.patientPhoneNo.text.toString()}"))
@@ -52,8 +55,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             binding.L3.isChecked -> level = "l3"
         }
         val comments: String = binding.commentBox.toString()
-        if (binding.declineToCome.isChecked) isDeclined = true
-        else if (!binding.declineToCome.isChecked) isDeclined = false
+        if (decline_to_come.isChecked()) isDeclined = true
+        else if (!decline_to_come.isChecked()) isDeclined = false
 
         binding.submitForm.setOnClickListener {
             if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked) {
@@ -65,10 +68,10 @@ class PatientDetailsActivity : AppCompatActivity() {
                 sendPatientData(level, comments, isDeclined, patientId.toString())
             }
         }
-
     }
 
     private fun beginPatientDiagnosis(patientId: String) {
+        println("pat id ======== $patientId")
         "application/json; charset=utf-8".toMediaTypeOrNull()
         PatientsApi.retrofitService.diagnosisBeginRequest(
             token = tokenManager.getAuthToken().toString(),
@@ -91,7 +94,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                         response: Response<ResponseModel>
                     ) {
                         Log.i("test", response.raw().message.toString())
-                        Log.i("test", response.body().toString())
+                        println("response body = ${response.body()} and response code = ${response.code()}")
                         Toast.makeText(
                             this@PatientDetailsActivity, "response code : ${response.code()}," +
                                     " response msg : ${response.message()}," +
@@ -110,6 +113,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         isDeclined: Boolean,
         patientId: String
     ) {
+        Log.i("check", "isDeclined = $isDeclined")
         "application/json; charset=utf-8".toMediaTypeOrNull()
         PatientsApi.retrofitService.assignPatientLevel(
             token = tokenManager.getAuthToken().toString(),
