@@ -27,10 +27,10 @@ class PatientDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.backBtn.setOnClickListener {
-            it.findNavController()
-                .navigate(R.id.action_patientDetailsFragment_to_diagnosisPendingFragment)
-        }
+//        binding.backBtn.setOnClickListener {
+//            it.findNavController()
+//                .navigate(R.id.action_patientDetailsFragment_to_diagnosisPendingFragment)
+//        }
         val patientName = arguments?.getString("name")
         val patientAge = arguments?.getString("age")
         val patientId = arguments?.getString("id")

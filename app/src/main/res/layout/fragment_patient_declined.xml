@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,10 +45,12 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/count_dec_patients"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:layout_marginLeft="4dp"
+                        android:layout_gravity="center_vertical"
                         android:fontFamily="@font/sen_extrabold"
                         android:text="@string/_345"
                         android:textColor="#fff"
@@ -60,7 +63,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:fontFamily="@font/sen_bold"
-                        android:text="Number of patients who were declined to be examined by the doctor"
+                        android:text="@string/patient_declined_count"
                         android:textColor="#fff"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -79,11 +82,24 @@
                 android:textColor="#424242"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text3"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/sen_regular"
+                android:text="@string/click_the_card_to_examine_the_patient"
+                android:textColor="#707070"
+                android:textSize="14sp" />
+
             <LinearLayout
                 android:id="@+id/list_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text3"
+                android:layout_below="@id/text4"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="8dp"
@@ -99,8 +115,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginLeft="36dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
                     android:fontFamily="@font/sen_regular"
                     android:text="@string/name"
                     android:textColor="#424242" />
@@ -108,8 +124,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="146dp"
-                    android:layout_marginLeft="146dp"
+                    android:layout_marginStart="130dp"
+                    android:layout_marginLeft="130dp"
                     android:fontFamily="@font/sen_regular"
                     android:text="@string/age"
                     android:textColor="#424242" />
@@ -123,8 +139,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="20dp"
-                tools:listitem="@layout/item_view_patient_declined" />
+                tools:listitem="@layout/item_view"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </layout>

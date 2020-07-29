@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dsckiet.covidtracker.model.PendingPatient
 import kotlinx.android.synthetic.main.item_view.view.*
@@ -44,9 +43,9 @@ class PendingListAdapter(val ctx: Context, private val listItem: List<PendingPat
                 "labName" to patientLabName
             )
 
-            it.findNavController().navigate(
-                R.id.action_diagnosisPendingFragment_to_patientDetailsFragment, bundle
-            )
+//            it.findNavController().navigate(
+//                R.id.action_diagnosisPendingFragment_to_patientDetailsFragment, bundle
+//            )
         }
     }
 

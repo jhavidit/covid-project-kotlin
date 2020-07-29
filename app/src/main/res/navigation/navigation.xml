@@ -17,9 +17,6 @@
             android:id="@+id/action_diagnosisPendingFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_diagnosisPendingFragment_to_patientDetailsFragment"
-            app:destination="@id/patientDetailsFragment" />
-        <action
             android:id="@+id/action_diagnosisPendingFragment_to_patientDeclinedFragment"
             app:destination="@id/patientDeclinedFragment" />
     </fragment>
@@ -34,15 +31,6 @@
         <action
             android:id="@+id/action_profileFragment_to_patientDeclinedFragment"
             app:destination="@id/patientDeclinedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/patientDetailsFragment"
-        android:name="com.dsckiet.covidtracker.PatientDetailsFragment"
-        android:label="PatientDetailsFragment"
-        tools:layout="@layout/fragment_patient_details">
-        <action
-            android:id="@+id/action_patientDetailsFragment_to_diagnosisPendingFragment"
-            app:destination="@id/diagnosisPendingFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientDeclinedFragment"
