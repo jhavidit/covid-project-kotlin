@@ -55,7 +55,7 @@ class DiagnosisPendingFragment : Fragment() {
             try {
                 list += PendingPatient(
                     data.getJSONObject(i).getString("name"),
-                    data.getJSONObject(i).getString("caseId"),
+                    data.getJSONObject(i).getString("_id"),
                     data.getJSONObject(i).getInt("age"),
                     data.getJSONObject(i).getString("gender"),
                     data.getJSONObject(i).getString("phone"),

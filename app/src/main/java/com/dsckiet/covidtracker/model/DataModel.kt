@@ -6,8 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ResponseModel (
-    val message: String?,
-    val error: Boolean?,
     val data: List<PatientDetails>?
 ) : Parcelable
 
@@ -17,7 +15,7 @@ data class ResponseModel (
 @Parcelize
 data class PendingPatient(
     val name:String="",
-    val caseId:String="",
+    @Json(name = "_id") val caseId:String="",
     val age:Int=0,
     val gender:String="",
     val phone:String="",

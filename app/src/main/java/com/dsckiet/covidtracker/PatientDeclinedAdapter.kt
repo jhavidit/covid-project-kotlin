@@ -24,18 +24,18 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = patientDeclinedData[position]
-        holder.patientId.text = currentItem.patientId?.substring(0, 5) + "..."
+        holder.patientId.text = currentItem.patientId.toString()
         holder.patientAge.text = currentItem.age.toString()
         holder.patientName.text = currentItem.name.toString()
         holder.patientCard.setOnClickListener {
             val patientId = holder.patientId.text.toString()
             val patientName = holder.patientName.text.toString()
             val patientAge = holder.patientAge.text.toString()
-            val patientContact = currentItem.phoneNo
-            val patientGender = currentItem.gender
-            val patientAddress = currentItem.address
-            val patientLabName = currentItem.lab
-            val patientDistrict = currentItem.district
+            val patientContact = currentItem.phoneNo.toString()
+            val patientGender = currentItem.gender.toString()
+            val patientAddress = currentItem.address.toString()
+            val patientLabName = currentItem.lab?.name.toString()
+            val patientDistrict = currentItem.district.toString()
             val bundle = bundleOf(
                 "id" to patientId,
                 "name" to patientName,
@@ -44,7 +44,8 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
                 "gender" to patientGender,
                 "address" to patientAddress,
                 "labName" to patientLabName,
-                "district" to patientDistrict
+                "district" to patientDistrict,
+                "pageToken" to "1"
             )
             ctx.startActivity(Intent(ctx, PatientDetailsActivity::class.java).putExtra("patientData", bundle))
         }
@@ -56,11 +57,6 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
         val patientId: TextView = unitView.patient_id
         val patientName: TextView = unitView.patient_name
         val patientAge: TextView = unitView.patient_age
-        val patientGender: TextView = unitView.patient_gender
-        val patientPhoneNo: TextView = unitView.patient_phone_no
-        val patientDistrict: TextView = unitView.patient_district
-        val patientAddress: TextView = unitView.patient_address
-        val patientLab: TextView = unitView.patient_assigned_lab
         val patientCard: CardView = unitView.patient_card
     }
 }

@@ -43,7 +43,8 @@ class DiagnosisPendingAdapter(val ctx: Context, private val listItem: List<Pendi
                 "gender" to patientGender,
                 "address" to patientAddress,
                 "labName" to patientLabName,
-                "district" to patientDistrict
+                "district" to patientDistrict,
+                "pageToken" to "0"
             )
             ctx.startActivity(Intent(ctx, PatientDetailsActivity::class.java).putExtra("patientData", bundle))
         }
