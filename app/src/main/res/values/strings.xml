@@ -69,5 +69,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dialer">dialer</string>
+    <string name="patient_declined_count">Number of patients who were declined to be examined by the doctor</string>
+
+    <style name="patient_declined_count">
+        number_of_patients_who_were_declined_to_be_examined_by_the_doctor
+    </style>
 
 </resources>

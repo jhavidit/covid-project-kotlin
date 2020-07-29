@@ -20,6 +20,8 @@ interface APIService {
     fun sendUserData(
         @Body userLogin: RequestModel
     ): Call<ResponseModel>
+
+
 }
 
 private const val BASE_URL = "https://covid-project-gzb.herokuapp.com/"

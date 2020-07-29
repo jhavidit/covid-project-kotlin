@@ -1,19 +1,19 @@
 package com.dsckiet.covidtracker
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dsckiet.covidtracker.model.PendingPatient
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class PendingListAdapter(val ctx: Context, private val listItem: List<PendingPatient>) :
-    RecyclerView.Adapter<PendingListAdapter.ViewHolder>() {
+class DiagnosisPendingAdapter(val ctx: Context, private val listItem: List<PendingPatient>) :
+    RecyclerView.Adapter<DiagnosisPendingAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
@@ -34,6 +34,7 @@ class PendingListAdapter(val ctx: Context, private val listItem: List<PendingPat
             val patientGender = currentItem.gender
             val patientAddress = currentItem.address
             val patientLabName = currentItem.labName
+            val patientDistrict = currentItem.district
             val bundle = bundleOf(
                 "id" to patientId,
                 "name" to patientName,
@@ -41,12 +42,10 @@ class PendingListAdapter(val ctx: Context, private val listItem: List<PendingPat
                 "contact" to patientContact,
                 "gender" to patientGender,
                 "address" to patientAddress,
-                "labName" to patientLabName
+                "labName" to patientLabName,
+                "district" to patientDistrict
             )
-
-            it.findNavController().navigate(
-                R.id.action_diagnosisPendingFragment_to_patientDetailsFragment, bundle
-            )
+            ctx.startActivity(Intent(ctx, PatientDetailsActivity::class.java).putExtra("patientData", bundle))
         }
     }
 

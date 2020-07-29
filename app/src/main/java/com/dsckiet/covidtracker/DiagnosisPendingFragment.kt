@@ -1,5 +1,6 @@
 package com.dsckiet.covidtracker
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dsckiet.covid_project_demo.SocketInstance
+import com.dsckiet.covidtracker.Authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.FragmentDiagnosisPendingBinding
 import com.dsckiet.covidtracker.model.PendingPatient
 import com.github.nkzawa.socketio.client.IO
@@ -24,6 +26,7 @@ class DiagnosisPendingFragment : Fragment() {
     private var mSocket: Socket? = null
     private var data: JSONObject? = null
     private var patientData: JSONArray? = null
+    private lateinit var tokenManager: TokenManager
     lateinit var list: ArrayList<PendingPatient>
 
 
@@ -38,20 +41,31 @@ class DiagnosisPendingFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("LogNotTimber")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tokenManager = TokenManager(requireContext())
+        Log.d("auth token: ", tokenManager.getAuthToken().toString())
+    }
 
     private fun generatePendingPatientList(data: JSONArray): ArrayList<PendingPatient> {
         val list = ArrayList<PendingPatient>()
 
         for (i in 0 until data.length()) {
-            list += PendingPatient(
-                data.getJSONObject(i).getString("name"),
-                data.getJSONObject(i).getString("caseId"),
-                data.getJSONObject(i).getInt("age"),
-                data.getJSONObject(i).getString("gender"),
-                data.getJSONObject(i).getString("phone"),
-                data.getJSONObject(i).getString("address"),
-                data.getJSONObject(i).getJSONObject("lab").getString("name")
-            )
+            try {
+                list += PendingPatient(
+                    data.getJSONObject(i).getString("name"),
+                    data.getJSONObject(i).getString("caseId"),
+                    data.getJSONObject(i).getInt("age"),
+                    data.getJSONObject(i).getString("gender"),
+                    data.getJSONObject(i).getString("phone"),
+                    data.getJSONObject(i).getString("address"),
+                    data.getJSONObject(i).getString("lab"),
+                    data.getJSONObject(i).getString("district")
+                )
+            } catch (e: JSONException) {
+                println("json exception : ${e.message}")
+            }
         }
         return list
     }
@@ -92,7 +106,7 @@ class DiagnosisPendingFragment : Fragment() {
                     binding.animationView.visibility = GONE
                     binding.recyclerView.visibility = VISIBLE
                     binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
-                    binding.recyclerView.adapter = PendingListAdapter(requireContext(), list)
+                    binding.recyclerView.adapter = DiagnosisPendingAdapter(requireContext(), list)
                 }
             } else {
                 activity?.runOnUiThread {
