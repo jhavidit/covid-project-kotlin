@@ -22,7 +22,8 @@ data class PendingPatient(
     val gender:String="",
     val phone:String="",
     val address:String="",
-    val labName:String=""
+    val labName:String="",
+    val district: String
 ) :Parcelable
 
 @Parcelize

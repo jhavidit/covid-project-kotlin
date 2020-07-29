@@ -19,9 +19,11 @@ import retrofit2.Response
 class PatientDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPatientDetailsBinding
     private val auth_token: String = TokenManager.USER_TOKEN
+    @SuppressLint("LogNotTimber")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_patient_details)
+        getPatientDetails()
     }
 
     private fun beginPatientDiagnosis(patientId: String) {
@@ -97,5 +99,20 @@ class PatientDetailsActivity : AppCompatActivity() {
 
                 }
             )
+    }
+
+    private fun getPatientDetails() {
+        val patientData = intent.extras?.getBundle("patientData")
+        val patientId = patientData?.getString("id")
+        binding.patientId.text = patientId
+        binding.patientName.text = patientData?.getString("name")
+        val patientAge = patientData?.getString("age")
+        var patientGender = patientData?.getString("gender")
+        if(patientGender == "M") patientGender = "Male"
+        binding.patientGA.text = "$patientGender | $patientAge years"
+        binding.patientPhoneNo.text = patientData?.getString("contact")
+        binding.patientDistrict.text = patientData?.getString("district")
+        binding.patientAddress.text = patientData?.getString("address")
+        binding.labName.text = patientData?.getString("labName")
     }
 }

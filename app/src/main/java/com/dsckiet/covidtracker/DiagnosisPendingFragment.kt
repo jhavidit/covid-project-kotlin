@@ -50,7 +50,8 @@ class DiagnosisPendingFragment : Fragment() {
                 data.getJSONObject(i).getString("gender"),
                 data.getJSONObject(i).getString("phone"),
                 data.getJSONObject(i).getString("address"),
-                data.getJSONObject(i).getJSONObject("lab").getString("name")
+                data.getJSONObject(i).getJSONObject("lab").getString("name"),
+                data.getJSONObject(i).getString("district")
             )
         }
         return list
@@ -92,7 +93,7 @@ class DiagnosisPendingFragment : Fragment() {
                     binding.animationView.visibility = GONE
                     binding.recyclerView.visibility = VISIBLE
                     binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
-                    binding.recyclerView.adapter = PendingListAdapter(requireContext(), list)
+                    binding.recyclerView.adapter = DiagnosisPendingAdapter(requireContext(), list)
                 }
             } else {
                 activity?.runOnUiThread {

@@ -49,6 +49,7 @@ class PatientDeclinedViewModel: ViewModel() {
                         response: Response<ResponseModel>
                     ) {
                         _responseModel.value = response.body()
+                        Log.d("fetch_status", "response code = ${response.code()} & response body = ${response.body()}")
                         _patientDeclinedData.value = responseModel.value?.data
                         _countListItem.value = patientDeclinedData.value?.size.toString()
                         Log.d("fetch_success","fetch_success, response: ${_patientDeclinedData.value.toString()}")
