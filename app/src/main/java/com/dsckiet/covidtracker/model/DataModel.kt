@@ -6,8 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ResponseModel (
-    val message: String,
-    val error: Boolean,
+    val message: String?,
+    val error: Boolean?,
     val data: List<PatientDetails>?
 ) : Parcelable
 
@@ -28,14 +28,14 @@ data class PendingPatient(
 
 @Parcelize
 data class PatientDetails (
-    @Json(name = "phone") val phoneNo: Long,
-    val district: String,
-    val address: String,
-    val name: String,
-    val age: Int,
-    val gender: String,
-    val lab: PatientLab,
-    @Json(name = "_id") val patientId: String
+    @Json(name = "phone") val phoneNo: Long?,
+    val district: String?,
+    val address: String?,
+    val name: String?,
+    val age: Int?,
+    val gender: String?,
+    val lab: PatientLab?,
+    @Json(name = "_id") val patientId: String?
 ) : Parcelable
 
 @Parcelize
@@ -47,5 +47,5 @@ data class AssignPatientLevel (
 
 @Parcelize
 data class PatientLab (
-    val name: String
+    val name: String?
 ) : Parcelable

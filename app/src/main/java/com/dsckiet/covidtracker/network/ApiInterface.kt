@@ -1,5 +1,7 @@
 package com.dsckiet.covidtracker.network
 
+import android.content.Context
+import com.dsckiet.covidtracker.Authentication.TokenManager
 import com.dsckiet.covidtracker.model.AssignPatientLevel
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.squareup.moshi.Moshi
@@ -24,16 +26,21 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiInterface {
     @GET("api/v1/doctors/patients/declined")
-    fun getPatientsData(@Header("x-auth-token") token: String): Call<ResponseModel>
+    fun getPatientsData(
+        @Header("x-auth-token") token: String
+    ): Call<ResponseModel>
 
     @POST("api/v1/doctors/patients/attend/{patientId}")
-    fun diagnosisBeginRequest(@Header("x-auth-token") token: String,
-                              @Path("patientId") patientId: String) : Call<ResponseModel>
+    fun diagnosisBeginRequest(
+        @Header("x-auth-token") token: String,
+        @Path("patientId") patientId: String
+    ): Call<ResponseModel>
 
     @POST("api/v1/doctors/patients/level/{patientId}")
-    fun assignPatientLevel(@Header("x-auth-token") token: String, @Path("patientId") patientId: String,
-                           @Body patientLevel: AssignPatientLevel
-    ) : Call<ResponseModel>
+    fun assignPatientLevel(
+        @Header("x-auth-token") token: String, @Path("patientId") patientId: String,
+        @Body patientLevel: AssignPatientLevel
+    ): Call<ResponseModel>
 }
 
 object PatientsApi {
