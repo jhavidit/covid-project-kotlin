@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker.screens.ui
+package com.dsckiet.covidtracker
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -25,6 +25,7 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
+import com.dsckiet.covidtracker.screens.ui.LoginActivity
 
 
 class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -116,7 +117,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
             .setIcon(R.drawable.ic_profile)
             .setPositiveButton("Yes") { dialog, which ->
                 tokenManager.deleteAuthToken()
-                val i = Intent(requireContext(), LoginActivity::class.java)
+                val i = Intent(requireContext(),LoginActivity::class.java)
                 i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)
 

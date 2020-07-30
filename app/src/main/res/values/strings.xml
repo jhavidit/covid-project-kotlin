@@ -71,9 +71,14 @@
     <string name="dialer">dialer</string>
     <string name="patient_declined_count">Number of patients who were declined to be examined by the doctor</string>
     <string name="number_of_patient_left_unassigned_by_the_doctor">Number of patient left unassigned by the doctor</string>
-
     <style name="patient_declined_count">
         number_of_patients_who_were_declined_to_be_examined_by_the_doctor
     </style>
+    <string-array name="Spinner">
+        <item>Edit Profile</item>
+        <item>Change Password</item>
+        <item>Logout</item>
+    </string-array>
+
 
 </resources>
