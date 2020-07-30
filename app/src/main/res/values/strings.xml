@@ -14,7 +14,7 @@
 
     <!--    String resources @Diagnosis Pending Page-->
     <string name="diagnosis_pending">Diagnosis Pending</string>
-    <string name="_345">345</string>
+    <string name="_345">0</string>
     <string name="number_of_patients_left_to_be_examined">Number of patients left to be examined</string>
     <string name="patients_list">Patient\'s List</string>
     <string name="click_the_card_to_examine_the_patient">Click the card to examine the patient</string>
@@ -70,6 +70,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dialer">dialer</string>
     <string name="patient_declined_count">Number of patients who were declined to be examined by the doctor</string>
+    <string name="number_of_patient_left_unassigned_by_the_doctor">Number of patient left unassigned by the doctor</string>
 
     <style name="patient_declined_count">
         number_of_patients_who_were_declined_to_be_examined_by_the_doctor

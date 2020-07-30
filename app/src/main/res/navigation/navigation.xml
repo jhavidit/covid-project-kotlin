@@ -11,20 +11,23 @@
         android:label="DiagnosisPendingFragment"
         tools:layout="@layout/fragment_diagnosis_pending">
         <action
-            android:id="@+id/action_diagnosisPendingFragment_to_diagnosisCompleteFragment"
+            android:id="@+id/action_diagnosisPendingFragment_to_patientUnassignedFragment"
+            app:destination="@id/patientUnassignedFragment" />
+        <action
+            android:id="@+id/action_diagnosisPendingFragment_to_patientDeclinedFragment"
             app:destination="@id/patientDeclinedFragment" />
         <action
             android:id="@+id/action_diagnosisPendingFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_diagnosisPendingFragment_to_patientDeclinedFragment"
-            app:destination="@id/patientDeclinedFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.dsckiet.covidtracker.screens.ui.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_patientUnassignedFragment"
+            app:destination="@id/patientUnassignedFragment" />
         <action
             android:id="@+id/action_profileFragment_to_diagnosisPendingFragment"
             app:destination="@id/diagnosisPendingFragment" />
@@ -41,7 +44,25 @@
             android:id="@+id/action_patientDeclinedFragment_to_diagnosisPendingFragment"
             app:destination="@id/diagnosisPendingFragment" />
         <action
+            android:id="@+id/action_patientDeclinedFragment_to_patientUnassignedFragment"
+            app:destination="@id/patientUnassignedFragment" />
+        <action
             android:id="@+id/action_patientDeclinedFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientUnassignedFragment"
+        android:name="com.dsckiet.covidtracker.screens.ui.PatientUnassignedFragment"
+        android:label="PatientUnassignedFragment"
+        tools:layout="@layout/fragment_patient_unassigned">
+        <action
+            android:id="@+id/action_patientUnassignedFragment_to_diagnosisPendingFragment"
+            app:destination="@id/diagnosisPendingFragment" />
+        <action
+            android:id="@+id/action_patientUnassignedFragment_to_patientDeclinedFragment"
+            app:destination="@id/patientDeclinedFragment" />
+        <action
+            android:id="@+id/action_patientUnassignedFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
