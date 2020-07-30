@@ -104,7 +104,7 @@ class DiagnosisPendingFragment : Fragment() {
                 list = generatePendingPatientList(patientData!!)
                 activity?.runOnUiThread {
                     binding.animationView.visibility = GONE
-                    binding.recyclerView.visibility = VISIBLE
+                    //binding.recyclerView.visibility = VISIBLE
                     binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
                     binding.recyclerView.adapter = DiagnosisPendingAdapter(requireContext(), list)
                 }
@@ -116,15 +116,15 @@ class DiagnosisPendingFragment : Fragment() {
             }
 
 
-        }.on(Socket.EVENT_DISCONNECT) { args ->
+        }.on(Socket.EVENT_DISCONNECT) { _ ->
             activity?.runOnUiThread {
                 binding.recyclerView.visibility = GONE
-                binding.animationView.visibility = VISIBLE
+                //binding.animationView.visibility = VISIBLE
                 binding.diagnosisPendingCount.text = ""
                 Toast.makeText(requireContext(), "Internet Unavailable", Toast.LENGTH_SHORT).show()
             }
 
-        }.on(Socket.EVENT_RECONNECT) { args ->
+        }.on(Socket.EVENT_RECONNECT) { _ ->
             try {
                 mSocket?.emit(
                     "patientsPoolForDoctor", jsonObject1

@@ -7,6 +7,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -40,6 +42,7 @@ class PatientDeclinedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.animationView.visibility = VISIBLE
         authToken = TokenManager(requireContext())
         getDeclinedPatientData()
     }
@@ -59,6 +62,7 @@ class PatientDeclinedFragment : Fragment() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
+                        binding.animationView.visibility = GONE
                         val listResponse = response.body()
                         val listData: List<PatientDetails>? = listResponse?.data
                         if (listData != null) {
