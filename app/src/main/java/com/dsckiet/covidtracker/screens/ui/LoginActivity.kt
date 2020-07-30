@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker
+package com.dsckiet.covidtracker.screens.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,6 +14,7 @@ import com.dsckiet.covidtracker.Authentication.LoginAPI
 import com.dsckiet.covidtracker.Authentication.Model.RequestModel
 import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
 import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
@@ -27,7 +28,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_login
+        )
 
         tokenManager = TokenManager(this)
         val token = tokenManager.getAuthToken()

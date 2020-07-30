@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:orientation="vertical"
-            tools:context=".LoginActivity">
+            tools:context=".screens.ui.LoginActivity">
 
             <ImageView
                 android:layout_width="105dp"

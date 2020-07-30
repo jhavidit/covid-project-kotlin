@@ -10,7 +10,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ProfileFragment">
+            tools:context=".screens.ui.ProfileFragment">
 
                 <TextView
                     android:id="@+id/dp_text"

@@ -10,7 +10,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".DiagnosisPendingFragment">
+            tools:context=".screens.ui.DiagnosisPendingFragment">
 
             <TextView
                 android:id="@+id/dp_text"
@@ -162,6 +162,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:layout_below="@id/list_header"
+                app:lottie_colorFilter="@color/colorPrimary"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/heartbeat_loading"

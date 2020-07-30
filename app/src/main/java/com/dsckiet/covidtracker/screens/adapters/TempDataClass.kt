@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker
+package com.dsckiet.covidtracker.screens.adapters
 
 data class TempDataClass(
     val patientId: String,

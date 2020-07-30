@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker
+package com.dsckiet.covidtracker.screens.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +21,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        navController = Navigation.findNavController(this, R.id.NavHostFragment)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main
+        )
+        navController = Navigation.findNavController(this,
+            R.id.NavHostFragment
+        )
 
         binding.bottomNav.setTypeface(Typeface.DEFAULT_BOLD)
         initBottomNav()
