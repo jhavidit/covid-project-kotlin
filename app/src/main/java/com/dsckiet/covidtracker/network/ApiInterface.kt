@@ -31,6 +31,11 @@ interface ApiInterface {
         @Header("x-auth-token") token: String
     ): Call<ResponseModel>
 
+    @GET("api/v1/doctors/patients/unassigned")
+    fun getUnassignedPatientsData(
+        @Header("x-auth-token") token: String
+    ): Call<ResponseModel>
+
     @POST("api/v1/doctors/patients/attend/{patientId}")
     fun diagnosisBeginRequest(
         @Header("x-auth-token") token: String,

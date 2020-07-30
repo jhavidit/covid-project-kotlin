@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -122,15 +123,15 @@ class DiagnosisPendingFragment : Fragment() {
             }
 
 
-        }.on(Socket.EVENT_DISCONNECT) { _ ->
+        }.on(Socket.EVENT_DISCONNECT) {
             activity?.runOnUiThread {
-                binding.recyclerView.visibility = GONE
-                //binding.animationView.visibility = VISIBLE
-                binding.diagnosisPendingCount.text = ""
+                //binding.recyclerView.visibility = GONE
+                binding.animationView.visibility = VISIBLE
+                binding.diagnosisPendingCount.text = "0"
                 Toast.makeText(requireContext(), "Internet Unavailable", Toast.LENGTH_SHORT).show()
             }
 
-        }.on(Socket.EVENT_RECONNECT) { _ ->
+        }.on(Socket.EVENT_RECONNECT) {
             try {
                 mSocket?.emit(
                     "patientsPoolForDoctor", jsonObject1

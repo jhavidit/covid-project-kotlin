@@ -27,13 +27,12 @@
             android:elevation="8dp"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:weightSum="3">
+            android:weightSum="4">
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_pending"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:backgroundTint="#fff"
                 android:gravity="center"
                 app:bt_active="true"
@@ -43,10 +42,21 @@
                 app:bt_title="Pending" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/toggle_declined"
-                android:layout_width="0dp"
+                android:id="@+id/toggle_unassigned"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:backgroundTint="#fff"
+                android:gravity="center"
+                app:bt_active="true"
+                app:bt_colorActive="@color/colorPrimary"
+                app:bt_colorInactive="@color/colorPrimary"
+                app:bt_icon="@drawable/icon_unassigned"
+                app:bt_title="Unassigned" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/toggle_declined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:backgroundTint="#fff"
                 android:gravity="center"
                 app:bt_active="true"
@@ -57,9 +67,8 @@
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_profile"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:backgroundTint="#fff"
                 android:gravity="center"
                 app:bt_active="true"

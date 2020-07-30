@@ -85,11 +85,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBottomNav() {
         binding.bottomNav.setNavigationChangeListener { _, position ->
-            if (previousNavigationPosition != position) {
-                when (position) {
+            if(previousNavigationPosition != position) {
+                when(position) {
                     0 -> {
                         binding.bottomNav.setCurrentActiveItem(0)
-                        if (previousNavigationPosition == 1) {
+                        if(previousNavigationPosition == 1) {
+                            navController.navigate(R.id.action_patientUnassignedFragment_to_diagnosisPendingFragment)
+                        } else if(previousNavigationPosition == 2) {
                             navController.navigate(R.id.action_patientDeclinedFragment_to_diagnosisPendingFragment)
                         } else {
                             navController.navigate(R.id.action_profileFragment_to_diagnosisPendingFragment)
@@ -98,17 +100,32 @@ class MainActivity : AppCompatActivity() {
                     }
                     1 -> {
                         binding.bottomNav.setCurrentActiveItem(1)
-                        if (previousNavigationPosition == 0) {
-                            navController.navigate(R.id.action_diagnosisPendingFragment_to_patientDeclinedFragment)
+                        if(previousNavigationPosition == 0) {
+                            navController.navigate(R.id.action_diagnosisPendingFragment_to_patientUnassignedFragment)
+                        } else if(previousNavigationPosition == 2) {
+                            navController.navigate(R.id.action_patientDeclinedFragment_to_patientUnassignedFragment)
                         } else {
-                            navController.navigate(R.id.action_profileFragment_to_patientDeclinedFragment)
+                            navController.navigate(R.id.action_profileFragment_to_patientUnassignedFragment)
                         }
                         previousNavigationPosition = position
                     }
                     2 -> {
                         binding.bottomNav.setCurrentActiveItem(2)
-                        if (previousNavigationPosition == 0) {
+                        if(previousNavigationPosition == 0) {
+                            navController.navigate(R.id.action_diagnosisPendingFragment_to_patientDeclinedFragment)
+                        } else if(previousNavigationPosition == 1) {
+                            navController.navigate(R.id.action_patientUnassignedFragment_to_patientDeclinedFragment)
+                        } else {
+                            navController.navigate(R.id.action_profileFragment_to_patientDeclinedFragment)
+                        }
+                        previousNavigationPosition = position
+                    }
+                    3 -> {
+                        binding.bottomNav.setCurrentActiveItem(3)
+                        if(previousNavigationPosition == 0) {
                             navController.navigate(R.id.action_diagnosisPendingFragment_to_profileFragment)
+                        } else if(previousNavigationPosition == 1) {
+                            navController.navigate(R.id.action_patientUnassignedFragment_to_profileFragment)
                         } else {
                             navController.navigate(R.id.action_patientDeclinedFragment_to_profileFragment)
                         }
