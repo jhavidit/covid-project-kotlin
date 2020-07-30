@@ -50,7 +50,7 @@ class DiagnosisPendingFragment : Fragment() {
                 data.getJSONObject(i).getString("gender"),
                 data.getJSONObject(i).getString("phone"),
                 data.getJSONObject(i).getString("address"),
-                data.getJSONObject(i).getJSONObject("lab").getString("name")
+                data.getJSONObject(i).getString("lab")
             )
         }
         return list

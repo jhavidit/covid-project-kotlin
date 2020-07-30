@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
 
                         @SuppressLint("LogNotTimber")
                         override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                            Log.i("Request", "Failure")
+                            Log.i("Request", "Failure : ${t.message}")
                         }
                     }
                     LoginAPI.retrofitService.sendUserData(user).enqueue(cb)
