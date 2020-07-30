@@ -10,7 +10,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".DiagnosisPendingFragment">
+            tools:context=".screens.ui.DiagnosisPendingFragment">
 
             <TextView
                 android:id="@+id/dp_text"

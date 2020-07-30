@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker
+package com.dsckiet.covidtracker.screens.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,13 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dsckiet.covid_project_demo.SocketInstance
 import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.screens.adapters.DiagnosisPendingAdapter
+import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.FragmentDiagnosisPendingBinding
 import com.dsckiet.covidtracker.model.PendingPatient
 import com.github.nkzawa.socketio.client.IO
@@ -37,7 +38,8 @@ class DiagnosisPendingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_diagnosis_pending, container, false)
+            DataBindingUtil.inflate(inflater,
+                R.layout.fragment_diagnosis_pending, container, false)
         return binding.root
     }
 
@@ -106,7 +108,11 @@ class DiagnosisPendingFragment : Fragment() {
                     binding.animationView.visibility = GONE
                     //binding.recyclerView.visibility = VISIBLE
                     binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
-                    binding.recyclerView.adapter = DiagnosisPendingAdapter(requireContext(), list)
+                    binding.recyclerView.adapter =
+                        DiagnosisPendingAdapter(
+                            requireContext(),
+                            list
+                        )
                 }
             } else {
                 activity?.runOnUiThread {

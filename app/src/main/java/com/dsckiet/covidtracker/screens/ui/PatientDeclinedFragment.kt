@@ -1,7 +1,6 @@
-package com.dsckiet.covidtracker
+package com.dsckiet.covidtracker.screens.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,16 +10,14 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.screens.adapters.PatientDeclinedAdapter
+import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.FragmentPatientDeclinedBinding
 import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
-import kotlinx.android.synthetic.main.fragment_patient_declined.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +33,8 @@ class PatientDeclinedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_patient_declined, container, false)
+            DataBindingUtil.inflate(inflater,
+                R.layout.fragment_patient_declined, container, false)
         return binding.root
     }
 
@@ -70,13 +68,14 @@ class PatientDeclinedFragment : Fragment() {
                                 list.add(PatientDetails(data.phoneNo, data.district, data.address, data.name, data.age
                                 , data.gender, data.lab, data.patientId))
                             }
-                            binding.recyclerView.adapter = PatientDeclinedAdapter(requireContext(), list)
+                            binding.recyclerView.adapter =
+                                PatientDeclinedAdapter(
+                                    requireContext(),
+                                    list
+                                )
                             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                             binding.recyclerView.setHasFixedSize(true)
                             binding.countDecPatients.text = listData.size.toString()
-                    //                        val listData: List<PatientDetails> = response.body()!!
-                            //for(data: List<PatientDetails> in listData)
-                            //binding.countDecPatients.text = list.size.toString()
                                 Log.d("fetch_success","fetch_success, response: ${listData}")
                             println("fetch status: response body = ${response.body()} and response code = ${response.code()}")
                         }

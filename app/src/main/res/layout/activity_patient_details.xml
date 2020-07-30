@@ -6,7 +6,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".PatientDetailsActivity">
+        tools:context=".screens.ui.PatientDetailsActivity">
 
         <RelativeLayout
             android:id="@+id/rel_layout"
