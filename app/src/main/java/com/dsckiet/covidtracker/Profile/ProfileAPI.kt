@@ -1,25 +1,28 @@
-package com.dsckiet.covidtracker.Authentication
+package com.dsckiet.covidtracker.Profile
+
 
 import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
-import com.dsckiet.covidtracker.Authentication.Model.RequestModel
+import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
+import com.dsckiet.covidtracker.Profile.Models.ProfileResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
-interface APIService {
+interface profileAPIService {
+
+
+    @GET("api/v1/users/profile")
+    fun getProfile(@Header("x-auth-token") token: String): Call<ProfileResponse>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/users/login/doctor")
-    fun sendUserData(
-        @Body userLogin: RequestModel
-    ): Call<ResponseModel>
+    @POST("api/v1/users/change-pwd")
+    fun changePassword(@Header("x-auth-token") token: String,@Body newpassword : NewPasswordRequest): Call<ProfileResponse>
+
 }
 
 private const val BASE_URL = "https://covid-project-gzb.herokuapp.com/"
@@ -36,8 +39,8 @@ private val retrofitBuilder = Retrofit.Builder()
     .client(client)
     .build()
 
-object LoginAPI {
-    val retrofitService: APIService by lazy {
-        retrofitBuilder.create(APIService::class.java)
+object ProfileAPI {
+    val retrofitService: profileAPIService by lazy {
+        retrofitBuilder.create(profileAPIService::class.java)
     }
 }
