@@ -30,6 +30,8 @@ import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
 import com.dsckiet.covidtracker.model.AssignPatientLevel
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
+import com.dsckiet.covidtracker.utils.InternetConnectivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_patient_details.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import retrofit2.Call
@@ -104,10 +106,12 @@ class PatientDetailsActivity : AppCompatActivity() {
 
         binding.submitForm.setOnClickListener {
 
-            if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked && !binding.declineToCome.isChecked) {
-                Toast.makeText(
-                    this, "Please assign a severity level to the patient !",
-                    Toast.LENGTH_LONG
+            if(!InternetConnectivity.isNetworkAvailable(this)!!)
+            Snackbar.make(binding.coordinatorLayout,"Internet Unavailable",Snackbar.LENGTH_LONG).show()
+            else if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked && !binding.declineToCome.isChecked) {
+                Snackbar.make(
+                    binding.coordinatorLayout, "Please assign a severity level to the patient !",
+                    Snackbar.LENGTH_LONG
                 ).show()
             } else {
 
@@ -137,10 +141,10 @@ class PatientDetailsActivity : AppCompatActivity() {
             .enqueue(
                 object : Callback<ResponseModel> {
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                        Toast.makeText(
-                            this@PatientDetailsActivity,
+                        Snackbar.make(
+                            binding.coordinatorLayout,
                             "Patient can not be attended check network connection",
-                            Toast.LENGTH_LONG
+                            Snackbar.LENGTH_LONG
                         )
                             .show()
                         onBackPressed()
@@ -153,12 +157,13 @@ class PatientDetailsActivity : AppCompatActivity() {
                     ) {
                         if(response.code()!=200)
                         {
-                            Toast.makeText(
-                                this@PatientDetailsActivity,
+                            Snackbar.make(
+                                binding.coordinatorLayout,
                                 "Patient can not be attended check network connection",
-                                Toast.LENGTH_LONG
+                                Snackbar.LENGTH_LONG
                             )
                                 .show()
+
                             onBackPressed()
                         }
 

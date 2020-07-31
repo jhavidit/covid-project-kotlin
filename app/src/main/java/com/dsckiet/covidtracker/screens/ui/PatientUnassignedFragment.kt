@@ -17,6 +17,7 @@ import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.screens.adapters.PatientDeclinedAdapter
 import com.dsckiet.covidtracker.screens.adapters.PatientUnassignedAdapter
+import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import retrofit2.Call
@@ -36,6 +37,7 @@ class PatientUnassignedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.animationView.visibility = View.VISIBLE
         authToken = TokenManager(requireContext())
+
         getUnassignedPatientData()
 
 

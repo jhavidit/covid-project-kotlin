@@ -22,12 +22,14 @@ import com.dsckiet.covidtracker.R
 import android.os.Build
 import android.text.Html
 import android.view.*
+import android.view.View.GONE
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.bind
+import android.view.View.VISIBLE as VISIBLE
 
 
 class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -68,8 +70,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 .enqueue(object : Callback<ProfileResponse> {
                     @SuppressLint("LogNotTimber")
                     override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-
-
+                        binding.animationView.visibility=GONE
                         Snackbar.make(
                             binding.coordinatorLayout,
                             "Some problem occurred check your network connection or restart the app",
@@ -81,7 +82,8 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         call: Call<ProfileResponse>,
                         response: Response<ProfileResponse>
                     ) {
-
+                        binding.relativeLayoutProfile.visibility=VISIBLE
+                        binding.animationView.visibility=GONE
                         val profile = response.body()
                         if (profile?.message == "success" && !profile.error) {
                             binding.docId.text = profile.data.empId

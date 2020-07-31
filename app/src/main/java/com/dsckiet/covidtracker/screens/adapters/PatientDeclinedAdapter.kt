@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.screens.ui.PatientDetailsActivity
+import com.dsckiet.covidtracker.utils.InternetConnectivity
 import kotlinx.android.synthetic.main.item_view.view.*
 
 class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: ArrayList<PatientDetails>) :
@@ -52,6 +54,9 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
                 "caseId" to caseId,
                 "pageToken" to "1"
             )
+            if(!InternetConnectivity.isNetworkAvailable(ctx)!!)
+                Toast.makeText(ctx,"Internet unavailable", Toast.LENGTH_LONG).show()
+            else
             ctx.startActivity(Intent(ctx, PatientDetailsActivity::class.java).putExtra("patientData", bundle))
         }
     }
