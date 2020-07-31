@@ -23,13 +23,15 @@
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/patient_submitted"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:textAlignment="center"
             android:text="Patient Details \n Submitted"
             android:layout_below="@id/image"

@@ -222,7 +222,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         // Initialize a new instance of popup window
         val popupWindow = PopupWindow(
             view, // Custom view to show in popup window
-            LinearLayout.LayoutParams.MATCH_PARENT, // Width of popup window
+            LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
             LinearLayout.LayoutParams.WRAP_CONTENT
 
             // Window height

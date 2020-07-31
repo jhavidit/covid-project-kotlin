@@ -54,7 +54,6 @@
                         android:layout_marginLeft="4dp"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/sen_extrabold"
-                        android:text="@string/_345"
                         android:textColor="#fff"
                         android:textSize="40sp" />
 

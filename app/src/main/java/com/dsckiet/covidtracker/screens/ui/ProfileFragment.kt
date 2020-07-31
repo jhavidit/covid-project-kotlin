@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.bind
 
 
 class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -87,6 +88,14 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             binding.docName.text = profile.data.name
                             Glide.with(requireContext()).load(profile.data.image).into(binding.docPhoto)
                             doctorId = profile.data._id
+                            binding.docAddressInfo
+                            val age=profile.data.age
+                            val gender=profile.data.gender
+                            binding.docAgeGender.text="$gender | $age years"
+                            binding.docProfileDetails.text=profile.data.about
+                            binding.docPhoneNum.text=profile.data.contact
+                            binding.docAddressInfo.text=profile.data.address
+                            binding.docHospitalInfo.text=profile.data.hospital
 
                         }
                     }
