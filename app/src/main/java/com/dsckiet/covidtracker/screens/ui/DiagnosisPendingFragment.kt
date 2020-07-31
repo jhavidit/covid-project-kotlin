@@ -17,11 +17,16 @@ import com.dsckiet.covidtracker.screens.adapters.DiagnosisPendingAdapter
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.FragmentDiagnosisPendingBinding
 import com.dsckiet.covidtracker.model.PendingPatient
+import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import org.koin.android.ext.android.bind
+import java.net.BindException
 import java.net.URISyntaxException
 
 class DiagnosisPendingFragment : Fragment() {
@@ -48,11 +53,14 @@ class DiagnosisPendingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tokenManager = TokenManager(requireContext())
-        Log.d("auth token: ", tokenManager.getAuthToken().toString())
+        if(!InternetConnectivity.isNetworkAvailable(requireContext())!!) {
+            Snackbar.make(binding.coordinatorLayout,"Internet Unavailable",Snackbar.LENGTH_INDEFINITE).show()
+            binding.animationView.visibility=GONE
+        }
     }
-
     private fun generatePendingPatientList(data: JSONArray): ArrayList<PendingPatient> {
         val list = ArrayList<PendingPatient>()
+
 
         for (i in 0 until data.length()) {
             try {
@@ -64,7 +72,9 @@ class DiagnosisPendingFragment : Fragment() {
                     data.getJSONObject(i).getString("phone"),
                     data.getJSONObject(i).getString("address"),
                     data.getJSONObject(i).getString("lab"),
-                    data.getJSONObject(i).getString("district")
+                    data.getJSONObject(i).getString("district"),
+                    data.getJSONObject(i).getString("caseId")
+
                 )
             } catch (e: JSONException) {
                 println("json exception : ${e.message}")
@@ -87,12 +97,12 @@ class DiagnosisPendingFragment : Fragment() {
     }
 
     private fun socketConnection() {
-        val jsonObject1 = JSONObject() //tocken object
+        val token=tokenManager.getAuthToken()
+        val jsonObject1 = JSONObject() //token object
         try {
             jsonObject1.put(
                 "token",
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMTMzZWEzMTgxOTM2MWUxMDE2Y2U5NCIsIm5hbWUiOiJSb290IERvY3RvciIsImVtYWlsIjoicmF3aWI1NDQzMkBleHBsb3JheGIuY29tIiwicm9sZSI6ImRvY3RvciIsImlhdCI6MTU5NTA5NjkzOX0.Ci50Rfi8oW6BlxIS8IP4329JQEBMDdoFyWex1iq7_sM"
-            )
+                token )
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -102,40 +112,45 @@ class DiagnosisPendingFragment : Fragment() {
                 data = args[0] as JSONObject
 
             if (data != null) {
-                Log.d("test", data.toString())
-                patientData = data!!.getJSONArray("patients")
-                list = generatePendingPatientList(patientData!!)
-                activity?.runOnUiThread {
-                    binding.animationView.visibility = GONE
-                    //binding.recyclerView.visibility = VISIBLE
-                    binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
-                    binding.recyclerView.adapter =
-                        DiagnosisPendingAdapter(
-                            requireContext(),
-                            list
-                        )
-                }
-            } else {
-                activity?.runOnUiThread {
-                    Toast.makeText(requireContext(), "No patient available", Toast.LENGTH_SHORT)
-                        .show()
+                if (data.toString() != "{}" || data.toString() != "[]") {
+                    patientData = data!!.getJSONArray("patients")
+                    list = generatePendingPatientList(patientData!!)
+                    activity?.runOnUiThread {
+                        binding.animationView.visibility = GONE
+                        binding.recyclerView.visibility = VISIBLE
+                        binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
+                        binding.recyclerView.adapter =
+                            DiagnosisPendingAdapter(
+                                requireContext(),
+                                list
+                            )
+                    }
+                } else {
+                    activity?.runOnUiThread {
+                        binding.animationView.visibility=GONE
+                        Snackbar.make(coordinator_layout,"No available Patient",Snackbar.LENGTH_INDEFINITE)
+                    }
                 }
             }
 
 
-        }.on(Socket.EVENT_DISCONNECT) {
+        }.on(Socket.EVENT_DISCONNECT) { args->
             activity?.runOnUiThread {
-                //binding.recyclerView.visibility = GONE
-                binding.animationView.visibility = VISIBLE
+                binding.recyclerView.visibility = GONE
+                binding.animationView.visibility = GONE
                 binding.diagnosisPendingCount.text = "0"
-                Toast.makeText(requireContext(), "Internet Unavailable", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_INDEFINITE).show()
             }
 
-        }.on(Socket.EVENT_RECONNECT) {
+        }.on(Socket.EVENT_RECONNECT) {args->
             try {
+                mSocket?.connect()
                 mSocket?.emit(
                     "patientsPoolForDoctor", jsonObject1
                 )
+                activity?.runOnUiThread{
+                    binding.animationView.visibility= VISIBLE
+                }
             } catch (e: URISyntaxException) {
                 e.printStackTrace()
             }
