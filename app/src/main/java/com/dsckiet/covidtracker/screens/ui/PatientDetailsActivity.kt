@@ -53,7 +53,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         val patientData = intent.extras?.getBundle("patientData")
         val patientId = patientData?.getString("id")
         val caseId = patientData?.getString("caseId")
-        binding.patientId.text = caseId?.substring(0, 5) + "..."
+        binding.patientId.text = caseId
         binding.patientName.text = patientData?.getString("name")
         val patientAge = patientData?.getString("age")
         var patientGender = patientData?.getString("gender")

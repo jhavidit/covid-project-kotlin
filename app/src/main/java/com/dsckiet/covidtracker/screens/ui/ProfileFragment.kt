@@ -60,36 +60,40 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
         tokenManager = TokenManager(requireContext())
+        val token = tokenManager.getAuthToken()
+        if (token != null) {
+
+            ProfileAPI.retrofitService.getProfile(token)
+                .enqueue(object : Callback<ProfileResponse> {
+                    @SuppressLint("LogNotTimber")
+                    override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
 
 
-        ProfileAPI.retrofitService.getProfile(token = tokenManager.getAuthToken()!!)
-            .enqueue(object : Callback<ProfileResponse> {
-                @SuppressLint("LogNotTimber")
-                override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-
-
-                    Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",
-                        Snackbar.LENGTH_INDEFINITE).show()
-                }
-
-                override fun onResponse(
-                    call: Call<ProfileResponse>,
-                    response: Response<ProfileResponse>
-                ) {
-
-                    val profile = response.body()
-                    if (profile?.message == "success" && !profile.error) {
-                        binding.docId.text = profile.data.empId
-                        binding.docName.text = profile.data.name
-                        Glide.with(requireContext()).load(profile.data.image).into(doc_photo)
-                        doctorId=profile.data._id
-
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Some problem occurred check your network connection or restart the app",
+                            Snackbar.LENGTH_INDEFINITE
+                        ).show()
                     }
-                }
-            })
+
+                    override fun onResponse(
+                        call: Call<ProfileResponse>,
+                        response: Response<ProfileResponse>
+                    ) {
+
+                        val profile = response.body()
+                        if (profile?.message == "success" && !profile.error) {
+                            binding.docId.text = profile.data.empId
+                            binding.docName.text = profile.data.name
+                            Glide.with(requireContext()).load(profile.data.image).into(binding.docPhoto)
+                            doctorId = profile.data._id
+
+                        }
+                    }
+                })
+        }
+
     }
-
-
     //TODO-comment -> next to implemented fun for spinner
     override fun onNothingSelected(parent: AdapterView<*>?) {
 

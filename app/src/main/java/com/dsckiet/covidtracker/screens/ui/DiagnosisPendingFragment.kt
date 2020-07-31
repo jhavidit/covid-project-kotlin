@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import org.koin.android.ext.android.bind
 import java.net.BindException
 import java.net.URISyntaxException
 
@@ -111,7 +112,6 @@ class DiagnosisPendingFragment : Fragment() {
                 data = args[0] as JSONObject
 
             if (data != null) {
-                Log.d("test", data.toString())
                 if (data.toString() != "{}" || data.toString() != "[]") {
                     patientData = data!!.getJSONArray("patients")
                     list = generatePendingPatientList(patientData!!)
@@ -144,9 +144,13 @@ class DiagnosisPendingFragment : Fragment() {
 
         }.on(Socket.EVENT_RECONNECT) {args->
             try {
+                mSocket?.connect()
                 mSocket?.emit(
                     "patientsPoolForDoctor", jsonObject1
                 )
+                activity?.runOnUiThread{
+                    binding.animationView.visibility= VISIBLE
+                }
             } catch (e: URISyntaxException) {
                 e.printStackTrace()
             }
