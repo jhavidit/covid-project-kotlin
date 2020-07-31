@@ -53,7 +53,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
         }
         tokenManager = TokenManager(this)
         val token = tokenManager.getAuthToken()
-        Log.d("token", token)
         binding.updatePhoto.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_PICK,
@@ -84,7 +83,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
                     )
                     callAPi.enqueue(object : Callback<UpdateProfileResponse> {
                         override fun onFailure(call: Call<UpdateProfileResponse>, t: Throwable) {
-                            Log.d("error", t.message)
                             Snackbar.make(
                                 binding.coordinatorLayout,
                                 "Some error occurred check your network connection or try again later",

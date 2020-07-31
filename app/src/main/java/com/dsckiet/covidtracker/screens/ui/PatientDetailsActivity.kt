@@ -151,7 +151,16 @@ class PatientDetailsActivity : AppCompatActivity() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
-
+                        if(response.code()!=200)
+                        {
+                            Toast.makeText(
+                                this@PatientDetailsActivity,
+                                "Patient can not be attended check network connection",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            onBackPressed()
+                        }
 
                     }
 
@@ -166,7 +175,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         isDeclined: Boolean,
         patientId: String
     ) {
-        Log.i("check", "isDeclined = $isDeclined")
+
         "application/json; charset=utf-8".toMediaTypeOrNull()
         PatientsApi.retrofitService.assignPatientLevel(
             token = tokenManager.getAuthToken().toString(),

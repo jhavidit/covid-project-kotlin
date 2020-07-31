@@ -26,13 +26,6 @@ interface APIService {
     fun updateUserProfile(
         @Header("x-auth-token") token: String,
         @Path("id") id: String,
-//    @Part("name") name: String,
-//    @Part("empId") caseId: String,
-//    @Part("age") age: String,
-//    @Part("about") about: String,
-//    @Part("contact") contact: String,
-//    @Part("address") address: String,
-//    @Part("hospital") hospital: String
         @Body body: UpdateProfileBody
 
     ): Call<UpdateProfileResponse>

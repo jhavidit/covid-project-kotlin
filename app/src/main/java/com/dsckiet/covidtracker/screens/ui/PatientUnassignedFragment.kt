@@ -46,14 +46,14 @@ class PatientUnassignedFragment : Fragment() {
         PatientsApi.retrofitService.getUnassignedPatientsData(token = authToken.getAuthToken().toString())
             .enqueue(
                 object : Callback<ResponseModel> {
-                    @SuppressLint("LogNotTimber")
+
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                         binding.animationView.visibility = View.GONE
 
                         Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_INDEFINITE).show()
                     }
 
-                    @SuppressLint("LogNotTimber")
+
                     override fun onResponse(
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
@@ -74,9 +74,7 @@ class PatientUnassignedFragment : Fragment() {
                             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                             binding.recyclerView.setHasFixedSize(true)
                             binding.countDecPatients.text = listData.size.toString()
-                            Log.d("fetch_success","fetch_success, response: ${listData}")
-                            println("fetch status: response body = ${response.body()} and response code = ${response.code()}")
-                        }
+                                       }
                     }
                 }
             )
