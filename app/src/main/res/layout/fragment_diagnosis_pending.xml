@@ -3,235 +3,189 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".screens.ui.DiagnosisPendingFragment">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/dp_text"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/sen_extrabold"
-                android:text="@string/diagnosis_pending"
-                android:textColor="#008DB9"
-                android:textSize="28sp" />
+                tools:context=".screens.ui.DiagnosisPendingFragment">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/examine_pending_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dp_text"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#008DB9"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                <TextView
+                    android:id="@+id/dp_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/sen_extrabold"
+                    android:text="@string/diagnosis_pending"
+                    android:textColor="#008DB9"
+                    android:textSize="28sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/examine_pending_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dp_text"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#008DB9"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/diagnosisPendingCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:fontFamily="@font/sen_extrabold"
+                            android:textColor="#fff"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="@string/number_of_patients_left_to_be_examined"
+                            android:textColor="#fff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/examine_pending_card"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="32dp"
+                    android:fontFamily="@font/sen_bold"
+                    android:text="@string/patients_list"
+                    android:textColor="#424242"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text3"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="32dp"
+                    android:fontFamily="@font/sen_regular"
+                    android:text="@string/click_the_card_to_examine_the_patient"
+                    android:textColor="#707070"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text4"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/sen_bold"
+                    android:text="@string/_09_07_2020"
+                    android:textColor="#424242"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text4"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/sen_bold"
+                    android:text="@string/_20_new_patients"
+                    android:textColor="#424242"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
                 <LinearLayout
+                    android:id="@+id/list_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/diagnosisPendingCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:fontFamily="@font/sen_extrabold"
-                        android:textColor="#fff"
-                        android:textSize="40sp" />
+                    android:layout_below="@id/text5"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:fontFamily="@font/sen_bold"
-                        android:text="@string/number_of_patients_left_to_be_examined"
-                        android:textColor="#fff"
-                        android:textSize="16sp" />
+                        android:fontFamily="@font/sen_regular"
+                        android:text="@string/patient_id"
+                        android:textColor="#424242" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:fontFamily="@font/sen_regular"
+                        android:text="@string/name"
+                        android:textColor="#424242" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginLeft="130dp"
+                        android:fontFamily="@font/sen_regular"
+                        android:text="@string/age"
+                        android:textColor="#424242" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/examine_pending_card"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:text="@string/patients_list"
-                android:textColor="#424242"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text3"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:text="@string/click_the_card_to_examine_the_patient"
-                android:textColor="#707070"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/text5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text4"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/sen_bold"
-                android:text="@string/_09_07_2020"
-                android:textColor="#424242"
-                android:textSize="14sp"
-                android:visibility="gone" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text4"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/sen_bold"
-                android:text="@string/_20_new_patients"
-                android:textColor="#424242"
-                android:textSize="14sp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/list_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text5"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_regular"
-                    android:text="@string/patient_id"
-                    android:textColor="#424242" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:fontFamily="@font/sen_regular"
-                    android:text="@string/name"
-                    android:textColor="#424242" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="130dp"
-                    android:layout_marginLeft="130dp"
-                    android:fontFamily="@font/sen_regular"
-                    android:text="@string/age"
-                    android:textColor="#424242" />
-            </LinearLayout>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationView"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_below="@id/list_header"
-                app:lottie_colorFilter="@color/colorPrimary"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/heartbeat_loading"
-                app:lottie_speed="1" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/animationView"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="20dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_view" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/recycler_view"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#F1F1F1"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp">
-
-                <RelativeLayout
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="350dp"
+                    android:layout_below="@id/list_header"
+                    app:lottie_autoPlay="true"
+                    app:lottie_colorFilter="@color/colorPrimary"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/heartbeat_loading"
+                    app:lottie_speed="1" />
 
-                    <TextView
-                        android:id="@+id/text6"
-                        android:layout_width="128dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sen_extrabold"
-                        android:paddingStart="16dp"
-                        android:paddingLeft="16dp"
-                        android:paddingTop="16dp"
-                        android:paddingEnd="16dp"
-                        android:text="@string/_09_07_2020" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/animationView"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_view" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/text6"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/sen_extrabold"
-                        android:paddingStart="16dp"
-                        android:paddingLeft="16dp"
-                        android:paddingTop="4dp"
-                        android:paddingEnd="16dp"
-                        android:text="@string/_20_undiagnosed_patients"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginRight="24dp"
-                        android:layout_marginBottom="4dp"
-                        app:srcCompat="@drawable/ic_drop_down" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+              
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

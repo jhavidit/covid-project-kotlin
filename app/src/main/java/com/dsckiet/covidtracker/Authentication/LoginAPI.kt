@@ -2,15 +2,15 @@ package com.dsckiet.covidtracker.Authentication
 
 import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
 import com.dsckiet.covidtracker.Authentication.Model.RequestModel
+import com.dsckiet.covidtracker.model.UpdateProfileBody
+import com.dsckiet.covidtracker.model.UpdateProfileResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface APIService {
@@ -20,6 +20,23 @@ interface APIService {
     fun sendUserData(
         @Body userLogin: RequestModel
     ): Call<ResponseModel>
+
+    @Headers("Content-Type:application/json")
+    @PUT("api/v1/doctors/{id}")
+    fun updateUserProfile(
+        @Header("x-auth-token") token: String,
+        @Path("id") id: String,
+//    @Part("name") name: String,
+//    @Part("empId") caseId: String,
+//    @Part("age") age: String,
+//    @Part("about") about: String,
+//    @Part("contact") contact: String,
+//    @Part("address") address: String,
+//    @Part("hospital") hospital: String
+        @Body body: UpdateProfileBody
+
+    ): Call<UpdateProfileResponse>
+
 
 }
 
