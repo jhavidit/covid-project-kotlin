@@ -57,7 +57,7 @@ class PatientDeclinedFragment : Fragment() {
                         binding.animationView.visibility = GONE
                         Log.d("onFailure response","Network request failed with error: ${t.message}")
                         Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",
-                            Snackbar.LENGTH_INDEFINITE).show()
+                            Snackbar.LENGTH_SHORT).show()
                     }
 
                     @SuppressLint("LogNotTimber")

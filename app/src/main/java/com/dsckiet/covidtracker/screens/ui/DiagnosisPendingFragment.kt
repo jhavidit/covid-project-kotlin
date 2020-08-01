@@ -54,7 +54,7 @@ class DiagnosisPendingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tokenManager = TokenManager(requireContext())
         if(!InternetConnectivity.isNetworkAvailable(requireContext())!!) {
-            Snackbar.make(binding.coordinatorLayout,"Internet Unavailable",Snackbar.LENGTH_INDEFINITE).show()
+            Snackbar.make(binding.coordinatorLayout,"Internet Unavailable",Snackbar.LENGTH_SHORT).show()
             binding.animationView.visibility=GONE
         }
     }
@@ -128,7 +128,7 @@ class DiagnosisPendingFragment : Fragment() {
                 } else {
                     activity?.runOnUiThread {
                         binding.animationView.visibility=GONE
-                        Snackbar.make(coordinator_layout,"No available Patient",Snackbar.LENGTH_INDEFINITE)
+                        Snackbar.make(coordinator_layout,"No available Patient",Snackbar.LENGTH_SHORT)
                     }
                 }
             }
@@ -139,7 +139,7 @@ class DiagnosisPendingFragment : Fragment() {
                 binding.recyclerView.visibility = GONE
                 binding.animationView.visibility = GONE
                 binding.diagnosisPendingCount.text = "0"
-                Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_INDEFINITE).show()
+                Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_SHORT).show()
             }
 
         }.on(Socket.EVENT_RECONNECT) {args->
