@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.ui.PatientDetailsActivity"></activity>
+        <activity android:name=".screens.ui.ProfileUpdateActivity"></activity>
+        <activity android:name=".screens.ui.PatientDetailsActivity" />
         <activity android:name=".screens.ui.MainActivity" />
         <activity
             android:name=".screens.ui.LoginActivity"
