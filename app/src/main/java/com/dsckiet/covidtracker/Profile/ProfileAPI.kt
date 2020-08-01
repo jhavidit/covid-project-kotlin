@@ -1,7 +1,7 @@
 package com.dsckiet.covidtracker.Profile
 
 
-import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
+import com.dsckiet.covidtracker.Password.PasswordResponse
 import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
 import com.dsckiet.covidtracker.Profile.Models.ProfileResponse
 import com.squareup.moshi.Moshi
@@ -21,7 +21,7 @@ interface profileAPIService {
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/users/change-pwd")
-    fun changePassword(@Header("x-auth-token") token: String,@Body newpassword : NewPasswordRequest): Call<ProfileResponse>
+    fun changePassword(@Header("x-auth-token") token: String,@Body newpassword : NewPasswordRequest): Call<PasswordResponse>
 
 }
 
