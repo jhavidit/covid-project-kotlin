@@ -81,19 +81,19 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         binding.animationView.visibility = GONE
                         val profile = response.body()
                         if (profile?.message == "success" && !profile.error) {
-                            binding.docId.text = profile.data.empId
-                            binding.docName.text = profile.data.name
-                            Glide.with(requireContext()).load(profile.data.image)
+                            binding.docId.text = profile.data?.empId
+                            binding.docName.text = profile.data?.name
+                            Glide.with(requireContext()).load(profile.data?.image)
                                 .into(binding.docPhoto)
-                            doctorId = profile.data._id
+                            doctorId = profile.data?._id.toString()
                             binding.docAddressInfo
-                            val age = profile.data.age
-                            val gender = profile.data.gender
+                            val age = profile.data?.age
+                            val gender = profile.data?.gender
                             binding.docAgeGender.text = "$gender | $age years"
-                            binding.docProfileDetails.text = profile.data.about
-                            binding.docPhoneNum.text = profile.data.contact
-                            binding.docAddressInfo.text = profile.data.address
-                            binding.docHospitalInfo.text = profile.data.hospital
+                            binding.docProfileDetails.text = profile.data?.about
+                            binding.docPhoneNum.text = profile.data?.contact
+                            binding.docAddressInfo.text = profile.data?.address
+                            binding.docHospitalInfo.text = profile.data?.hospital
 
                         }
                     }
