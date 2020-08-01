@@ -3,33 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:lottie_colorFilter="@color/colorPrimary"
-                app:lottie_autoPlay="true"
-                android:visibility="visible"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/heartbeat_loading"
-                app:lottie_speed="1" />
-        
-        <RelativeLayout
-            android:id="@+id/relative_layout_profile"
-            android:layout_below="@id/animationView"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".screens.ui.ProfileFragment">
@@ -72,11 +50,10 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
-
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -89,6 +66,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sen_bold"
+                            android:text="@string/doct101"
                             android:textColor="#fff"
                             android:textSize="16sp" />
 
@@ -98,6 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:fontFamily="@font/sen_extrabold"
+                            android:text="@string/shubham_goswami"
                             android:textColor="#fff"
                             android:textSize="20sp" />
 
@@ -108,22 +87,20 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/sen_bold"
+                            android:text="@string/male_62_years_old"
                             android:textColor="#fff"
                             android:textSize="16sp" />
                     </LinearLayout>
 
                     <ImageView
-
-                       android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:id="@+id/doc_photo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginLeft="12dp"
                         android:src="@drawable/doct_img" />
-                </RelativeLayout>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -148,6 +125,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/sen_regular"
+                android:text="@string/profile_info"
                 android:textColor="#424242"
                 android:textSize="14sp" />
 
@@ -186,8 +164,10 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/sen_bold"
+                android:text="@string/phone_num"
                 android:textColor="#424242"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/address_head"
                 android:layout_width="match_parent"
@@ -210,36 +190,10 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/sen_bold"
+                android:text="@string/address_info"
                 android:textColor="#424242"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/hospital_head"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/doc_address_info"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:text="@string/hospital"
-                android:textColor="#424242"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/doc_hospital_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/hospital_head"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:textColor="#424242"
-                android:textSize="16sp" />
-
-        </RelativeLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

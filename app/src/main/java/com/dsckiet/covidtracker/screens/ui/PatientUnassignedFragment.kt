@@ -17,9 +17,6 @@ import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.screens.adapters.PatientDeclinedAdapter
 import com.dsckiet.covidtracker.screens.adapters.PatientUnassignedAdapter
-import com.dsckiet.covidtracker.utils.InternetConnectivity
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,10 +34,7 @@ class PatientUnassignedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.animationView.visibility = View.VISIBLE
         authToken = TokenManager(requireContext())
-
         getUnassignedPatientData()
-
-
     }
 
     private fun getUnassignedPatientData() {
@@ -48,14 +42,13 @@ class PatientUnassignedFragment : Fragment() {
         PatientsApi.retrofitService.getUnassignedPatientsData(token = authToken.getAuthToken().toString())
             .enqueue(
                 object : Callback<ResponseModel> {
-
+                    @SuppressLint("LogNotTimber")
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                         binding.animationView.visibility = View.GONE
-
-                        Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_INDEFINITE).show()
+                        Log.d("onFailure response","Network request failed with error: ${t.message}")
                     }
 
-
+                    @SuppressLint("LogNotTimber")
                     override fun onResponse(
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
@@ -66,7 +59,7 @@ class PatientUnassignedFragment : Fragment() {
                         if (listData != null) {
                             for(data: PatientDetails in listData) {
                                 list.add(PatientDetails(data.phoneNo, data.district, data.address, data.name, data.age
-                                    , data.gender, data.lab, data.patientId,data.caseId))
+                                    , data.gender, data.lab, data.patientId))
                             }
                             binding.recyclerView.adapter =
                                 PatientUnassignedAdapter(
@@ -76,7 +69,9 @@ class PatientUnassignedFragment : Fragment() {
                             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                             binding.recyclerView.setHasFixedSize(true)
                             binding.countDecPatients.text = listData.size.toString()
-                                       }
+                            Log.d("fetch_success","fetch_success, response: ${listData}")
+                            println("fetch status: response body = ${response.body()} and response code = ${response.code()}")
+                        }
                     }
                 }
             )

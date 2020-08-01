@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         checkPermission()
     }
 
-    private fun checkPermission() {
+    fun checkPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.CALL_PHONE

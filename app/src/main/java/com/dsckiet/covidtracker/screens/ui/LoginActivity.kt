@@ -64,8 +64,8 @@ class LoginActivity : AppCompatActivity() {
 
                     auth_button.visibility = GONE
                     progress_login.visibility = VISIBLE
-                    val email = binding.usernameInput.text.toString().trim()
-                    val password = binding.passwordInput.text.toString().trim()
+                    val email = username_input.text.toString().trim()
+                    val password = password_input.text.toString().trim()
                     val user = RequestModel(
                         email,
                         password
