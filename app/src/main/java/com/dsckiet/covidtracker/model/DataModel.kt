@@ -15,14 +15,13 @@ data class ResponseModel (
 @Parcelize
 data class PendingPatient(
     val name:String="",
-    @Json(name = "_id") val patientId: String="",
+    @Json(name = "_id") val caseId:String="",
     val age:Int=0,
     val gender:String="",
     val phone:String="",
     val address:String="",
     val labName:String="",
-    val district: String="",
-    val caseId:String=""
+    val district: String=""
 ) :Parcelable
 
 @Parcelize
@@ -33,9 +32,8 @@ data class PatientDetails (
     val name: String?,
     val age: Int?,
     val gender: String?,
-    val lab: String?,
-    @Json(name = "_id") val patientId: String?,
-    val caseId :String?
+    val lab: PatientLab?,
+    @Json(name = "_id") val patientId: String?
 ) : Parcelable
 
 @Parcelize

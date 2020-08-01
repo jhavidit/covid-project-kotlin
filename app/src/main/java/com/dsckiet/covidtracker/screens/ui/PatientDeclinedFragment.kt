@@ -18,8 +18,6 @@ import com.dsckiet.covidtracker.databinding.FragmentPatientDeclinedBinding
 import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,8 +54,6 @@ class PatientDeclinedFragment : Fragment() {
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                         binding.animationView.visibility = GONE
                         Log.d("onFailure response","Network request failed with error: ${t.message}")
-                        Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",
-                            Snackbar.LENGTH_INDEFINITE).show()
                     }
 
                     @SuppressLint("LogNotTimber")
@@ -71,7 +67,7 @@ class PatientDeclinedFragment : Fragment() {
                         if (listData != null) {
                             for(data: PatientDetails in listData) {
                                 list.add(PatientDetails(data.phoneNo, data.district, data.address, data.name, data.age
-                                , data.gender, data.lab, data.patientId,data.caseId))
+                                , data.gender, data.lab, data.patientId))
                             }
                             binding.recyclerView.adapter =
                                 PatientDeclinedAdapter(
@@ -81,7 +77,8 @@ class PatientDeclinedFragment : Fragment() {
                             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                             binding.recyclerView.setHasFixedSize(true)
                             binding.countDecPatients.text = listData.size.toString()
-
+                                Log.d("fetch_success","fetch_success, response: ${listData}")
+                            println("fetch status: response body = ${response.body()} and response code = ${response.code()}")
                         }
                     }
                 }
