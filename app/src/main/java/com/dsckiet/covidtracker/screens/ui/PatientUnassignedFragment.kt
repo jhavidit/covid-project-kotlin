@@ -52,7 +52,7 @@ class PatientUnassignedFragment : Fragment() {
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                         binding.animationView.visibility = View.GONE
 
-                        Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_INDEFINITE).show()
+                        Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_SHORT).show()
                     }
 
 

@@ -86,7 +86,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
                             Snackbar.make(
                                 binding.coordinatorLayout,
                                 "Some error occurred check your network connection or try again later",
-                                Snackbar.LENGTH_INDEFINITE
+                                Snackbar.LENGTH_SHORT
                             ).show()
                         }
 
@@ -107,7 +107,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
                                 Snackbar.make(
                                     binding.coordinatorLayout,
                                     "Some error occurred check your network connection or try again later",
-                                    Snackbar.LENGTH_INDEFINITE
+                                    Snackbar.LENGTH_SHORT
                                 ).show()
                             }
 
@@ -119,7 +119,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
                     Snackbar.make(
                         binding.coordinatorLayout,
                         "Some error occurred check your network connection or try again later",
-                        Snackbar.LENGTH_INDEFINITE
+                        Snackbar.LENGTH_SHORT
                     ).show()
                 }
             }
@@ -128,7 +128,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 Snackbar.make(
                     binding.coordinatorLayout,
                     "Update Field can not be empty",
-                    Snackbar.LENGTH_INDEFINITE
+                    Snackbar.LENGTH_SHORT
                 ).show()
             }
 
