@@ -42,8 +42,8 @@ import retrofit2.Response
 class PatientDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPatientDetailsBinding
     private lateinit var tokenManager: TokenManager
-    private var level = ""
-    private var comments = ""
+    private lateinit var level: String
+    private lateinit var comments: String
     private var isDeclined = false
 
     @SuppressLint("LogNotTimber", "MissingPermission")
@@ -53,6 +53,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             this,
             R.layout.activity_patient_details
         )
+        level=""
+        comments=""
         tokenManager = TokenManager(this)
 
         val patientData = intent.extras?.getBundle("patientData")

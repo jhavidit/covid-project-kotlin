@@ -58,7 +58,7 @@ class PatientDeclinedFragment : Fragment() {
                         Snackbar.make(
                             binding.coordinatorLayout,
                             "Some problem occurred check your network connection or restart the app",
-                            Snackbar.LENGTH_INDEFINITE
+                            Snackbar.LENGTH_LONG
                         ).show()
                     }
 
@@ -78,8 +78,7 @@ class PatientDeclinedFragment : Fragment() {
                                         data.district,
                                         data.address,
                                         data.name,
-                                        data.age
-                                        ,
+                                        data.age,
                                         data.gender,
                                         data.lab,
                                         data.patientId,
