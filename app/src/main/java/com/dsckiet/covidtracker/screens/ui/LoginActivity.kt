@@ -1,25 +1,26 @@
 package com.dsckiet.covidtracker.screens.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.authentication.LoginAPI
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.authentication.model.RequestModel
 import com.dsckiet.covidtracker.authentication.model.ResponseModel
-import com.dsckiet.covidtracker.authentication.TokenManager
-import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityLoginBinding
-import kotlinx.android.synthetic.main.activity_login.*
+import com.dsckiet.covidtracker.utils.logs
+import com.dsckiet.covidtracker.utils.toasts
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,42 +29,77 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,
+        binding = DataBindingUtil.setContentView(
+            this,
             R.layout.activity_login
         )
 
         tokenManager = TokenManager(this)
         val token = tokenManager.getAuthToken()
 
+        /* To hide the warnings when user tried to enter details in text-fields again */
+        binding.usernameInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                if (s.isNotEmpty()) {
+                    hideWarningViews()
+                }
+            }
+        })
+        binding.passwordInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                if (s.isNotEmpty()) {
+                    hideWarningViews()
+                }
+            }
+        })
+
         if (token.isNullOrBlank()) {
 
-            auth_button.setOnClickListener {
-                binding.invalidPassword.visibility = GONE
-                binding.invalidEmailId.visibility = GONE
-                binding.usernameInputLayout.boxStrokeColor = Color.parseColor("#707070")
-                binding.passwordInputLayout.boxStrokeColor = Color.parseColor("#707070")
-
+            binding.authButton.setOnClickListener {
 
                 if (binding.usernameInput.text!!.isEmpty()) {
                     binding.invalidEmailId.visibility = VISIBLE
-                    binding.invalidEmailId.text = "Email can not be empty"
-                    binding.usernameInputLayout.boxStrokeColor = Color.RED
+                    binding.invalidEmailId.setText(R.string.email_can_not_be_empty)
+                    binding.usernameInputLayout.boxStrokeColor =
+                        ContextCompat.getColor(applicationContext, R.color.warning_red_color)
                 } else if (binding.passwordInput.text!!.length < 6) {
                     binding.invalidPassword.visibility = VISIBLE
-                    binding.invalidPassword.text = "Password too small"
-                    binding.passwordInputLayout.boxStrokeColor = Color.RED
+                    binding.invalidPassword.setText(R.string.invalid_password)
+                    binding.passwordInputLayout.boxStrokeColor =
+                        ContextCompat.getColor(applicationContext, R.color.warning_red_color)
                 } else if (!binding.usernameInput.text!!.contains(
                         "@",
                         true
                     ) || !binding.usernameInput.text!!.contains(".", true)
                 ) {
                     binding.invalidEmailId.visibility = VISIBLE
-                    binding.invalidEmailId.text = "Invalid Email ID"
-                    binding.usernameInputLayout.boxStrokeColor = Color.RED
+                    binding.invalidEmailId.setText(R.string.invalid_email_id)
+                    binding.usernameInputLayout.boxStrokeColor =
+                        ContextCompat.getColor(applicationContext, R.color.warning_red_color)
                 } else {
 
-                    auth_button.visibility = GONE
-                    progress_login.visibility = VISIBLE
+                    binding.authButton.visibility = GONE
+                    binding.progressLogin.visibility = VISIBLE
                     val email = binding.usernameInput.text.toString().trim()
                     val password = binding.passwordInput.text.toString().trim()
                     val user = RequestModel(
@@ -71,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
                         password
                     )
                     //Login Request
-                    val cb = object : Callback<ResponseModel> {
+                    val loginRequest = object : Callback<ResponseModel> {
                         override fun onResponse(
                             call: Call<ResponseModel>,
                             response: Response<ResponseModel>
@@ -80,25 +116,27 @@ class LoginActivity : AppCompatActivity() {
 
                             if (loginResponse?.message == "success" && !loginResponse.error) {
 
-                                val h = response.headers().get("x-auth-token")
+                                val h = response.headers()["x-auth-token"]
                                 tokenManager.saveAuthToken(h!!)
-                                binding.progressLogin.visibility = View.GONE
+                                binding.progressLogin.visibility = GONE
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finish()
                             } else {
                                 binding.progressLogin.visibility = GONE
-                                binding.invalidPassword.visibility = VISIBLE
-                                binding.invalidPassword.text = "Invalid email id or Password"
                                 binding.authButton.visibility = VISIBLE
+                                binding.invalidPassword.visibility = VISIBLE
+                                binding.invalidPassword.setText(R.string.invalid_email_id_or_password)
                             }
                         }
 
-                        @SuppressLint("LogNotTimber")
                         override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                            Log.i("Request", "Failure : ${t.message}")
+                            binding.progressLogin.visibility = GONE
+                            binding.authButton.visibility = VISIBLE
+                            toasts(this@LoginActivity, "Network Problem")
+                            logs("Request Failure: ${t.message}")
                         }
                     }
-                    LoginAPI.retrofitService.sendUserData(user).enqueue(cb)
+                    LoginAPI.retrofitService.sendUserData(user).enqueue(loginRequest)
                 }
             }
         } else {
@@ -107,5 +145,14 @@ class LoginActivity : AppCompatActivity() {
             startActivity(i)
             finish()
         }
+    }
+
+    private fun hideWarningViews() {
+        binding.invalidPassword.visibility = GONE
+        binding.invalidEmailId.visibility = GONE
+        binding.usernameInputLayout.boxStrokeColor =
+            ContextCompat.getColor(applicationContext, R.color.light_grey)
+        binding.passwordInputLayout.boxStrokeColor =
+            ContextCompat.getColor(applicationContext, R.color.light_grey)
     }
 }

@@ -7,6 +7,8 @@
     <string name="invalid_email_id">Invalid Email Id</string>
     <string name="invalid_email_id_or_password">Invalid Email Id/Password</string>
     <string name="enter_your_password">Enter Your Password</string>
+    <string name="email_can_not_be_empty">Email can not be empty</string>
+    <string name="invalid_password">Invalid Password</string>
     <string name="sign_in">Sign In</string>
     <string name="login_image">login image</string>
     <string name="email_icon">email icon</string>
