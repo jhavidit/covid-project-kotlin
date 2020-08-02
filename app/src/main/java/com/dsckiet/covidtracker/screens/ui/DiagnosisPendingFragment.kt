@@ -2,17 +2,15 @@ package com.dsckiet.covidtracker.screens.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dsckiet.covid_project_demo.SocketInstance
-import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.screens.adapters.DiagnosisPendingAdapter
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.FragmentDiagnosisPendingBinding
@@ -25,8 +23,6 @@ import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import org.koin.android.ext.android.bind
-import java.net.BindException
 import java.net.URISyntaxException
 
 class DiagnosisPendingFragment : Fragment() {

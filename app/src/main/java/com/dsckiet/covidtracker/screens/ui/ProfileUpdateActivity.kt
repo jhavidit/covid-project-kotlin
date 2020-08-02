@@ -10,21 +10,16 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.Authentication.LoginAPI
-import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.authentication.LoginAPI
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityProfileUpdateBinding
 import com.dsckiet.covidtracker.model.UpdateProfileBody
 import com.dsckiet.covidtracker.model.UpdateProfileResponse
 import com.google.android.material.snackbar.Snackbar
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 
 class ProfileUpdateActivity : AppCompatActivity() {
     private val RESULT_LOAD_IMAGE = 1

@@ -1,9 +1,9 @@
-package com.dsckiet.covidtracker.Profile
+package com.dsckiet.covidtracker.profile
 
 
-import com.dsckiet.covidtracker.Password.PasswordResponse
-import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
-import com.dsckiet.covidtracker.Profile.Models.ProfileResponse
+import com.dsckiet.covidtracker.password.PasswordResponse
+import com.dsckiet.covidtracker.profile.models.NewPasswordRequest
+import com.dsckiet.covidtracker.profile.models.ProfileResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

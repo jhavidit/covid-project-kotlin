@@ -7,9 +7,9 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.dsckiet.covidtracker.Authentication.TokenManager
-import com.dsckiet.covidtracker.Profile.Models.ProfileResponse
-import com.dsckiet.covidtracker.Profile.ProfileAPI
+import com.dsckiet.covidtracker.authentication.TokenManager
+import com.dsckiet.covidtracker.profile.models.ProfileResponse
+import com.dsckiet.covidtracker.profile.ProfileAPI
 import com.dsckiet.covidtracker.databinding.FragmentProfileBinding
 import kotlinx.android.synthetic.main.fragment_profile.*
 import retrofit2.Call
@@ -22,7 +22,7 @@ import android.view.View.GONE
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
-import com.dsckiet.covidtracker.Password.Password
+import com.dsckiet.covidtracker.password.Password
 import com.google.android.material.snackbar.Snackbar
 import android.view.View.VISIBLE as VISIBLE
 

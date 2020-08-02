@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker.Authentication
+package com.dsckiet.covidtracker.authentication
 
 import android.content.Context
 import android.content.SharedPreferences

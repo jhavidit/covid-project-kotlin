@@ -24,7 +24,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
 import com.dsckiet.covidtracker.model.AssignPatientLevel

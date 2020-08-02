@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker.Profile.Models
+package com.dsckiet.covidtracker.profile.models
 
 
 data class Data(

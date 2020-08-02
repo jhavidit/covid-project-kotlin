@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker.Authentication.Model
+package com.dsckiet.covidtracker.authentication.model
 
 data class ResponseModel(
 

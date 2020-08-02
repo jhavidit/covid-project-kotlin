@@ -10,10 +10,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.Authentication.LoginAPI
-import com.dsckiet.covidtracker.Authentication.Model.RequestModel
-import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
-import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.authentication.LoginAPI
+import com.dsckiet.covidtracker.authentication.model.RequestModel
+import com.dsckiet.covidtracker.authentication.model.ResponseModel
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*

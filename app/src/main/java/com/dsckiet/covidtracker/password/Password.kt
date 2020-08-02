@@ -1,4 +1,4 @@
-package com.dsckiet.covidtracker.Password
+package com.dsckiet.covidtracker.password
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,9 +11,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.Authentication.TokenManager
-import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
-import com.dsckiet.covidtracker.Profile.ProfileAPI
+import com.dsckiet.covidtracker.authentication.TokenManager
+import com.dsckiet.covidtracker.profile.models.NewPasswordRequest
+import com.dsckiet.covidtracker.profile.ProfileAPI
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityPasswordBinding
 import com.dsckiet.covidtracker.screens.ui.MainActivity

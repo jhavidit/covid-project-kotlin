@@ -1,9 +1,6 @@
 package com.dsckiet.covidtracker.network
 
-import android.content.Context
-import com.dsckiet.covidtracker.Authentication.TokenManager
 import com.dsckiet.covidtracker.model.AssignPatientLevel
-import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

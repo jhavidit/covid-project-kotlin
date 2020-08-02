@@ -1,7 +1,7 @@
-package com.dsckiet.covidtracker.Authentication
+package com.dsckiet.covidtracker.authentication
 
-import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
-import com.dsckiet.covidtracker.Authentication.Model.RequestModel
+import com.dsckiet.covidtracker.authentication.model.ResponseModel
+import com.dsckiet.covidtracker.authentication.model.RequestModel
 import com.dsckiet.covidtracker.model.UpdateProfileBody
 import com.dsckiet.covidtracker.model.UpdateProfileResponse
 import com.squareup.moshi.Moshi
