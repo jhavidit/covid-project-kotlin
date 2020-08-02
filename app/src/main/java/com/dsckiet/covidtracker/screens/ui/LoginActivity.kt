@@ -84,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
                                 tokenManager.saveAuthToken(h!!)
                                 binding.progressLogin.visibility = View.GONE
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                finish()
                             } else {
                                 binding.progressLogin.visibility = GONE
                                 binding.invalidPassword.visibility = VISIBLE
