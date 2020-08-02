@@ -5,6 +5,7 @@
     <!--     String resources @Login Page-->
     <string name="enter_your_email_id">Enter Your Email Id</string>
     <string name="invalid_email_id">Invalid Email Id</string>
+    <string name="invalid_email_id_or_password">Invalid Email Id/Password</string>
     <string name="enter_your_password">Enter Your Password</string>
     <string name="sign_in">Sign In</string>
     <string name="login_image">login image</string>

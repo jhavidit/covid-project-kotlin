@@ -4,8 +4,11 @@
     <color name="colorPrimaryDark">#008DB9</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="blue">#008DB9</color>
+    <color name="button_blue">#0082bc</color>
     <color name="black">#424242</color>
-    <color name="textColor">#707070</color>
-    <color name="white">#F1F1F1</color>
-<!--    Combine common color names & references using Ctrl+Shift+R-->
+    <color name="light_grey">#707070</color>
+    <color name="grey_white_box">#f1f1f1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="warning_red_color">#DB4437</color>
+    <!--    Combine common color names & references using Ctrl+Shift+R-->
 </resources>

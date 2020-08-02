@@ -9,7 +9,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.dsckiet.covid_project_demo.SocketInstance
+import com.dsckiet.covidtracker.network.SocketInstance
 import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.screens.adapters.DiagnosisPendingAdapter
 import com.dsckiet.covidtracker.R
