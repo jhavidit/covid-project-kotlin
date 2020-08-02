@@ -21,15 +21,12 @@
     <string name="number_of_patients_left_to_be_examined">Number of patients left to be examined</string>
     <string name="patients_list">Patient\'s List</string>
     <string name="click_the_card_to_examine_the_patient">Click the card to examine the patient</string>
-    <string name="_09_07_2020">09/07/2020</string>
-    <string name="_20_new_patients">20 new patients</string>
     <string name="patient_id">Patient Id</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
     <string name="p1a56">P1A56</string>
-    <string name="rohan_mehta">Rohan Mehta</string>
+    <string name="dummy">Dummy Name</string>
     <string name="_62">62</string>
-    <string name="_20_undiagnosed_patients">20 undiagnosed patients</string>
 
     <!--    String resources @Patient Details Page-->
     <string name="patients_details">Patients Details</string>

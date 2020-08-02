@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dimen_0"
             android:layout_weight="2"
             android:gravity="center"
             android:orientation="vertical">
@@ -31,21 +31,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_40"
+            android:layout_height="@dimen/dimen_0"
+            android:layout_marginTop="@dimen/dimen_40"
             android:layout_weight="3"
             android:orientation="vertical"
-            android:paddingTop="@dimen/margin_8">
+            android:paddingTop="@dimen/dimen_8">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginLeft="@dimen/margin_40"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginLeft="@dimen/dimen_40"
                 android:fontFamily="@font/sen_bold"
                 android:text="@string/enter_your_email_id"
                 android:textColor="@color/light_grey"
-                android:textSize="14sp"
+                android:textSize="@dimen/dimen_text_14"
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -53,14 +53,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginTop="@dimen/margin_4"
-                android:layout_marginEnd="@dimen/margin_40"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginTop="@dimen/dimen_4"
+                android:layout_marginEnd="@dimen/dimen_40"
                 app:boxBackgroundColor="@color/grey_white_box"
-                app:boxCornerRadiusBottomEnd="@dimen/margin_8"
-                app:boxCornerRadiusBottomStart="@dimen/margin_8"
-                app:boxCornerRadiusTopEnd="@dimen/margin_8"
-                app:boxCornerRadiusTopStart="@dimen/margin_8"
+                app:boxCornerRadiusBottomEnd="@dimen/dimen_8"
+                app:boxCornerRadiusBottomStart="@dimen/dimen_8"
+                app:boxCornerRadiusTopEnd="@dimen/dimen_8"
+                app:boxCornerRadiusTopStart="@dimen/dimen_8"
                 app:boxStrokeColor="@color/light_grey"
                 app:startIconDrawable="@drawable/email_icon">
 
@@ -70,32 +70,32 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sen_regular"
                     android:inputType="textEmailAddress"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/dimen_text_16" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/invalid_email_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginLeft="@dimen/margin_40"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginLeft="@dimen/dimen_40"
+                android:layout_marginTop="@dimen/dimen_4"
                 android:fontFamily="@font/sen_reg"
                 android:text="@string/invalid_email_id"
                 android:textColor="@color/warning_red_color"
-                android:textSize="14sp"
+                android:textSize="@dimen/dimen_text_14"
                 android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginLeft="@dimen/margin_40"
-                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginLeft="@dimen/dimen_40"
+                android:layout_marginTop="@dimen/dimen_20"
                 android:fontFamily="@font/sen_bold"
                 android:text="@string/enter_your_password"
                 android:textColor="@color/light_grey"
-                android:textSize="14sp"
+                android:textSize="@dimen/dimen_text_14"
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -103,14 +103,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginTop="@dimen/margin_4"
-                android:layout_marginEnd="@dimen/margin_40"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginTop="@dimen/dimen_4"
+                android:layout_marginEnd="@dimen/dimen_40"
                 app:boxBackgroundColor="@color/grey_white_box"
-                app:boxCornerRadiusBottomEnd="@dimen/margin_8"
-                app:boxCornerRadiusBottomStart="@dimen/margin_8"
-                app:boxCornerRadiusTopEnd="@dimen/margin_8"
-                app:boxCornerRadiusTopStart="@dimen/margin_8"
+                app:boxCornerRadiusBottomEnd="@dimen/dimen_8"
+                app:boxCornerRadiusBottomStart="@dimen/dimen_8"
+                app:boxCornerRadiusTopEnd="@dimen/dimen_8"
+                app:boxCornerRadiusTopStart="@dimen/dimen_8"
                 app:boxStrokeColor="@color/light_grey"
                 app:endIconMode="password_toggle"
                 app:startIconDrawable="@drawable/password_icon">
@@ -121,20 +121,20 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sen_regular"
                     android:inputType="textPassword"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/dimen_text_16" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/invalid_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginLeft="@dimen/margin_40"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginLeft="@dimen/dimen_40"
+                android:layout_marginTop="@dimen/dimen_4"
                 android:fontFamily="@font/sen_reg"
                 android:text="@string/invalid_email_id_or_password"
                 android:textColor="@color/warning_red_color"
-                android:textSize="14sp"
+                android:textSize="@dimen/dimen_text_14"
                 android:visibility="gone" />
 
             <ProgressBar
@@ -142,21 +142,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/margin_40"
-                android:layout_marginTop="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_40"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_marginEnd="@dimen/dimen_40"
                 android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/auth_button"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_40"
+                android:layout_height="@dimen/dimen_50"
+                android:layout_margin="@dimen/dimen_40"
                 android:fontFamily="@font/sen_bold"
                 android:text="@string/sign_in"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/dimen_text_16"
                 app:backgroundTint="@color/button_blue" />
 
         </LinearLayout>

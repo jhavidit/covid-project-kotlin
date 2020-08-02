@@ -87,7 +87,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:fontFamily="@font/sen_extrabold"
-                                android:text="@string/rohan_mehta"
+                                android:text="@string/dummy"
                                 android:textColor="#fff"
                                 android:textSize="20sp" />
 
@@ -125,7 +125,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/sen_bold"
                     android:text="@string/personal_information"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -166,7 +166,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/_9867412325"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                         <TextView
@@ -190,7 +190,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/ghaziabad"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                         <TextView
@@ -216,7 +216,7 @@
                             android:layout_marginBottom="16dp"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/address_info"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -231,7 +231,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/sen_bold"
                     android:text="@string/treatment_information"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -274,7 +274,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/dayalchand_labs_its_muradnagar"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                         <TextView
@@ -313,7 +313,7 @@
                                     android:scaleX="0.75"
                                     android:scaleY="0.75"
                                     android:text="@string/l1"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/dark_grey"
                                     android:textSize="20sp" />
 
                                 <RadioButton
@@ -327,7 +327,7 @@
                                     android:scaleX="0.75"
                                     android:scaleY="0.75"
                                     android:text="@string/l2"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/dark_grey"
                                     android:textSize="20sp" />
 
                                 <RadioButton
@@ -341,7 +341,7 @@
                                     android:scaleX="0.75"
                                     android:scaleY="0.75"
                                     android:text="@string/l3"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/dark_grey"
                                     android:textSize="20sp" />
                             </RadioGroup>
                         </LinearLayout>
@@ -408,7 +408,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/modi_hospital_china"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp"
                             android:visibility="gone" />
 
