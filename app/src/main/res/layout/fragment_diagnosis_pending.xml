@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="@dimen/dimen_0"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="1.3"
                         android:fontFamily="@font/sen_regular"
                         android:gravity="start"
                         android:text="@string/patient_id"
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dimen_16"
                         android:layout_marginLeft="@dimen/dimen_8"
-                        android:layout_weight="2"
+                        android:layout_weight="2.2"
                         android:fontFamily="@font/sen_regular"
                         android:gravity="start"
                         android:text="@string/name"
@@ -134,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dimen_8"
                         android:layout_marginLeft="@dimen/dimen_8"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:fontFamily="@font/sen_regular"
                         android:gravity="start"
                         android:text="@string/age"
@@ -144,7 +144,7 @@
                     <View
                         android:layout_width="@dimen/dimen_0"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="0.7" />
                 </LinearLayout>
 
                 <com.airbnb.lottie.LottieAnimationView
@@ -153,15 +153,27 @@
                     android:layout_height="350dp"
                     android:layout_below="@id/list_header"
                     app:lottie_autoPlay="true"
-                    app:lottie_colorFilter="@color/colorPrimary"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/heartbeat_loading" />
+
+                <TextView
+                    android:id="@+id/open_settings"
+                    android:layout_below="@id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sen_regular"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="-100dp"
+                    android:textSize="@dimen/dimen_text_16"
+                    android:text="@string/open_settings"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/animationView"
+                    android:layout_below="@id/open_settings"
                     android:layout_marginStart="@dimen/dimen_20"
                     android:layout_marginTop="@dimen/dimen_4"
                     android:layout_marginEnd="@dimen/dimen_20"
