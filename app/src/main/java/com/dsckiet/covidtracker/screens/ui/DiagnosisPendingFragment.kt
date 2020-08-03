@@ -2,23 +2,28 @@ package com.dsckiet.covidtracker.screens.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.dsckiet.covidtracker.network.SocketInstance
-import com.dsckiet.covidtracker.authentication.TokenManager
-import com.dsckiet.covidtracker.screens.adapters.DiagnosisPendingAdapter
 import com.dsckiet.covidtracker.R
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.FragmentDiagnosisPendingBinding
 import com.dsckiet.covidtracker.model.PendingPatient
+import com.dsckiet.covidtracker.network.SocketInstance
+import com.dsckiet.covidtracker.screens.adapters.DiagnosisPendingAdapter
 import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.google.android.material.snackbar.Snackbar
+import com.robinhood.ticker.TickerUtils
+import com.robinhood.ticker.TickerView
 import kotlinx.android.synthetic.main.fragment_diagnosis_pending.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -30,8 +35,8 @@ class DiagnosisPendingFragment : Fragment() {
     private var data: JSONObject? = null
     private var patientData: JSONArray? = null
     private lateinit var tokenManager: TokenManager
-    lateinit var list: ArrayList<PendingPatient>
-
+    private lateinit var list: ArrayList<PendingPatient>
+    private lateinit var tickerView : TickerView
 
     private lateinit var binding: FragmentDiagnosisPendingBinding
     override fun onCreateView(
@@ -42,6 +47,14 @@ class DiagnosisPendingFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater,
                 R.layout.fragment_diagnosis_pending, container, false)
+        tickerView = binding.diagnosisPendingCount
+        tickerView.animationInterpolator = OvershootInterpolator()
+        tickerView.setCharacterLists(TickerUtils.provideNumberList())
+        val fontFace = ResourcesCompat.getFont(requireContext(), R.font.sen_bold)
+        tickerView.setPreferredScrollingDirection(TickerView.ScrollingDirection.ANY)
+        tickerView.typeface = fontFace
+        tickerView.gravity = Gravity.START
+        tickerView.animationDuration = 2000
         return binding.root
     }
 
@@ -114,7 +127,8 @@ class DiagnosisPendingFragment : Fragment() {
                     activity?.runOnUiThread {
                         binding.animationView.visibility = GONE
                         binding.recyclerView.visibility = VISIBLE
-                        binding.diagnosisPendingCount.text = data!!.getString("remainingPatients")
+
+                        tickerView.text = data!!.getString("remainingPatients")
                         binding.recyclerView.adapter =
                             DiagnosisPendingAdapter(
                                 requireContext(),
@@ -129,16 +143,15 @@ class DiagnosisPendingFragment : Fragment() {
                 }
             }
 
-
-        }.on(Socket.EVENT_DISCONNECT) { args->
+        }.on(Socket.EVENT_DISCONNECT) {
             activity?.runOnUiThread {
                 binding.recyclerView.visibility = GONE
-                binding.animationView.visibility = GONE
-                binding.diagnosisPendingCount.text = "0"
+                binding.animationView.visibility = VISIBLE
+                tickerView.text = "0"
                 Snackbar.make(binding.coordinatorLayout,"Some problem occurred check your network connection or restart the app",Snackbar.LENGTH_SHORT).show()
             }
 
-        }.on(Socket.EVENT_RECONNECT) {args->
+        }.on(Socket.EVENT_RECONNECT) {
             try {
                 mSocket?.connect()
                 mSocket?.emit(
@@ -165,9 +178,5 @@ class DiagnosisPendingFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         mSocket?.disconnect()
-
-
     }
-
-
 }
