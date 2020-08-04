@@ -1,12 +1,17 @@
 package com.dsckiet.covidtracker.screens.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +22,10 @@ import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.screens.adapters.PatientDeclinedAdapter
+import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.google.android.material.snackbar.Snackbar
+import com.robinhood.ticker.TickerUtils
+import com.robinhood.ticker.TickerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +35,8 @@ class PatientDeclinedFragment : Fragment() {
     private lateinit var binding: FragmentPatientDeclinedBinding
     private lateinit var authToken: TokenManager
     private var list = ArrayList<PatientDetails>()
+    private lateinit var tickerView: TickerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +47,19 @@ class PatientDeclinedFragment : Fragment() {
                 inflater,
                 R.layout.fragment_patient_declined, container, false
             )
+
+        tickerView = binding.countDecPatients
+        tickerView.animationInterpolator = OvershootInterpolator()
+        tickerView.setCharacterLists(TickerUtils.provideNumberList())
+        val fontFace = ResourcesCompat.getFont(requireContext(), R.font.sen_bold)
+        tickerView.setPreferredScrollingDirection(TickerView.ScrollingDirection.ANY)
+        tickerView.typeface = fontFace
+        tickerView.gravity = Gravity.START
+        tickerView.animationDuration = 2000
+
+        binding.openSettings.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
+        }
         return binding.root
     }
 
@@ -44,22 +67,38 @@ class PatientDeclinedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.animationView.visibility = VISIBLE
         authToken = TokenManager(requireContext())
-        getDeclinedPatientData()
+
+        if (!InternetConnectivity.isNetworkAvailable(requireContext())!!) {
+            offlineCase()
+        }else{
+            getDeclinedPatientData()
+        }
     }
 
+    private fun offlineCase() {
+        binding.animationView.setAnimation(R.raw.no_internet)
+        binding.animationView.visibility = VISIBLE
+        binding.openSettings.visibility = VISIBLE
+        Snackbar.make(binding.coordinatorLayout, "Network Problem", Snackbar.LENGTH_LONG)
+            .setAction("Open Settings") {
+                startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
+            }.show()
+    }
     private fun getDeclinedPatientData() {
+        binding.animationView.setAnimation(R.raw.heartbeat_loading)
+        binding.animationView.playAnimation()
+        binding.animationView.repeatMode
         val list = ArrayList<PatientDetails>()
         PatientsApi.retrofitService.getPatientsData(token = authToken.getAuthToken().toString())
             .enqueue(
                 object : Callback<ResponseModel> {
                     @SuppressLint("LogNotTimber")
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                        binding.animationView.visibility = GONE
-                        Snackbar.make(
-                            binding.coordinatorLayout,
-                            "Some problem occurred check your network connection or restart the app",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                        offlineCase()
+                        Snackbar.make(binding.coordinatorLayout, "Network Problem", Snackbar.LENGTH_LONG)
+                            .setAction("Open Settings") {
+                                startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
+                            }.show()
                     }
 
                     @SuppressLint("LogNotTimber")
@@ -68,6 +107,7 @@ class PatientDeclinedFragment : Fragment() {
                         response: Response<ResponseModel>
                     ) {
                         binding.animationView.visibility = GONE
+                        binding.openSettings.visibility = GONE
                         val listResponse = response.body()
                         val listData: List<PatientDetails>? = listResponse?.data
                         if (listData != null) {
@@ -91,11 +131,13 @@ class PatientDeclinedFragment : Fragment() {
                                     requireContext(),
                                     list
                                 )
-                            binding.recyclerView.layoutManager =
-                                LinearLayoutManager(requireContext())
+                            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                             binding.recyclerView.setHasFixedSize(true)
-                            binding.countDecPatients.text = listData.size.toString()
+                            tickerView.text = listData.size.toString()
                             if (listData.isEmpty()) {
+                                binding.animationView.setAnimation(R.raw.empty_list)
+                                binding.animationView.visibility = VISIBLE
+                                binding.openSettings.visibility = GONE
                                 Snackbar.make(
                                     binding.coordinatorLayout,
                                     "No patient available",
