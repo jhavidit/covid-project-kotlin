@@ -27,6 +27,7 @@ import androidx.databinding.DataBindingUtil
 import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
+import com.dsckiet.covidtracker.model.AssignPatient
 import com.dsckiet.covidtracker.model.AssignPatientLevel
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
@@ -218,8 +219,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             patientLevel = AssignPatientLevel(level, comments, isDeclined)
         )
             .enqueue(
-                object : Callback<ResponseModel> {
-                    override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                object : Callback<AssignPatient> {
+                    override fun onFailure(call: Call<AssignPatient>, t: Throwable) {
                         Snackbar.make(
                             binding.coordinatorLayout,
                             "Check your network connection",
@@ -229,8 +230,8 @@ class PatientDetailsActivity : AppCompatActivity() {
 
                     @RequiresApi(Build.VERSION_CODES.KITKAT)
                     override fun onResponse(
-                        call: Call<ResponseModel>,
-                        response: Response<ResponseModel>
+                        call: Call<AssignPatient>,
+                        response: Response<AssignPatient>
                     ) {
                         if (response.code() == 200) {
                             showPopupWindow()
