@@ -17,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityProfileUpdateBinding
+import com.dsckiet.covidtracker.network.BASE_URL
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -35,7 +36,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
     private lateinit var tokenManager: TokenManager
     private lateinit var doctorId: String
     var path: String = ""
-    private var NETWORK_METHOD_FLAG = 0 // Initiate network flag for network request
+    private var NETWORK_METHOD_FLAG = 0 // Initialize network flag for network request
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,7 +136,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
     }
 
     @SuppressLint("LogNotTimber")
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun updateDetailsWithoutPhoto() {
         // Launch in Coroutine Scope to avoid Network on main thread exception
         CoroutineScope(IO).launch {
@@ -160,7 +160,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
                 // Test your client on testing server => https://{test-server-id}.ngrok.io/
                 val request: Request = Request.Builder()
-                    .url("https://covid-project-gzb.herokuapp.com/api/v1/doctors/${doctorId.toString()}")
+                    .url("${BASE_URL}api/v1/doctors/${doctorId.toString()}")
                     .method("PUT", body)
                     .addHeader("x-auth-token", tokenManager.getAuthToken().toString())
                     .build()
@@ -187,7 +187,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
     }
 
     @SuppressLint("LogNotTimber")
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun updateDetailsWithPhoto() {
         // Launch in Coroutine Scope to avoid Network on main thread exception
         CoroutineScope(IO).launch {
@@ -216,7 +215,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
                 // Test your client on testing server => https://{test-server-id}.ngrok.io/
                 val request: Request = Request.Builder()
-                    .url("https://covid-project-gzb.herokuapp.com/api/v1/doctors/${doctorId.toString()}")
+                    .url("${BASE_URL}api/v1/doctors/${doctorId.toString()}")
                     .method("PUT", body)
                     .addHeader("x-auth-token", tokenManager.getAuthToken().toString())
                     .build()
