@@ -79,6 +79,7 @@
     <string name="hospital">Hospital</string>
     <string name="open_settings">Open Settings</string>
     <string name="patients_declined">Patients Declined</string>
+    <string name="unassigned_patients">Unassigned Patients</string>
 
     <style name="patient_declined_count">
         number_of_patients_who_were_declined_to_be_examined_by_the_doctor</style>
