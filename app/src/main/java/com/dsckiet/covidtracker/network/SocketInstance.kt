@@ -1,4 +1,4 @@
-package com.dsckiet.covid_project_demo
+package com.dsckiet.covidtracker.network
 
 import android.app.Application
 import com.github.nkzawa.socketio.client.IO;

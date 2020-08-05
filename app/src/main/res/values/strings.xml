@@ -5,7 +5,10 @@
     <!--     String resources @Login Page-->
     <string name="enter_your_email_id">Enter Your Email Id</string>
     <string name="invalid_email_id">Invalid Email Id</string>
+    <string name="invalid_email_id_or_password">Invalid Email Id/Password</string>
     <string name="enter_your_password">Enter Your Password</string>
+    <string name="email_can_not_be_empty">Email can not be empty</string>
+    <string name="invalid_password">Invalid Password</string>
     <string name="sign_in">Sign In</string>
     <string name="login_image">login image</string>
     <string name="email_icon">email icon</string>
@@ -18,15 +21,12 @@
     <string name="number_of_patients_left_to_be_examined">Number of patients left to be examined</string>
     <string name="patients_list">Patient\'s List</string>
     <string name="click_the_card_to_examine_the_patient">Click the card to examine the patient</string>
-    <string name="_09_07_2020">09/07/2020</string>
-    <string name="_20_new_patients">20 new patients</string>
     <string name="patient_id">Patient Id</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
     <string name="p1a56">P1A56</string>
-    <string name="rohan_mehta">Rohan Mehta</string>
+    <string name="dummy">Dummy Name</string>
     <string name="_62">62</string>
-    <string name="_20_undiagnosed_patients">20 undiagnosed patients</string>
 
     <!--    String resources @Patient Details Page-->
     <string name="patients_details">Patients Details</string>
@@ -77,8 +77,8 @@
     <string name="contact">Contact</string>
     <string name="gender">Gender</string>
     <string name="hospital">Hospital</string>
-
-
+    <string name="open_settings">Open Settings</string>
+    <string name="patients_declined">Patients Declined</string>
 
     <style name="patient_declined_count">
         number_of_patients_who_were_declined_to_be_examined_by_the_doctor</style>

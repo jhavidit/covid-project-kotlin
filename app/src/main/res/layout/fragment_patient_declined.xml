@@ -7,155 +7,180 @@
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".screens.ui.PatientDeclinedFragment">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/dp_text"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/sen_extrabold"
-                android:text="Patients Declined"
-                android:textColor="#008DB9"
-                android:textSize="28sp" />
+                tools:context=".screens.ui.PatientDeclinedFragment">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/examine_pending_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dp_text"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#008DB9"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                <TextView
+                    android:id="@+id/dp_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_32"
+                    android:fontFamily="@font/sen_extrabold"
+                    android:text="@string/patients_declined"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/dimen_text_28" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/examine_pending_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dp_text"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_24"
+                    android:layout_marginEnd="@dimen/dimen_32"
+                    android:layout_marginBottom="@dimen/dimen_12"
+                    app:cardBackgroundColor="@color/blue"
+                    app:cardCornerRadius="@dimen/dimen_8"
+                    app:cardElevation="@dimen/dimen_8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dimen_16">
+
+                        <com.robinhood.ticker.TickerView
+                            android:id="@+id/count_dec_patients"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/dimen_4"
+                            android:layout_marginLeft="@dimen/dimen_4"
+                            android:text="0"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dimen_text_40" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/dimen_20"
+                            android:layout_marginLeft="@dimen/dimen_20"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="@string/number_of_patients_left_to_be_examined"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dimen_text_16" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/examine_pending_card"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_12"
+                    android:layout_marginEnd="@dimen/dimen_32"
+                    android:fontFamily="@font/sen_bold"
+                    android:text="@string/patients_list"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/dimen_text_20" />
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text3"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_4"
+                    android:layout_marginEnd="@dimen/dimen_32"
+                    android:fontFamily="@font/sen_regular"
+                    android:text="@string/click_the_card_to_examine_the_patient"
+                    android:textColor="@color/light_grey"
+                    android:textSize="@dimen/dimen_text_14" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/list_header"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/text4"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:layout_marginEnd="@dimen/dimen_32"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:weightSum="5">
 
                     <TextView
-                        android:id="@+id/count_dec_patients"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dimen_0"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/sen_extrabold"
-                        android:textColor="#fff"
-                        android:textSize="40sp" />
+                        android:layout_weight="1.3"
+                        android:fontFamily="@font/sen_regular"
+                        android:gravity="start"
+                        android:text="@string/patient_id"
+                        android:textColor="@color/dark_grey" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dimen_0"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:fontFamily="@font/sen_bold"
-                        android:text="@string/patient_declined_count"
-                        android:textColor="#fff"
-                        android:textSize="16sp" />
+                        android:layout_marginStart="@dimen/dimen_16"
+                        android:layout_marginLeft="@dimen/dimen_8"
+                        android:layout_weight="2.2"
+                        android:fontFamily="@font/sen_regular"
+                        android:gravity="start"
+                        android:text="@string/name"
+                        android:textColor="@color/dark_grey" />
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8"
+                        android:layout_marginLeft="@dimen/dimen_8"
+                        android:layout_weight="0.8"
+                        android:fontFamily="@font/sen_regular"
+                        android:gravity="start"
+                        android:text="@string/age"
+                        android:textColor="@color/dark_grey" />
+
+                    <!-- Empty space in right -->
+                    <View
+                        android:layout_width="@dimen/dimen_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/examine_pending_card"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:text="@string/patients_list"
-                android:textColor="#424242"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text3"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:text="@string/click_the_card_to_examine_the_patient"
-                android:textColor="#707070"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:id="@+id/list_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text4"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_below="@id/list_header"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/heartbeat_loading" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/open_settings"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/animationView"
+                    android:layout_marginTop="-100dp"
                     android:fontFamily="@font/sen_regular"
-                    android:text="@string/patient_id"
-                    android:textColor="#424242" />
+                    android:gravity="center"
+                    android:text="@string/open_settings"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimen_text_16"
+                    android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:fontFamily="@font/sen_regular"
-                    android:text="@string/name"
-                    android:textColor="#424242" />
+                    android:layout_below="@id/open_settings"
+                    android:layout_marginStart="@dimen/dimen_20"
+                    android:layout_marginTop="@dimen/dimen_4"
+                    android:layout_marginEnd="@dimen/dimen_20"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_view" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="130dp"
-                    android:layout_marginLeft="130dp"
-                    android:fontFamily="@font/sen_regular"
-                    android:text="@string/age"
-                    android:textColor="#424242" />
-            </LinearLayout>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationView"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_below="@id/list_header"
-                app:lottie_colorFilter="@color/colorPrimary"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/heartbeat_loading"
-                app:lottie_speed="1" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/animationView"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="20dp"
-                tools:listitem="@layout/item_view"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

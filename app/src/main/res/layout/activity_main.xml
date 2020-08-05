@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
-        android:id="@+id/main_r_layout"
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".screens.ui.MainActivity">
@@ -14,26 +14,28 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="@dimen/dimen_70"
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation" />
 
         <com.gauravk.bubblenavigation.BubbleNavigationLinearView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/dimen_70"
             android:layout_alignParentBottom="true"
-            android:background="#fff"
-            android:elevation="8dp"
+            android:background="@color/white"
+            android:elevation="@dimen/dimen_8"
             android:orientation="horizontal"
-            android:padding="12dp"
-            android:weightSum="4">
+            android:padding="@dimen/dimen_8"
+            android:weightSum="5"
+            tools:targetApi="lollipop">
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_pending"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#fff"
+                android:layout_weight="2"
+                android:backgroundTint="@color/white"
                 android:gravity="center"
                 app:bt_active="true"
                 app:bt_colorActive="@color/colorPrimary"
@@ -43,11 +45,12 @@
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_unassigned"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#fff"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
                 android:gravity="center"
-                app:bt_active="true"
+                app:bt_active="false"
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
                 app:bt_icon="@drawable/icon_unassigned"
@@ -55,11 +58,12 @@
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_declined"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#fff"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
                 android:gravity="center"
-                app:bt_active="true"
+                app:bt_active="false"
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
                 app:bt_icon="@drawable/icon_complete"
@@ -67,18 +71,18 @@
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/toggle_profile"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#fff"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
                 android:gravity="center"
-                app:bt_active="true"
+                app:bt_active="false"
                 app:bt_colorActive="@color/colorPrimary"
                 app:bt_colorInactive="@color/colorPrimary"
                 app:bt_icon="@drawable/icon_profile"
                 app:bt_title="Profile" />
 
         </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
-
     </RelativeLayout>
 </layout>
 

@@ -1,9 +1,9 @@
-package com.dsckiet.covidtracker.Profile
+package com.dsckiet.covidtracker.profile
 
 
-import com.dsckiet.covidtracker.Authentication.Model.ResponseModel
-import com.dsckiet.covidtracker.Profile.Models.NewPasswordRequest
-import com.dsckiet.covidtracker.Profile.Models.ProfileResponse
+import com.dsckiet.covidtracker.password.PasswordResponse
+import com.dsckiet.covidtracker.profile.models.NewPasswordRequest
+import com.dsckiet.covidtracker.profile.models.ProfileResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -21,7 +21,7 @@ interface profileAPIService {
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/users/change-pwd")
-    fun changePassword(@Header("x-auth-token") token: String,@Body newpassword : NewPasswordRequest): Call<ProfileResponse>
+    fun changePassword(@Header("x-auth-token") token: String,@Body newpassword : NewPasswordRequest): Call<PasswordResponse>
 
 }
 

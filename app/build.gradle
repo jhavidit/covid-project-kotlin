@@ -121,6 +121,9 @@ dependencies {
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    //Ticker
+    implementation 'com.robinhood.ticker:ticker:2.0.2'
+
 
     //Testing
     implementation 'com.android.support:multidex:1.0.3'

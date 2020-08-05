@@ -1,15 +1,16 @@
 package com.dsckiet.covidtracker.screens.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.text.Html
 import android.transition.Slide
 import android.transition.TransitionManager
@@ -17,16 +18,16 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.Authentication.TokenManager
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
+import com.dsckiet.covidtracker.model.AssignPatient
 import com.dsckiet.covidtracker.model.AssignPatientLevel
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
@@ -42,6 +43,9 @@ import retrofit2.Response
 class PatientDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPatientDetailsBinding
     private lateinit var tokenManager: TokenManager
+    private lateinit var level: String
+    private lateinit var comments: String
+    private var isDeclined = false
 
     @SuppressLint("LogNotTimber", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +54,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             this,
             R.layout.activity_patient_details
         )
+        level=""
+        comments=""
         tokenManager = TokenManager(this)
 
         val patientData = intent.extras?.getBundle("patientData")
@@ -72,12 +78,32 @@ class PatientDetailsActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.docProfileCard.setOnClickListener {
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:${binding.patientPhoneNo.text}"))
-            startActivity(intent)
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CALL_PHONE
+                )
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                val intent =
+                    Intent(Intent.ACTION_CALL, Uri.parse("tel:${binding.patientPhoneNo.text}"))
+                startActivity(intent)
+            } else {
+                Snackbar.make(
+                    binding.coordinatorLayout,
+                    "You have denied the permission kindly allow call permission from the settings",
+                    Snackbar.LENGTH_LONG
+                ).setAction("go", View.OnClickListener {
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    val uri =
+                        Uri.fromParts("package", packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
+                }).show()
+
+            }
         }
-        var level = ""
-        var isDeclined: Boolean = false
-        //radio buttons clicks
+
         binding.radioGroupDetails.setOnCheckedChangeListener { _, isCheckedID ->
             var isChecked = binding.L1.isChecked || binding.L2.isChecked || binding.L3.isChecked
             if (isChecked) {
@@ -88,26 +114,24 @@ class PatientDetailsActivity : AppCompatActivity() {
         binding.declineToCome.isChecked = false
         //Check box checks
         binding.declineToCome.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+            isDeclined = if (isChecked) {
                 binding.radioGroupDetails.clearCheck()
-                isDeclined = true
+                true
             } else {
-                isDeclined = false
+                false
             }
         }
         //Radio Button Checks
-        when {
-            binding.L1.isChecked -> level = "l1"
-            binding.L2.isChecked -> level = "l2"
-            binding.L3.isChecked -> level = "l3"
-        }
-        val comments: String = binding.commentBox.toString()
 
 
         binding.submitForm.setOnClickListener {
 
-            if(!InternetConnectivity.isNetworkAvailable(this)!!)
-            Snackbar.make(binding.coordinatorLayout,"Internet Unavailable",Snackbar.LENGTH_LONG).show()
+            if (!InternetConnectivity.isNetworkAvailable(this)!!)
+                Snackbar.make(
+                    binding.coordinatorLayout,
+                    "Internet Unavailable",
+                    Snackbar.LENGTH_LONG
+                ).show()
             else if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked && !binding.declineToCome.isChecked) {
                 Snackbar.make(
                     binding.coordinatorLayout, "Please assign a severity level to the patient !",
@@ -120,6 +144,12 @@ class PatientDetailsActivity : AppCompatActivity() {
                     .setIcon(R.drawable.ic_profile)
                     .setPositiveButton("Yes") { dialog, which ->
                         Log.d("pat_id === ", patientId.toString())
+                        when {
+                            binding.L1.isChecked -> level = "l1"
+                            binding.L2.isChecked -> level = "l2"
+                            binding.L3.isChecked -> level = "l3"
+                        }
+                        comments = binding.patientComment.text.toString()
                         sendPatientData(level, comments, isDeclined, patientId.toString())
                         dialog.dismiss()
                     }.setNeutralButton("No") { dialog, which ->
@@ -132,7 +162,6 @@ class PatientDetailsActivity : AppCompatActivity() {
     }
 
     private fun beginPatientDiagnosis(patientId: String) {
-        println("pat id ======== $patientId")
         "application/json; charset=utf-8".toMediaTypeOrNull()
         PatientsApi.retrofitService.diagnosisBeginRequest(
             token = tokenManager.getAuthToken().toString(),
@@ -155,8 +184,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
-                        if(response.code()!=200)
-                        {
+                        if (response.code() != 200) {
                             Snackbar.make(
                                 binding.coordinatorLayout,
                                 "Patient can not be attended check network connection",
@@ -182,32 +210,45 @@ class PatientDetailsActivity : AppCompatActivity() {
     ) {
 
         "application/json; charset=utf-8".toMediaTypeOrNull()
+
+
+
         PatientsApi.retrofitService.assignPatientLevel(
             token = tokenManager.getAuthToken().toString(),
             patientId = patientId,
             patientLevel = AssignPatientLevel(level, comments, isDeclined)
         )
             .enqueue(
-                object : Callback<ResponseModel> {
-                    override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                        Toast.makeText(
-                            this@PatientDetailsActivity,
-                            "error: ${t.message}",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                object : Callback<AssignPatient> {
+                    override fun onFailure(call: Call<AssignPatient>, t: Throwable) {
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Check your network connection",
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
 
                     @RequiresApi(Build.VERSION_CODES.KITKAT)
                     override fun onResponse(
-                        call: Call<ResponseModel>,
-                        response: Response<ResponseModel>
+                        call: Call<AssignPatient>,
+                        response: Response<AssignPatient>
                     ) {
                         if (response.code() == 200) {
                             showPopupWindow()
                             Handler().postDelayed({
-                                onBackPressed()
-                            },1500)
+                                startActivity(
+                                    Intent(
+                                        this@PatientDetailsActivity,
+                                        MainActivity::class.java
+                                    )
+                                )
+                            }, 1500)
+                        } else {
+                            Snackbar.make(
+                                binding.coordinatorLayout,
+                                response.message(),
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
 
 

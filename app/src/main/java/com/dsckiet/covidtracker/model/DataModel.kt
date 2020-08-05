@@ -5,6 +5,22 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+data class AssignPatient(
+    val message:String,
+    val error:Boolean,
+    val data:HospitalDetails?
+):Parcelable
+
+@Parcelize
+data class HospitalDetails(
+    @Json(name = "_id") val hospitalId: String="",
+    val name: String="",
+    val address: String="",
+    val category: String=""
+):Parcelable
+
+
+@Parcelize
 data class ResponseModel (
     val data: List<PatientDetails>?
 ) : Parcelable
