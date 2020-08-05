@@ -33,7 +33,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
     private val RESULT_LOAD_IMAGE = 1
     lateinit var binding: ActivityProfileUpdateBinding
     private lateinit var tokenManager: TokenManager
-    private var doctorId: String? = ""
+    private lateinit var doctorId: String
     var path: String = ""
     private var NETWORK_METHOD_FLAG = 0 // Initiate network flag for network request
 
@@ -51,7 +51,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
         binding.updateContact.setText(doctorData?.getString("contact"))
         binding.updateAge.setText(doctorData?.getString("age"))
         binding.updateId.setText(doctorData?.getString("id"))
-        doctorId = doctorData?.getString("doctorId")
+        doctorId = doctorData?.getString("doctorId").toString()
         println("doctor id : $doctorId")
         binding.updateHospital.setText("city hospital")
 
@@ -137,6 +137,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
     @SuppressLint("LogNotTimber")
     @RequiresApi(Build.VERSION_CODES.M)
     private fun updateDetailsWithoutPhoto() {
+        // Launch in Coroutine Scope to avoid Network on main thread exception
         CoroutineScope(IO).launch {
             try {
                 val client: OkHttpClient = OkHttpClient().newBuilder()
@@ -188,6 +189,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
     @SuppressLint("LogNotTimber")
     @RequiresApi(Build.VERSION_CODES.M)
     private fun updateDetailsWithPhoto() {
+        // Launch in Coroutine Scope to avoid Network on main thread exception
         CoroutineScope(IO).launch {
             try {
                 val client: OkHttpClient = OkHttpClient().newBuilder()
