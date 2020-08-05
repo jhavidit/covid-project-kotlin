@@ -34,8 +34,8 @@ class PatientDeclinedFragment : Fragment() {
 
     private lateinit var binding: FragmentPatientDeclinedBinding
     private lateinit var authToken: TokenManager
-    private var list = ArrayList<PatientDetails>()
     private lateinit var tickerView: TickerView
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +47,7 @@ class PatientDeclinedFragment : Fragment() {
                 inflater,
                 R.layout.fragment_patient_declined, container, false
             )
+
 
         tickerView = binding.countDecPatients
         tickerView.animationInterpolator = OvershootInterpolator()
@@ -70,7 +71,7 @@ class PatientDeclinedFragment : Fragment() {
 
         if (!InternetConnectivity.isNetworkAvailable(requireContext())!!) {
             offlineCase()
-        }else{
+        } else {
             getDeclinedPatientData()
         }
     }
@@ -84,24 +85,30 @@ class PatientDeclinedFragment : Fragment() {
                 startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
             }.show()
     }
+
     private fun getDeclinedPatientData() {
+        val list = ArrayList<PatientDetails>()
         binding.animationView.setAnimation(R.raw.heartbeat_loading)
         binding.animationView.playAnimation()
         binding.animationView.repeatMode
-        val list = ArrayList<PatientDetails>()
+
         PatientsApi.retrofitService.getPatientsData(token = authToken.getAuthToken().toString())
             .enqueue(
                 object : Callback<ResponseModel> {
                     @SuppressLint("LogNotTimber")
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                         offlineCase()
-                        Snackbar.make(binding.coordinatorLayout, "Network Problem", Snackbar.LENGTH_LONG)
+                        tickerView.text = "0"
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Network Problem",
+                            Snackbar.LENGTH_LONG
+                        )
                             .setAction("Open Settings") {
                                 startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
                             }.show()
                     }
 
-                    @SuppressLint("LogNotTimber")
                     override fun onResponse(
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
@@ -131,7 +138,8 @@ class PatientDeclinedFragment : Fragment() {
                                     requireContext(),
                                     list
                                 )
-                            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                            binding.recyclerView.layoutManager =
+                                LinearLayoutManager(requireContext())
                             binding.recyclerView.setHasFixedSize(true)
                             tickerView.text = listData.size.toString()
                             if (listData.isEmpty()) {

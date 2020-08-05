@@ -84,11 +84,11 @@ class DiagnosisPendingFragment : Fragment() {
     }
 
     private fun generatePendingPatientList(data: JSONArray): ArrayList<PendingPatient> {
-        val list = ArrayList<PendingPatient>()
+        val tempList = ArrayList<PendingPatient>()
 
         for (i in 0 until data.length()) {
             try {
-                list += PendingPatient(
+                tempList += PendingPatient(
                     data.getJSONObject(i).getString("name"),
                     data.getJSONObject(i).getString("_id"),
                     data.getJSONObject(i).getInt("age"),
@@ -103,7 +103,7 @@ class DiagnosisPendingFragment : Fragment() {
                 println("json exception : ${e.message}")
             }
         }
-        return list
+        return tempList
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
