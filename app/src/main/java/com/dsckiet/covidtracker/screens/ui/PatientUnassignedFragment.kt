@@ -12,8 +12,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.FragmentPatientUnassignedBinding
 import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.model.ResponseModel
@@ -23,6 +23,7 @@ import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.google.android.material.snackbar.Snackbar
 import com.robinhood.ticker.TickerUtils
 import com.robinhood.ticker.TickerView
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -109,44 +110,54 @@ class PatientUnassignedFragment : Fragment() {
                     ) {
                         binding.animationView.visibility = View.GONE
                         binding.openSettings.visibility = View.GONE
-                        val listResponse = response.body()
-                        val listData: List<PatientDetails>? = listResponse?.data
-                        if (listData != null) {
-                            for (data: PatientDetails in listData) {
-                                list.add(
-                                    PatientDetails(
-                                        data.phoneNo,
-                                        data.district,
-                                        data.address,
-                                        data.name,
-                                        data.age,
-                                        data.gender,
-                                        data.lab,
-                                        data.patientId,
-                                        data.caseId
+                        if (response.code() == 200) {
+                            val listResponse = response.body()
+                            val listData: List<PatientDetails>? = listResponse?.data
+                            if (listData != null) {
+                                for (data: PatientDetails in listData) {
+                                    list.add(
+                                        PatientDetails(
+                                            data.phoneNo,
+                                            data.district,
+                                            data.address,
+                                            data.name,
+                                            data.age,
+                                            data.gender,
+                                            data.lab,
+                                            data.patientId,
+                                            data.caseId
+                                        )
                                     )
-                                )
-                            }
-                            binding.recyclerView.adapter =
-                                PatientUnassignedAdapter(
-                                    requireContext(),
-                                    list
-                                )
-                            binding.recyclerView.layoutManager =
-                                LinearLayoutManager(requireContext())
-                            binding.recyclerView.setHasFixedSize(true)
-                            tickerView.text = listData.size.toString()
+                                }
+                                binding.recyclerView.adapter =
+                                    PatientUnassignedAdapter(
+                                        requireContext(),
+                                        list
+                                    )
+                                binding.recyclerView.layoutManager =
+                                    LinearLayoutManager(requireContext())
+                                binding.recyclerView.setHasFixedSize(true)
+                                tickerView.text = listData.size.toString()
 
-                            if (listData.isEmpty()) {
-                                binding.animationView.setAnimation(R.raw.empty_list)
-                                binding.animationView.visibility = View.VISIBLE
-                                binding.openSettings.visibility = View.GONE
-                                Snackbar.make(
-                                    binding.coordinatorLayout,
-                                    "No patient available",
-                                    Snackbar.LENGTH_INDEFINITE
-                                ).show()
+                                if (listData.isEmpty()) {
+                                    binding.animationView.setAnimation(R.raw.empty_list)
+                                    binding.animationView.visibility = View.VISIBLE
+                                    binding.openSettings.visibility = View.GONE
+                                    Snackbar.make(
+                                        binding.coordinatorLayout,
+                                        "No patient available",
+                                        Snackbar.LENGTH_INDEFINITE
+                                    ).show()
+                                }
                             }
+                        }else{
+                            val jsonObject= JSONObject(response.errorBody()?.string()!!)
+
+                            Snackbar.make(
+                                binding.coordinatorLayout,
+                                jsonObject.getString("message"),
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }
                 }

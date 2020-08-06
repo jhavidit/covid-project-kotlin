@@ -26,6 +26,7 @@ import com.dsckiet.covidtracker.utils.InternetConnectivity
 import com.google.android.material.snackbar.Snackbar
 import com.robinhood.ticker.TickerUtils
 import com.robinhood.ticker.TickerView
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -113,46 +114,58 @@ class PatientDeclinedFragment : Fragment() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
+
                         binding.animationView.visibility = GONE
                         binding.openSettings.visibility = GONE
-                        val listResponse = response.body()
-                        val listData: List<PatientDetails>? = listResponse?.data
-                        if (listData != null) {
-                            for (data: PatientDetails in listData) {
-                                list.add(
-                                    PatientDetails(
-                                        data.phoneNo,
-                                        data.district,
-                                        data.address,
-                                        data.name,
-                                        data.age,
-                                        data.gender,
-                                        data.lab,
-                                        data.patientId,
-                                        data.caseId
+                        if (response.code() == 200) {
+                            val listResponse = response.body()
+                            val listData: List<PatientDetails>? = listResponse?.data
+                            if (listData != null) {
+                                for (data: PatientDetails in listData) {
+                                    list.add(
+                                        PatientDetails(
+                                            data.phoneNo,
+                                            data.district,
+                                            data.address,
+                                            data.name,
+                                            data.age,
+                                            data.gender,
+                                            data.lab,
+                                            data.patientId,
+                                            data.caseId
+                                        )
                                     )
-                                )
-                            }
-                            binding.recyclerView.adapter =
-                                PatientDeclinedAdapter(
-                                    requireContext(),
-                                    list
-                                )
-                            binding.recyclerView.layoutManager =
-                                LinearLayoutManager(requireContext())
-                            binding.recyclerView.setHasFixedSize(true)
-                            tickerView.text = listData.size.toString()
-                            if (listData.isEmpty()) {
-                                binding.animationView.setAnimation(R.raw.empty_list)
-                                binding.animationView.visibility = VISIBLE
-                                binding.openSettings.visibility = GONE
-                                Snackbar.make(
-                                    binding.coordinatorLayout,
-                                    "No patient available",
-                                    Snackbar.LENGTH_INDEFINITE
-                                ).show()
-                            }
+                                }
+                                binding.recyclerView.adapter =
+                                    PatientDeclinedAdapter(
+                                        requireContext(),
+                                        list
+                                    )
+                                binding.recyclerView.layoutManager =
+                                    LinearLayoutManager(requireContext())
+                                binding.recyclerView.setHasFixedSize(true)
+                                tickerView.text = listData.size.toString()
+                                if (listData.isEmpty()) {
+                                    binding.animationView.setAnimation(R.raw.empty_list)
+                                    binding.animationView.visibility = VISIBLE
+                                    binding.openSettings.visibility = GONE
+                                    Snackbar.make(
+                                        binding.coordinatorLayout,
+                                        "No patient available",
+                                        Snackbar.LENGTH_INDEFINITE
+                                    ).show()
+                                }
 
+                            }
+                        }
+                        else{
+                            val jsonObject= JSONObject(response.errorBody()?.string()!!)
+
+                            Snackbar.make(
+                                binding.coordinatorLayout,
+                                jsonObject.getString("message"),
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }
                 }

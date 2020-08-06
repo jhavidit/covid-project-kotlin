@@ -23,6 +23,7 @@ import com.dsckiet.covidtracker.utils.logs
 import com.google.android.material.snackbar.Snackbar
 import com.robinhood.ticker.TickerUtils
 import com.robinhood.ticker.TickerView
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,50 +80,65 @@ class ChangeHospitalActivity : AppCompatActivity() {
                 binding.animationView.visibility = GONE
                 logs("success ${response.body().toString()}")
 
-                if (response.body()?.data != null) {
-                    for (i in response.body()!!.data.indices) {
-                        if (response.body()!!.data[i].hospitalId != allocatedHospital)
-                            availableHospital += AvailableHospital(
-                                response.body()!!.data[i].name,
-                                response.body()!!.data[i].address,
-                                response.body()!!.data[i].hospitalId
+                if (response.code() == 200) {
+                    if (response.body()?.data != null) {
+                        for (i in response.body()!!.data.indices) {
+                            if (response.body()!!.data[i].hospitalId != allocatedHospital)
+                                availableHospital += AvailableHospital(
+                                    response.body()!!.data[i].name,
+                                    response.body()!!.data[i].address,
+                                    response.body()!!.data[i].hospitalId
+                                )
+                        }
+
+                        binding.recyclerView.adapter =
+                            HospitalListAdapter(
+                                this@ChangeHospitalActivity,
+                                availableHospital, allocatedHospital, patientId
                             )
+                        binding.recyclerView.layoutManager =
+                            LinearLayoutManager(this@ChangeHospitalActivity)
+                        binding.recyclerView.setHasFixedSize(true)
+
+                        tickerView = binding.hospitalCount
+                        tickerView.animationInterpolator = OvershootInterpolator()
+                        tickerView.setCharacterLists(TickerUtils.provideNumberList())
+                        val fontFace =
+                            ResourcesCompat.getFont(this@ChangeHospitalActivity, R.font.sen_bold)
+                        tickerView.setPreferredScrollingDirection(TickerView.ScrollingDirection.ANY)
+                        tickerView.typeface = fontFace
+                        tickerView.gravity = Gravity.START
+                        tickerView.animationDuration = 2000
+                        tickerView.text = availableHospital.size.toString()
+                    }
+                    if (availableHospital.isEmpty()) {
+                        binding.animationView.setAnimation(R.raw.empty_list)
+                        binding.animationView.visibility = VISIBLE
+                        binding.openSettings.visibility = GONE
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "No Hospital available",
+                            Snackbar.LENGTH_INDEFINITE
+                        ).setAction("SUBMIT") {
+                            startActivity(
+                                Intent(
+                                    this@ChangeHospitalActivity,
+                                    MainActivity::class.java
+                                )
+                            )
+                        }.show()
                     }
 
-                    binding.recyclerView.adapter =
-                        HospitalListAdapter(
-                            this@ChangeHospitalActivity,
-                            availableHospital, allocatedHospital, patientId
-                        )
-                    binding.recyclerView.layoutManager =
-                        LinearLayoutManager(this@ChangeHospitalActivity)
-                    binding.recyclerView.setHasFixedSize(true)
-
-                    tickerView = binding.hospitalCount
-                    tickerView.animationInterpolator = OvershootInterpolator()
-                    tickerView.setCharacterLists(TickerUtils.provideNumberList())
-                    val fontFace =
-                        ResourcesCompat.getFont(this@ChangeHospitalActivity, R.font.sen_bold)
-                    tickerView.setPreferredScrollingDirection(TickerView.ScrollingDirection.ANY)
-                    tickerView.typeface = fontFace
-                    tickerView.gravity = Gravity.START
-                    tickerView.animationDuration = 2000
-                    tickerView.text = availableHospital.size.toString()
                 }
-                if(availableHospital.isEmpty())
-                {
-                    binding.animationView.setAnimation(R.raw.empty_list)
-                    binding.animationView.visibility = VISIBLE
-                    binding.openSettings.visibility = GONE
+                else{
+                    val jsonObject= JSONObject(response.errorBody()?.string()!!)
+
                     Snackbar.make(
                         binding.coordinatorLayout,
-                        "No Hospital available",
-                        Snackbar.LENGTH_INDEFINITE
-                    ).setAction("SUBMIT") {
-                        startActivity(Intent(this@ChangeHospitalActivity,MainActivity::class.java))
-                    }.show()
+                        jsonObject.getString("message"),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
-
             }
         })
 
