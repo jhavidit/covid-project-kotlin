@@ -31,7 +31,7 @@ import android.view.View.VISIBLE as VISIBLE
 class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var tokenManager: TokenManager
-    var doctorId: String = ""
+    private lateinit var doctorId: String
     lateinit var photoURL:String
 
     override fun onCreateView(
@@ -125,7 +125,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
         when (position) {
 
             0 -> {
-
+                //TODO => Remove this and opt for a better item drop down approach [after refactoring]
             }
             1 -> {
                 val name = binding.docName.text
