@@ -58,6 +58,8 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
         spinner.adapter = array
         spinner.onItemSelectedListener = this
 
+        //TODO => Increase spinner button touch area
+
 
         tokenManager = TokenManager(requireContext())
         val token = tokenManager.getAuthToken()
