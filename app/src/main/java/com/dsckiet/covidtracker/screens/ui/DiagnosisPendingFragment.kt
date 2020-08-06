@@ -139,7 +139,7 @@ class DiagnosisPendingFragment : Fragment() {
             if (data != null) {
                 //to check size of data
                 logs(data.toString())
-                if (data!!.getString("remainingPatients")!="0") {
+                if (data?.getString("remainingPatients")!="0") {
                     patientData = data!!.getJSONArray("patients")
                     list = generatePendingPatientList(patientData!!)
                     activity?.runOnUiThread {

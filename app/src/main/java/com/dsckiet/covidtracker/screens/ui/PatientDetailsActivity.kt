@@ -243,13 +243,12 @@ class PatientDetailsActivity : AppCompatActivity() {
                         response: Response<AssignPatient>
                     ) {
                         if (response.code() == 200) {
-                            logs("success"+response.toString())
-                            logs("success body"+response.body().toString())
+
 
                             binding.rlAssignPatient.visibility = GONE
                             binding.rlLevelAssigned.visibility = VISIBLE
 
-                            if (level == "") {
+                            if (level.isEmpty()) {
                                 binding.levelAllocatedText.text = "Declined to come"
                                 binding.patientHospital.visibility = GONE
                                 binding.titleHospital.visibility = GONE
@@ -266,8 +265,9 @@ class PatientDetailsActivity : AppCompatActivity() {
                                 }, 1500)
                             } else {
                                 if (response.body()?.data != null) {
-                                    binding.patientHospital.text =
-                                        response.body()?.data?.name + ", " + response.body()?.data?.address
+                                    val hospitalNameAddress=  response.body()?.data?.name + ", " + response.body()?.data?.address
+                                    binding.patientHospital.text =hospitalNameAddress
+
                                     allocatedHospital = response.body()?.data?.hospitalId
                                     binding.levelAllocatedText.text = level.capitalize()
                                     binding.submitForm.setOnClickListener {
@@ -338,6 +338,7 @@ class PatientDetailsActivity : AppCompatActivity() {
             )
     }
 
+
     fun showPopupWindow() {
         val inflater: LayoutInflater =
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -360,7 +361,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         }
 
 
-// If API level 23 or higher then execute the code
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 // Create a new slide animation for popup window enter transition
             val slideIn = Slide()
@@ -372,8 +373,11 @@ class PatientDetailsActivity : AppCompatActivity() {
             slideOut.slideEdge = Gravity.RIGHT
             popupWindow.exitTransition = slideOut
 // Finally, show the popup window on app
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             TransitionManager.beginDelayedTransition(rel_layout)
-            popupWindow.showAtLocation(
+        }
+        popupWindow.showAtLocation(
                 rel_layout, // Location to display popup window
                 Gravity.CENTER, // Exact position of layout to display popup
                 0, // X offset
@@ -384,6 +388,6 @@ class PatientDetailsActivity : AppCompatActivity() {
                 popupWindow.dismiss()
             }, 2000)
 
-        }
+
     }
 }
