@@ -77,6 +77,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         call: Call<ProfileResponse>,
                         response: Response<ProfileResponse>
                     ) {
+                        println("response : ${response.body()}")
                         binding.relativeLayoutProfile.visibility = VISIBLE
                         binding.animationView.visibility = GONE
                         val profile = response.body()
