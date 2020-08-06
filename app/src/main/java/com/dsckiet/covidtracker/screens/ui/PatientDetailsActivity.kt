@@ -18,23 +18,30 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
 import com.dsckiet.covidtracker.model.AssignPatient
 import com.dsckiet.covidtracker.model.AssignPatientLevel
+import com.dsckiet.covidtracker.model.AvailableHospital
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.utils.InternetConnectivity
+import com.dsckiet.covidtracker.utils.logs
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_patient_details.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,6 +53,8 @@ class PatientDetailsActivity : AppCompatActivity() {
     private lateinit var level: String
     private lateinit var comments: String
     private var isDeclined = false
+    private var allocatedHospital: String? = null
+    private val availableHospital = ArrayList<AvailableHospital>()
 
     @SuppressLint("LogNotTimber", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +63,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             this,
             R.layout.activity_patient_details
         )
-        level=""
-        comments=""
+        level = ""
+        comments = ""
         tokenManager = TokenManager(this)
 
         val patientData = intent.extras?.getBundle("patientData")
@@ -234,19 +243,90 @@ class PatientDetailsActivity : AppCompatActivity() {
                         response: Response<AssignPatient>
                     ) {
                         if (response.code() == 200) {
-                            showPopupWindow()
-                            Handler().postDelayed({
-                                startActivity(
-                                    Intent(
-                                        this@PatientDetailsActivity,
-                                        MainActivity::class.java
+
+
+                            binding.rlAssignPatient.visibility = GONE
+                            binding.rlLevelAssigned.visibility = VISIBLE
+
+                            if (level.isEmpty()) {
+                                binding.levelAllocatedText.text = "Declined to come"
+                                binding.patientHospital.visibility = GONE
+                                binding.titleHospital.visibility = GONE
+                                binding.changeHospitalText.visibility = GONE
+                                binding.titleChangeHospital.visibility = GONE
+                                showPopupWindow()
+                                Handler().postDelayed({
+                                    startActivity(
+                                        Intent(
+                                            this@PatientDetailsActivity,
+                                            MainActivity::class.java
+                                        )
                                     )
-                                )
-                            }, 1500)
+                                }, 1500)
+                            } else {
+                                if (response.body()?.data != null) {
+                                    val hospitalNameAddress=  response.body()?.data?.name + ", " + response.body()?.data?.address
+                                    binding.patientHospital.text =hospitalNameAddress
+
+                                    allocatedHospital = response.body()?.data?.hospitalId
+                                    binding.levelAllocatedText.text = level.capitalize()
+                                    binding.submitForm.setOnClickListener {
+                                        showPopupWindow()
+                                        Handler().postDelayed({
+                                            startActivity(
+                                                Intent(
+                                                    this@PatientDetailsActivity,
+                                                    MainActivity::class.java
+                                                )
+                                            )
+                                        }, 1500)
+
+                                    }
+                                    binding.changeHospitalText.setOnClickListener {
+                                        val intent = Intent(
+                                            this@PatientDetailsActivity,
+                                            ChangeHospitalActivity::class.java
+                                        )
+                                        val bundle = bundleOf(
+                                            "level" to level,
+                                            "allocatedHospital" to allocatedHospital,
+                                            "patientId" to patientId
+                                        )
+                                        this@PatientDetailsActivity.startActivity(
+                                            intent.putExtra(
+                                                "hospitalDetails",
+                                                bundle
+                                            )
+                                        )
+
+                                    }
+                                } else {
+                                    Toast.makeText(
+                                        this@PatientDetailsActivity,
+                                        "No hospitals available right now",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    showPopupWindow()
+                                    Handler().postDelayed({
+                                        startActivity(
+                                            Intent(
+                                                this@PatientDetailsActivity,
+                                                MainActivity::class.java
+                                            )
+                                        )
+                                    }, 1500)
+
+
+                                }
+                            }
+
+
                         } else {
+                            val jsonObject=JSONObject(response.errorBody()?.string()!!)
+
                             Snackbar.make(
                                 binding.coordinatorLayout,
-                                response.message(),
+                                jsonObject.getString("message"),
                                 Snackbar.LENGTH_LONG
                             ).show()
                         }
@@ -258,42 +338,46 @@ class PatientDetailsActivity : AppCompatActivity() {
             )
     }
 
-    private fun showPopupWindow() {
+
+    fun showPopupWindow() {
         val inflater: LayoutInflater =
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        // Inflate a custom view using layout inflater
+// Inflate a custom view using layout inflater
         val view = inflater.inflate(R.layout.patient_submitted_popup, null)
 
-        // Initialize a new instance of popup window
+// Initialize a new instance of popup window
         val popupWindow = PopupWindow(
             view, // Custom view to show in popup window
             LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
             LinearLayout.LayoutParams.WRAP_CONTENT
 
-            // Window height
+// Window height
         )
 
-        // Set an elevation for the popup window
+// Set an elevation for the popup window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             popupWindow.elevation = 10.0F
         }
 
 
-        // If API level 23 or higher then execute the code
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Create a new slide animation for popup window enter transition
+// Create a new slide animation for popup window enter transition
             val slideIn = Slide()
             slideIn.slideEdge = Gravity.TOP
             popupWindow.enterTransition = slideIn
 
-            // Slide animation for popup window exit transition
+// Slide animation for popup window exit transition
             val slideOut = Slide()
             slideOut.slideEdge = Gravity.RIGHT
             popupWindow.exitTransition = slideOut
-            // Finally, show the popup window on app
+// Finally, show the popup window on app
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             TransitionManager.beginDelayedTransition(rel_layout)
-            popupWindow.showAtLocation(
+        }
+        popupWindow.showAtLocation(
                 rel_layout, // Location to display popup window
                 Gravity.CENTER, // Exact position of layout to display popup
                 0, // X offset
@@ -304,6 +388,6 @@ class PatientDetailsActivity : AppCompatActivity() {
                 popupWindow.dismiss()
             }, 2000)
 
-        }
+
     }
 }

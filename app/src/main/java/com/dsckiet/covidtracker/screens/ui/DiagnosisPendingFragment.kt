@@ -138,8 +138,8 @@ class DiagnosisPendingFragment : Fragment() {
 
             if (data != null) {
                 //to check size of data
-                logs(data!!.length().toString())
-                if (data.toString() != "{}" || data.toString() != "[]") {
+                logs(data.toString())
+                if (data?.getString("remainingPatients")!="0") {
                     patientData = data!!.getJSONArray("patients")
                     list = generatePendingPatientList(patientData!!)
                     activity?.runOnUiThread {
@@ -156,17 +156,17 @@ class DiagnosisPendingFragment : Fragment() {
                             )
                     }
                 } else {
-                    //TODO:: Need Testing of empty list data
                     activity?.runOnUiThread {
                         binding.animationView.setAnimation(R.raw.empty_list)
                         binding.animationView.visibility = VISIBLE
                         binding.openSettings.visibility = GONE
+                        binding.animationView.playAnimation()
 
                         Snackbar.make(
                             binding.coordinatorLayout,
                             "No available Patient",
                             Snackbar.LENGTH_LONG
-                        )
+                        ).show()
                     }
                 }
             }

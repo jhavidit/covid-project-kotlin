@@ -1,8 +1,6 @@
 package com.dsckiet.covidtracker.network
 
-import com.dsckiet.covidtracker.model.AssignPatient
-import com.dsckiet.covidtracker.model.AssignPatientLevel
-import com.dsckiet.covidtracker.model.ResponseModel
+import com.dsckiet.covidtracker.model.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -45,6 +43,19 @@ interface ApiInterface {
         @Header("x-auth-token") token: String, @Path("patientId") patientId: String,
         @Body patientLevel: AssignPatientLevel
     ): Call<AssignPatient>
+
+    @GET("api/v1/hospitals/available/{level}")
+    fun getAvailableHospital(
+        @Header("x-auth-token") token: String,
+        @Path("level") level: String
+    ):Call<HospitalList>
+
+    @POST("api/v1/doctors/patients/change-hospital/{pid}")
+    fun changeHospital(
+        @Header("x-auth-token") token: String,
+        @Path("pid") patientId: String,
+        @Body changeHospital: ChangeHospital
+    ):Call<AssignPatient>
 }
 
 object PatientsApi {

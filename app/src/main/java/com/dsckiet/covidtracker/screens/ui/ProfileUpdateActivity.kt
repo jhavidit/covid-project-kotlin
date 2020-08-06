@@ -7,15 +7,17 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
-import com.dsckiet.covidtracker.authentication.TokenManager
+import com.bumptech.glide.Glide
 import com.dsckiet.covidtracker.R
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.ActivityProfileUpdateBinding
 import com.dsckiet.covidtracker.network.BASE_URL
 import com.google.android.material.snackbar.Snackbar
@@ -53,8 +55,11 @@ class ProfileUpdateActivity : AppCompatActivity() {
         binding.updateAge.setText(doctorData?.getString("age"))
         binding.updateId.setText(doctorData?.getString("id"))
         doctorId = doctorData?.getString("doctorId").toString()
+        Glide.with(this).load(doctorData?.getString("image"))
+            .into(binding.doctorProfilePhoto)
         println("doctor id : $doctorId")
         binding.updateHospital.setText("city hospital")
+
 
         // Initialize Token Manager
         tokenManager = TokenManager(this)
@@ -107,7 +112,11 @@ class ProfileUpdateActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Snackbar.make(binding.coordinatorLayout, "Update Fields cannot be left blank", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    binding.coordinatorLayout,
+                    "Update Fields cannot be left blank",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -167,12 +176,19 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
                 val response: okhttp3.Response = client.newCall(request).execute()
                 Log.d("response: ", "code : ${response.code} and body : ${response.body}")
-                if(response.code != 200) {
-                    Snackbar.make(binding.coordinatorLayout, "Something went wrong! Please try again later."
-                        , Snackbar.LENGTH_SHORT).show()
+                if (response.code == 200) {
+                    Toast.makeText(
+                        this@ProfileUpdateActivity, "Profile updated successfully."
+                        , Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+
                 } else {
-                    Snackbar.make(binding.coordinatorLayout, "Profile updated successfully."
-                        , Snackbar.LENGTH_SHORT).show()
+
+                    Snackbar.make(
+                        binding.coordinatorLayout, "Something went wrong! Please try again later."
+                        , Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -222,12 +238,19 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
                 val response: okhttp3.Response = client.newCall(request).execute()
                 Log.d("response: ", "code : ${response.code} and body : ${response.body}")
-                if(response.code != 200) {
-                    Snackbar.make(binding.coordinatorLayout, "Something went wrong! Please try again later."
-                        , Snackbar.LENGTH_SHORT).show()
+                if (response.code == 200) {
+                    Toast.makeText(
+                        this@ProfileUpdateActivity, "Profile updated successfully."
+                        , Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+
                 } else {
-                    Snackbar.make(binding.coordinatorLayout, "Profile updated successfully."
-                        , Snackbar.LENGTH_SHORT).show()
+
+                    Snackbar.make(
+                        binding.coordinatorLayout, "Something went wrong! Please try again later."
+                        , Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

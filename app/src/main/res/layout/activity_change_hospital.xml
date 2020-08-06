@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/rel_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/profile_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/back_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:foreground="?selectableItemBackground"
+                        android:paddingRight="10dp"
+                        app:srcCompat="@drawable/ic_back_btn" />
+
+                    <TextView
+                        android:id="@+id/dp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/sen_extrabold"
+                        android:text="Change Hospital"
+                        android:textColor="#008DB9"
+                        android:textSize="28sp" />
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/examine_pending_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_group"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_24"
+                    android:layout_marginEnd="@dimen/dimen_32"
+                    android:layout_marginBottom="@dimen/dimen_12"
+                    app:cardBackgroundColor="@color/blue"
+                    app:cardCornerRadius="@dimen/dimen_8"
+                    app:cardElevation="@dimen/dimen_8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dimen_16">
+
+                        <com.robinhood.ticker.TickerView
+                            android:id="@+id/hospital_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_4"
+                            android:layout_marginLeft="@dimen/dimen_4"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:text="0"
+                            android:textSize="@dimen/dimen_text_40" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/dimen_20"
+                            android:layout_marginLeft="@dimen/dimen_20"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="Number of available Hospitals"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dimen_text_16" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/hospital_change_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/examine_pending_card"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_12"
+                    android:layout_marginEnd="@dimen/dimen_32"
+                    android:fontFamily="@font/sen_bold"
+                    android:text="Hospital List"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/dimen_text_20" />
+
+                <TextView
+                    android:id="@+id/change_hospital_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/hospital_change_title"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_4"
+                    android:layout_marginEnd="@dimen/dimen_32"
+                    android:fontFamily="@font/sen_regular"
+                    android:text="Click the card to change the hospital"
+                    android:textColor="@color/light_grey"
+                    android:textSize="@dimen/dimen_text_14" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_below="@id/change_hospital_text"
+                    app:lottie_autoPlay="true"
+                    android:visibility="gone"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/heartbeat_loading" />
+
+                <TextView
+                    android:id="@+id/open_settings"
+                    android:layout_below="@id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sen_regular"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="-100dp"
+                    android:textSize="@dimen/dimen_text_16"
+                    android:text="@string/open_settings"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/open_settings"
+                    android:layout_marginStart="@dimen/dimen_20"
+                    android:layout_marginTop="@dimen/dimen_4"
+                    android:layout_marginEnd="@dimen/dimen_20"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/hospital_list" />
+
+            </RelativeLayout>
+
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

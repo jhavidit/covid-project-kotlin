@@ -31,9 +31,9 @@
                         android:id="@+id/back_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:paddingRight="10dp"
                         android:layout_gravity="center_vertical"
                         android:foreground="?selectableItemBackground"
+                        android:paddingRight="10dp"
                         app:srcCompat="@drawable/ic_back_btn" />
 
                     <TextView
@@ -63,8 +63,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
+                        android:layout_height="wrap_content">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -105,11 +104,11 @@
 
                         <ImageView
                             android:layout_width="45dp"
-                            android:layout_marginRight="25dp"
-                            android:layout_marginEnd="25dp"
                             android:layout_height="45dp"
-                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginRight="25dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/ic_icon_phone" />
                     </RelativeLayout>
@@ -249,7 +248,7 @@
                     app:cardElevation="@null">
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="330dp"
                         android:layout_height="match_parent"
                         android:background="@color/grey_white_box">
 
@@ -277,169 +276,238 @@
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
-                        <TextView
-                            android:id="@+id/title_severityLevel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <RelativeLayout
+                            android:id="@+id/rl_assign_patient"
+                            android:layout_width="360dp"
+
+                            android:layout_height="match_parent"
                             android:layout_below="@id/labName"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/sen_reg"
-                            android:text="@string/select_severity_level"
-                            android:textSize="12sp" />
+                            android:visibility="visible">
 
-                        <LinearLayout
-                            android:id="@+id/radio_buttons"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/title_severityLevel"
-                            android:orientation="horizontal">
-
-                            <RadioGroup
-                                android:id="@+id/radio_group_details"
+                            <TextView
+                                android:id="@+id/title_severityLevel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/sen_reg"
+                                android:text="@string/select_severity_level"
+                                android:textSize="12sp" />
+
+                            <LinearLayout
+                                android:id="@+id/radio_buttons"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/title_severityLevel"
                                 android:orientation="horizontal">
 
-                                <RadioButton
-                                    android:id="@+id/L1"
+                                <RadioGroup
+                                    android:id="@+id/radio_group_details"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="14dp"
-                                    android:layout_marginLeft="14dp"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/sen_bold"
-                                    android:scaleX="0.75"
-                                    android:scaleY="0.75"
-                                    android:text="@string/l1"
-                                    android:textColor="@color/dark_grey"
-                                    android:textSize="20sp" />
+                                    android:orientation="horizontal">
 
-                                <RadioButton
-                                    android:id="@+id/L2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/sen_bold"
-                                    android:scaleX="0.75"
-                                    android:scaleY="0.75"
-                                    android:text="@string/l2"
-                                    android:textColor="@color/dark_grey"
-                                    android:textSize="20sp" />
+                                    <RadioButton
+                                        android:id="@+id/L1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="14dp"
+                                        android:layout_marginLeft="14dp"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="@font/sen_bold"
+                                        android:scaleX="0.75"
+                                        android:scaleY="0.75"
+                                        android:text="@string/l1"
+                                        android:textColor="@color/dark_grey"
+                                        android:textSize="20sp" />
 
-                                <RadioButton
-                                    android:id="@+id/L3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/sen_bold"
-                                    android:scaleX="0.75"
-                                    android:scaleY="0.75"
-                                    android:text="@string/l3"
-                                    android:textColor="@color/dark_grey"
-                                    android:textSize="20sp" />
-                            </RadioGroup>
-                        </LinearLayout>
+                                    <RadioButton
+                                        android:id="@+id/L2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="@font/sen_bold"
+                                        android:scaleX="0.75"
+                                        android:scaleY="0.75"
+                                        android:text="@string/l2"
+                                        android:textColor="@color/dark_grey"
+                                        android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/title_comment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/radio_buttons"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="14dp"
-                            android:fontFamily="@font/sen_reg"
-                            android:text="@string/add_a_comment"
-                            android:textSize="12sp" />
+                                    <RadioButton
+                                        android:id="@+id/L3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="@font/sen_bold"
+                                        android:scaleX="0.75"
+                                        android:scaleY="0.75"
+                                        android:text="@string/l3"
+                                        android:textColor="@color/dark_grey"
+                                        android:textSize="20sp" />
+                                </RadioGroup>
+                            </LinearLayout>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/comment_box"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/title_comment"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="17dp"
-                            android:layout_marginRight="17dp"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="@null">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/patient_comment"
-                                android:minHeight="60dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
+                            <TextView
+                                android:id="@+id/title_comment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/radio_buttons"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="14dp"
                                 android:fontFamily="@font/sen_reg"
-                                android:paddingLeft="12dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="12dp"
-                                android:paddingBottom="11dp"
-                                android:textSize="14sp" />
-                        </androidx.cardview.widget.CardView>
+                                android:text="@string/add_a_comment"
+                                android:textSize="12sp" />
 
-                        <TextView
-                            android:id="@+id/title_hospital"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/comment_box"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/sen_reg"
-                            android:text="@string/assigned_hospital"
-                            android:textSize="12sp"
-                            android:visibility="gone" />
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/comment_box"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/title_comment"
+                                android:layout_marginStart="16dp"
+                                android:minHeight="60dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="@null">
 
-                        <TextView
-                            android:id="@+id/patient_hospital"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/title_hospital"
-                            android:layout_marginStart="16sp"
-                            android:layout_marginLeft="16sp"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/sen_bold"
-                            android:text="@string/modi_hospital_china"
-                            android:textColor="@color/dark_grey"
-                            android:textSize="16sp"
-                            android:visibility="gone" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/patient_comment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:fontFamily="@font/sen_reg"
+                                    android:minHeight="60dp"
+                                    android:paddingLeft="12dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingRight="12dp"
+                                    android:paddingBottom="11dp"
+                                    android:textSize="14sp" />
+                            </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:id="@+id/title_declined"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/comment_box"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/sen_reg"
-                            android:text="@string/declined_to_come"
-                            android:textSize="12sp" />
 
-                        <com.google.android.material.checkbox.MaterialCheckBox
-                            android:id="@+id/decline_to_come"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/comment_box"
-                            android:layout_toEndOf="@id/title_declined"
-                            android:layout_toRightOf="@id/title_declined"
-                            android:fontFamily="@font/sen_bold"
-                            android:text="Yes"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/title_declined"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/comment_box"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/sen_reg"
+                                android:text="@string/declined_to_come"
+                                android:textSize="12sp" />
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:id="@+id/decline_to_come"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/comment_box"
+                                android:layout_toEndOf="@id/title_declined"
+                                android:layout_toRightOf="@id/title_declined"
+                                android:fontFamily="@font/sen_bold"
+                                android:text="Yes"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_level_assigned"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/rl_assign_patient"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/title_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/sen_reg"
+                                android:text="Patient assigned level"
+                                android:textSize="12sp"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/level_allocated_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/title_level"
+                                android:layout_marginStart="16sp"
+                                android:layout_marginLeft="16sp"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/sen_bold"
+                                android:text="L1"
+                                android:textColor="@color/dark_grey"
+                                android:textSize="16sp"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/title_hospital"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/level_allocated_text"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/sen_reg"
+                                android:text="@string/assigned_hospital"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/patient_hospital"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/title_hospital"
+                                android:layout_marginStart="16sp"
+                                android:layout_marginLeft="16sp"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/sen_bold"
+                                android:text="@string/modi_hospital_china"
+                                android:textColor="@color/dark_grey"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/title_change_hospital"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/patient_hospital"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/sen_reg"
+                                android:text="To change Hospital,"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/change_hospital_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/patient_hospital"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="14sp"
+                                android:layout_toRightOf="@id/title_change_hospital"
+                                android:fontFamily="@font/sen_bold"
+                                android:text="Click here"
+                                android:textColor="@color/blue"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/submit_form"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/title_declined"
+                            android:layout_below="@id/rl_level_assigned"
                             android:layout_marginLeft="32dp"
                             android:layout_marginTop="24dp"
                             android:layout_marginRight="32dp"
@@ -458,6 +526,7 @@
                                 android:text="@string/submit"
                                 android:textColor="#fff"
                                 android:textSize="16sp" />
+
 
                         </androidx.cardview.widget.CardView>
 

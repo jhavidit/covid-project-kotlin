@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import com.dsckiet.covidtracker.password.Password
 import com.google.android.material.snackbar.Snackbar
+import org.json.JSONObject
 import android.view.View.VISIBLE as VISIBLE
 
 
@@ -31,6 +32,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var tokenManager: TokenManager
     var doctorId: String = ""
+    lateinit var photoURL:String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,25 +79,35 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         call: Call<ProfileResponse>,
                         response: Response<ProfileResponse>
                     ) {
-                        println("response : ${response.body()}")
                         binding.relativeLayoutProfile.visibility = VISIBLE
                         binding.animationView.visibility = GONE
-                        val profile = response.body()
-                        if (profile?.message == "success" && !profile.error) {
-                            binding.docId.text = profile.data?.empId
-                            binding.docName.text = profile.data?.name
-                            Glide.with(requireContext()).load(profile.data?.image)
-                                .into(binding.docPhoto)
-                            doctorId = profile.data?._id.toString()
-                            binding.docAddressInfo
-                            val age = profile.data?.age
-                            val gender = profile.data?.gender
-                            binding.docAgeGender.text = "$gender | $age years"
-                            binding.docProfileDetails.text = profile.data?.about
-                            binding.docPhoneNum.text = profile.data?.contact
-                            binding.docAddressInfo.text = profile.data?.address
-                            binding.docHospitalInfo.text = profile.data?.hospital
+                        if (response.code() == 200) {
+                            val profile = response.body()
+                            if (profile?.message == "success" && !profile.error) {
+                                binding.docId.text = profile.data?.empId
+                                binding.docName.text = profile.data?.name
+                                Glide.with(requireContext()).load(profile.data?.image)
+                                    .into(binding.docPhoto)
+                                doctorId = profile.data?._id.toString()
+                                binding.docAddressInfo
+                                val age = profile.data?.age
+                                val gender = profile.data?.gender
+                                photoURL = profile.data?.image.toString()
+                                binding.docAgeGender.text = "$gender | $age years"
+                                binding.docProfileDetails.text = profile.data?.about
+                                binding.docPhoneNum.text = profile.data?.contact
+                                binding.docAddressInfo.text = profile.data?.address
+                                binding.docHospitalInfo.text = profile.data?.hospital
 
+                            }
+                        }else{
+                            val jsonObject= JSONObject(response.errorBody()?.string()!!)
+
+                            Snackbar.make(
+                                binding.coordinatorLayout,
+                                jsonObject.getString("message"),
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }
                 })
@@ -132,7 +144,8 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     "age" to age,
                     "about" to about,
                     "address" to address,
-                    "doctorId" to doctorUrlId
+                    "doctorId" to doctorUrlId,
+                    "image" to photoURL
                 )
                 val intent = Intent(requireContext(), ProfileUpdateActivity::class.java)
                 intent.putExtra("doctorDetails", bundle)
