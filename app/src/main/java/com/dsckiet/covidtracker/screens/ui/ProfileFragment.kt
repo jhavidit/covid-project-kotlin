@@ -31,6 +31,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var tokenManager: TokenManager
     var doctorId: String = ""
+    lateinit var photoURL:String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,6 +91,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             binding.docAddressInfo
                             val age = profile.data?.age
                             val gender = profile.data?.gender
+                             photoURL= profile.data?.image.toString()
                             binding.docAgeGender.text = "$gender | $age years"
                             binding.docProfileDetails.text = profile.data?.about
                             binding.docPhoneNum.text = profile.data?.contact
@@ -132,7 +134,8 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     "age" to age,
                     "about" to about,
                     "address" to address,
-                    "doctorId" to doctorUrlId
+                    "doctorId" to doctorUrlId,
+                    "image" to photoURL
                 )
                 val intent = Intent(requireContext(), ProfileUpdateActivity::class.java)
                 intent.putExtra("doctorDetails", bundle)

@@ -37,9 +37,11 @@ import com.dsckiet.covidtracker.model.AvailableHospital
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.utils.InternetConnectivity
+import com.dsckiet.covidtracker.utils.logs
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_patient_details.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -241,6 +243,8 @@ class PatientDetailsActivity : AppCompatActivity() {
                         response: Response<AssignPatient>
                     ) {
                         if (response.code() == 200) {
+                            logs("success"+response.toString())
+                            logs("success body"+response.body().toString())
 
                             binding.rlAssignPatient.visibility = GONE
                             binding.rlLevelAssigned.visibility = VISIBLE
@@ -318,9 +322,11 @@ class PatientDetailsActivity : AppCompatActivity() {
 
 
                         } else {
+                            val jsonObject=JSONObject(response.errorBody()?.string()!!)
+
                             Snackbar.make(
                                 binding.coordinatorLayout,
-                                response.body()!!.message,
+                                jsonObject.getString("message"),
                                 Snackbar.LENGTH_LONG
                             ).show()
                         }

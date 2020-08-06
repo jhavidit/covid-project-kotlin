@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.dsckiet.covidtracker.R
 import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.ActivityProfileUpdateBinding
@@ -54,8 +55,11 @@ class ProfileUpdateActivity : AppCompatActivity() {
         binding.updateAge.setText(doctorData?.getString("age"))
         binding.updateId.setText(doctorData?.getString("id"))
         doctorId = doctorData?.getString("doctorId").toString()
+        Glide.with(this).load(doctorData?.getString("image"))
+            .into(binding.doctorProfilePhoto)
         println("doctor id : $doctorId")
         binding.updateHospital.setText("city hospital")
+
 
         // Initialize Token Manager
         tokenManager = TokenManager(this)
