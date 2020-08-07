@@ -27,7 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
+class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var tokenManager: TokenManager
     private lateinit var doctorId: String
@@ -174,24 +174,6 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             }
         val dialog: AlertDialog = warning.create()
         dialog.show()
-    }
-
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.editProfile -> {
-                Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.changePwd -> {
-                Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.logout -> {
-                Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
-                return true
-            }
-        }
-        return false
     }
 }
 
