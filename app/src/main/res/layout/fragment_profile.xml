@@ -21,7 +21,7 @@
                 android:layout_height="match_parent"
                 app:lottie_colorFilter="@color/colorPrimary"
                 app:lottie_autoPlay="true"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/heartbeat_loading"
                 app:lottie_speed="1" />
@@ -29,7 +29,7 @@
         <RelativeLayout
             android:id="@+id/relative_layout_profile"
             android:layout_below="@id/animationView"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".screens.ui.ProfileFragment">
@@ -56,20 +56,16 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="0dp">
-                    <Spinner
-                        android:id="@+id/spinner"
-                        android:layout_marginTop="32dp"
-                        android:spinnerMode="dropdown"
-                        android:layout_marginRight="36dp"
-                        android:background="@drawable/icon_dd"
-                        android:layout_width="8dp"
-                        android:layout_height="32dp"
-                        android:layout_marginEnd="36dp" />
-                </androidx.cardview.widget.CardView>
+                <ImageButton
+                    android:id="@+id/dropdown_btn"
+                    android:layout_width="8dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/icon_dd"
+                    android:contentDescription="@string/overflow_button"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginRight="36dp"
+                    android:layout_marginEnd="36dp" />
             </LinearLayout>
 
 
@@ -88,9 +84,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="wrap_content"

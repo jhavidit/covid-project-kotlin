@@ -21,6 +21,8 @@ import android.view.*
 import android.view.View.GONE
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.dsckiet.covidtracker.password.Password
 import com.google.android.material.snackbar.Snackbar
@@ -28,7 +30,7 @@ import org.json.JSONObject
 import android.view.View.VISIBLE as VISIBLE
 
 
-class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var tokenManager: TokenManager
     private lateinit var doctorId: String
@@ -49,17 +51,54 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val array = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.Spinner,
-            R.layout.ghost_spinner
-        )
-        array.setDropDownViewResource(R.layout.spinner)
-        spinner.adapter = array
-        spinner.onItemSelectedListener = this
-
         //TODO => Increase spinner button touch area
 
+        binding.dropdownBtn.setOnClickListener {
+            val popup = PopupMenu(requireContext(), it)
+            val inflater: MenuInflater = popup.menuInflater
+            inflater.inflate(R.menu.dropdown_menu, popup.menu)
+            popup.show()
+            popup.setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.editProfile -> {
+                        val name = binding.docName.text
+                        val id = binding.docId.text
+                        val contact = binding.docPhoneNum.text
+                        val ageGender = binding.docAgeGender.text
+                        val age =
+                            ageGender.substring(ageGender.indexOf("|") + 2, (ageGender.indexOf("y") - 1))
+                        val about = binding.docProfileDetails.text
+                        val address = binding.docAddressInfo.text
+                        val doctorUrlId = doctorId
+                        val bundle = bundleOf(
+                            "name" to name,
+                            "id" to id,
+                            "contact" to contact,
+                            "age" to age,
+                            "about" to about,
+                            "address" to address,
+                            "doctorId" to doctorUrlId
+                        )
+                        val intent = Intent(requireContext(), ProfileUpdateActivity::class.java)
+                        intent.putExtra("doctorDetails", bundle)
+                        startActivity(intent)
+                        true
+                    }
+                    R.id.changePwd -> {
+                        val i = Intent(requireContext(), Password::class.java)
+                        startActivity(i)
+                        true
+                    }
+                    R.id.logout -> {
+                        Logout()
+                        true
+                    }
+                    else -> {
+                        true
+                    }
+                }
+            }
+        }
 
         tokenManager = TokenManager(requireContext())
         val token = tokenManager.getAuthToken()
@@ -117,53 +156,6 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
-    //TODO-comment -> next to implemented fun for spinner
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-        when (position) {
-
-            0 -> {
-                //TODO => Remove this and opt for a better item drop down approach [after refactoring]
-            }
-            1 -> {
-                val name = binding.docName.text
-                val id = binding.docId.text
-                val contact = binding.docPhoneNum.text
-                val ageGender = binding.docAgeGender.text
-                val age =
-                    ageGender.substring(ageGender.indexOf("|") + 2, (ageGender.indexOf("y") - 1))
-                val about = binding.docProfileDetails.text
-                val address = binding.docAddressInfo.text
-                val doctorUrlId = doctorId
-                val bundle = bundleOf(
-                    "name" to name,
-                    "id" to id,
-                    "contact" to contact,
-                    "age" to age,
-                    "about" to about,
-                    "address" to address,
-                    "doctorId" to doctorUrlId,
-                    "image" to photoURL
-                )
-                val intent = Intent(requireContext(), ProfileUpdateActivity::class.java)
-                intent.putExtra("doctorDetails", bundle)
-                startActivity(intent)
-                spinner.setSelection(0)
-            }
-            2 -> {
-                val i = Intent(requireContext(), Password::class.java)
-                startActivity(i)
-                spinner.setSelection(0)
-            }
-            3 -> {
-                Logout()
-            }
-        }
-    }
 
 
     private fun Logout() {
@@ -181,7 +173,24 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         val dialog: AlertDialog = warning.create()
         dialog.show()
-        spinner.setSelection(0)
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.editProfile -> {
+                Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.changePwd -> {
+                Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.logout ->  {
+                Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
+                return true
+            }
+        }
+        return false
     }
 }
 
