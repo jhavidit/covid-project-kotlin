@@ -33,6 +33,7 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
         holder.patientAge.text = currentItem.age.toString()
         holder.patientName.text = currentItem.name.toString()
         holder.patientCard.setOnClickListener {
+            val isDeclined=true
             val patientId = currentItem.patientId.toString()
             val patientName = holder.patientName.text.toString()
             val patientAge = holder.patientAge.text.toString()
@@ -52,6 +53,7 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
                 "labName" to patientLabName,
                 "district" to patientDistrict,
                 "caseId" to caseId,
+                "isDeclined" to isDeclined,
                 "pageToken" to "1"
             )
             if(!InternetConnectivity.isNetworkAvailable(ctx)!!)

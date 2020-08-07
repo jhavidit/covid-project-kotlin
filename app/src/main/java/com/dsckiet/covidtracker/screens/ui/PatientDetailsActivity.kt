@@ -131,6 +131,10 @@ class PatientDetailsActivity : AppCompatActivity() {
             }
         }
         //Radio Button Checks
+        if(patientData?.getBoolean("isDeclined")==true) {
+            isDeclined = true
+            binding.declineToCome.isChecked=true
+        }
 
 
         binding.submitForm.setOnClickListener {

@@ -88,6 +88,10 @@ class DiagnosisPendingFragment : Fragment() {
 
         for (i in 0 until data.length()) {
             try {
+                var lab: String = if ((data.getJSONObject(i).isNull("lab")))
+                    "Not provided"
+                else
+                    data.getJSONObject(i).getString("lab")
                 tempList += PendingPatient(
                     data.getJSONObject(i).getString("name"),
                     data.getJSONObject(i).getString("_id"),
@@ -95,7 +99,7 @@ class DiagnosisPendingFragment : Fragment() {
                     data.getJSONObject(i).getString("gender"),
                     data.getJSONObject(i).getString("phone"),
                     data.getJSONObject(i).getString("address"),
-                    data.getJSONObject(i).getString("lab"),
+                    lab,
                     data.getJSONObject(i).getString("district"),
                     data.getJSONObject(i).getString("caseId")
                 )
