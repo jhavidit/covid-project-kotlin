@@ -137,16 +137,6 @@
                 android:textSize="@dimen/dimen_text_14"
                 android:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/progress_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dimen_40"
-                android:layout_marginTop="@dimen/dimen_20"
-                android:layout_marginEnd="@dimen/dimen_40"
-                android:visibility="gone" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/auth_button"
                 android:layout_width="match_parent"
@@ -158,6 +148,18 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_text_16"
                 app:backgroundTint="@color/button_blue" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/auth_button_anim"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_margin="@dimen/dimen_40"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_colorFilter="@color/button_blue"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/btn_loading" />
 
         </LinearLayout>
     </LinearLayout>

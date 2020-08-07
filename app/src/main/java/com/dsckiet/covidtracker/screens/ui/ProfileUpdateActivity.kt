@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,9 @@ import com.dsckiet.covidtracker.network.BASE_URL
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -53,7 +57,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
         binding.updateAddress.setText(doctorData?.getString("address"))
         binding.updateContact.setText(doctorData?.getString("contact"))
         binding.updateAge.setText(doctorData?.getString("age"))
-        binding.updateId.setText(doctorData?.getString("id"))
         doctorId = doctorData?.getString("doctorId").toString()
         Glide.with(this).load(doctorData?.getString("image"))
             .into(binding.doctorProfilePhoto)
@@ -80,8 +83,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
         }
 
         binding.btnUpdateProfile.setOnClickListener {
+
             if (!binding.updateName.text.isNullOrEmpty()
-                && !binding.updateId.text.isNullOrEmpty()
                 && !binding.updateAge.text.isNullOrEmpty()
                 && !binding.updateAbout.text.isNullOrEmpty()
                 && !binding.updateContact.text.isNullOrEmpty()
@@ -106,6 +109,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         1
                     )
                 } else {
+                    binding.btnUpdateProfile.visibility = View.GONE
+                    binding.updateProfileAnim.visibility = View.VISIBLE
                     when (NETWORK_METHOD_FLAG) {
                         0 -> updateDetailsWithoutPhoto()
                         1 -> updateDetailsWithPhoto()
@@ -121,6 +126,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("LogNotTimber")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && null != data) {
@@ -155,7 +161,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 "application/json; charset=utf-8".toMediaTypeOrNull()
                 val body: RequestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
                     .addFormDataPart("name", binding.updateName.text.toString())
-                    .addFormDataPart("empId", binding.updateId.text.toString())
                     .addFormDataPart("age", binding.updateAge.text.toString())
                     .addFormDataPart(
                         "about",
@@ -177,27 +182,42 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 val response: okhttp3.Response = client.newCall(request).execute()
                 Log.d("response: ", "code : ${response.code} and body : ${response.body}")
                 if (response.code == 200) {
-                    Toast.makeText(
-                        this@ProfileUpdateActivity, "Profile updated successfully."
-                        , Toast.LENGTH_SHORT
-                    ).show()
-                    startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    CoroutineScope(Main).launch {
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Profile Updated Successfully."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        delay(1000)
+                        startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    }
 
                 } else {
 
-                    Snackbar.make(
-                        binding.coordinatorLayout, "Something went wrong! Please try again later."
-                        , Snackbar.LENGTH_SHORT
-                    ).show()
+                    CoroutineScope(Main).launch {
+                        binding.btnUpdateProfile.visibility = View.VISIBLE
+                        binding.updateProfileAnim.visibility = View.GONE
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Something went wrong! Please try again later."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("okHttp exception", "${e.message}")
-                Snackbar.make(
-                    binding.coordinatorLayout,
-                    "Some error occurred! Please try again later.",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                CoroutineScope(Main).launch {
+                    binding.btnUpdateProfile.visibility = View.VISIBLE
+                    binding.updateProfileAnim.visibility = View.GONE
+                    Snackbar.make(
+                        binding.coordinatorLayout,
+                        "Some error occurred! Please try again later.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -217,7 +237,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         File(path).asRequestBody("application/octet-stream".toMediaTypeOrNull())
                     )
                     .addFormDataPart("name", binding.updateName.text.toString())
-                    .addFormDataPart("empId", binding.updateId.text.toString())
                     .addFormDataPart("age", binding.updateAge.text.toString())
                     .addFormDataPart(
                         "about",
@@ -239,27 +258,45 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 val response: okhttp3.Response = client.newCall(request).execute()
                 Log.d("response: ", "code : ${response.code} and body : ${response.body}")
                 if (response.code == 200) {
-                    Toast.makeText(
-                        this@ProfileUpdateActivity, "Profile updated successfully."
-                        , Toast.LENGTH_SHORT
-                    ).show()
-                    startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    CoroutineScope(Main).launch {
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Profile Updated Successfully."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        delay(1000)
+                        startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    }
 
                 } else {
-
-                    Snackbar.make(
-                        binding.coordinatorLayout, "Something went wrong! Please try again later."
-                        , Snackbar.LENGTH_SHORT
-                    ).show()
+                    CoroutineScope(Main).launch {
+                        binding.btnUpdateProfile.visibility = View.VISIBLE
+                        binding.updateProfileAnim.visibility = View.GONE
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Something went wrong! Please try again later."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("okHttp exception", "${e.message}")
-                Snackbar.make(
-                    binding.coordinatorLayout,
-                    "Some error occurred! Please try again later.",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                CoroutineScope(Main).launch {
+                    binding.btnUpdateProfile.visibility = View.VISIBLE
+                    binding.updateProfileAnim.visibility = View.GONE
+                    Snackbar.make(
+                        binding.coordinatorLayout,
+                        "Some error occurred! Please try again later.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                /*
+                In latest commits, additional Coroutine Scopes are launched on Main thread to avoid UI over IO thread exception
+                Also, 1-second delay is added on this page so that user can see the Network response SnackBar info.
+                */
             }
         }
     }

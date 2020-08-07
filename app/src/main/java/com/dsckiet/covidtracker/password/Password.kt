@@ -50,6 +50,8 @@ class Password : AppCompatActivity() {
 
                 if (newPass == confirmPass && newPass.length >= 6) {
 
+                    binding.doneButton.visibility = View.GONE
+                    binding.doneButtonAnim.visibility = View.VISIBLE
                     val changePass = NewPasswordRequest(oldPass, newPass)
                     ProfileAPI.retrofitService.changePassword(
                         token = token,
@@ -60,6 +62,8 @@ class Password : AppCompatActivity() {
                             @SuppressLint("LogNotTimber")
                             override fun onFailure(call: Call<PasswordResponse>, t: Throwable) {
                                 Log.i("msg", "ERROR-${t.message}")
+                                binding.doneButton.visibility = View.VISIBLE
+                                binding.doneButtonAnim.visibility = View.GONE
                                 Snackbar.make(
                                     binding.passwordLayout,
                                     "Some problem occurred check your network connection or restart the app",
@@ -116,8 +120,7 @@ class Password : AppCompatActivity() {
                         binding.errorConfirmPassword.visibility = View.VISIBLE
                         binding.errorNewPassword.text = "Password does not match"
                         binding.errorConfirmPassword.text = "Password does not match"
-                    }
-                    else{
+                    } else {
                         Snackbar.make(
                             binding.passwordLayout,
                             "Could not change password",
