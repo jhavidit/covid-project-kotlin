@@ -24,6 +24,9 @@ import com.dsckiet.covidtracker.network.BASE_URL
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -178,31 +181,42 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 val response: okhttp3.Response = client.newCall(request).execute()
                 Log.d("response: ", "code : ${response.code} and body : ${response.body}")
                 if (response.code == 200) {
-                    Toast.makeText(
-                        this@ProfileUpdateActivity, "Profile updated successfully."
-                        , Toast.LENGTH_SHORT
-                    ).show()
-                    startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    CoroutineScope(Main).launch {
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Profile Updated Successfully."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        delay(1000)
+                        startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    }
 
                 } else {
 
-                    binding.btnUpdateProfile.visibility = View.VISIBLE
-                    binding.updateProfileAnim.visibility = View.GONE
-                    Snackbar.make(
-                        binding.coordinatorLayout, "Something went wrong! Please try again later."
-                        , Snackbar.LENGTH_SHORT
-                    ).show()
+                    CoroutineScope(Main).launch {
+                        binding.btnUpdateProfile.visibility = View.VISIBLE
+                        binding.updateProfileAnim.visibility = View.GONE
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Something went wrong! Please try again later."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("okHttp exception", "${e.message}")
-                binding.btnUpdateProfile.visibility = View.VISIBLE
-                binding.updateProfileAnim.visibility = View.GONE
-                Snackbar.make(
-                    binding.coordinatorLayout,
-                    "Some error occurred! Please try again later.",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                CoroutineScope(Main).launch {
+                    binding.btnUpdateProfile.visibility = View.VISIBLE
+                    binding.updateProfileAnim.visibility = View.GONE
+                    Snackbar.make(
+                        binding.coordinatorLayout,
+                        "Some error occurred! Please try again later.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -243,30 +257,41 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 val response: okhttp3.Response = client.newCall(request).execute()
                 Log.d("response: ", "code : ${response.code} and body : ${response.body}")
                 if (response.code == 200) {
-                    Toast.makeText(
-                        this@ProfileUpdateActivity, "Profile updated successfully."
-                        , Toast.LENGTH_SHORT
-                    ).show()
-                    startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    CoroutineScope(Main).launch {
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Profile Updated Successfully."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        delay(1000)
+                        startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                    }
 
                 } else {
-                    binding.btnUpdateProfile.visibility = View.VISIBLE
-                    binding.updateProfileAnim.visibility = View.GONE
-                    Snackbar.make(
-                        binding.coordinatorLayout, "Something went wrong! Please try again later."
-                        , Snackbar.LENGTH_SHORT
-                    ).show()
+                    CoroutineScope(Main).launch {
+                        binding.btnUpdateProfile.visibility = View.VISIBLE
+                        binding.updateProfileAnim.visibility = View.GONE
+                        Snackbar.make(
+                            binding.coordinatorLayout,
+                            "Something went wrong! Please try again later."
+                            ,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("okHttp exception", "${e.message}")
-                binding.btnUpdateProfile.visibility = View.VISIBLE
-                binding.updateProfileAnim.visibility = View.GONE
-                Snackbar.make(
-                    binding.coordinatorLayout,
-                    "Some error occurred! Please try again later.",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                CoroutineScope(Main).launch {
+                    binding.btnUpdateProfile.visibility = View.VISIBLE
+                    binding.updateProfileAnim.visibility = View.GONE
+                    Snackbar.make(
+                        binding.coordinatorLayout,
+                        "Some error occurred! Please try again later.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
