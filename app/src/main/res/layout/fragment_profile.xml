@@ -60,6 +60,8 @@
                     android:id="@+id/dropdown_btn"
                     android:layout_width="8dp"
                     android:layout_height="32dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
                     android:scaleType="centerCrop"
                     android:background="@drawable/icon_dd"
                     android:contentDescription="@string/overflow_button"
