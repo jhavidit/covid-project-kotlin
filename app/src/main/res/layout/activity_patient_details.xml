@@ -248,7 +248,7 @@
                     app:cardElevation="@null">
 
                     <RelativeLayout
-                        android:layout_width="330dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/grey_white_box">
 
@@ -278,7 +278,7 @@
 
                         <RelativeLayout
                             android:id="@+id/rl_assign_patient"
-                            android:layout_width="360dp"
+                            android:layout_width="match_parent"
 
                             android:layout_height="match_parent"
                             android:layout_below="@id/labName"
