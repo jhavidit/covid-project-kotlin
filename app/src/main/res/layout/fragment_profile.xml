@@ -21,7 +21,7 @@
                 android:layout_height="match_parent"
                 app:lottie_colorFilter="@color/colorPrimary"
                 app:lottie_autoPlay="true"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/heartbeat_loading"
                 app:lottie_speed="1" />
@@ -29,7 +29,7 @@
         <RelativeLayout
             android:id="@+id/relative_layout_profile"
             android:layout_below="@id/animationView"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".screens.ui.ProfileFragment">
