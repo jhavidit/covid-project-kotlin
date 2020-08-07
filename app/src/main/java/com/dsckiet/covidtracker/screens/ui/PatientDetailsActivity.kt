@@ -171,6 +171,7 @@ class PatientDetailsActivity : AppCompatActivity() {
     }
 
     private fun beginPatientDiagnosis(patientId: String) {
+
         "application/json; charset=utf-8".toMediaTypeOrNull()
         PatientsApi.retrofitService.diagnosisBeginRequest(
             token = tokenManager.getAuthToken().toString(),
@@ -179,6 +180,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             .enqueue(
                 object : Callback<ResponseModel> {
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                        binding.submitForm.visibility = VISIBLE
+                        binding.submitFormAnim.visibility = GONE
                         Snackbar.make(
                             binding.coordinatorLayout,
                             "Patient can not be attended check network connection",
@@ -194,6 +197,8 @@ class PatientDetailsActivity : AppCompatActivity() {
                         response: Response<ResponseModel>
                     ) {
                         if (response.code() != 200) {
+                            binding.submitForm.visibility = VISIBLE
+                            binding.submitFormAnim.visibility = GONE
                             Snackbar.make(
                                 binding.coordinatorLayout,
                                 "Patient can not be attended check network connection",
@@ -217,11 +222,9 @@ class PatientDetailsActivity : AppCompatActivity() {
         isDeclined: Boolean,
         patientId: String
     ) {
-
+        binding.submitForm.visibility = GONE
+        binding.submitFormAnim.visibility = VISIBLE
         "application/json; charset=utf-8".toMediaTypeOrNull()
-
-
-
         PatientsApi.retrofitService.assignPatientLevel(
             token = tokenManager.getAuthToken().toString(),
             patientId = patientId,
@@ -230,6 +233,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             .enqueue(
                 object : Callback<AssignPatient> {
                     override fun onFailure(call: Call<AssignPatient>, t: Throwable) {
+                        binding.submitForm.visibility = VISIBLE
+                        binding.submitFormAnim.visibility = GONE
                         Snackbar.make(
                             binding.coordinatorLayout,
                             "Check your network connection",
@@ -244,7 +249,8 @@ class PatientDetailsActivity : AppCompatActivity() {
                     ) {
                         if (response.code() == 200) {
 
-
+                            binding.submitForm.visibility = VISIBLE
+                            binding.submitFormAnim.visibility = GONE
                             binding.rlAssignPatient.visibility = GONE
                             binding.rlLevelAssigned.visibility = VISIBLE
 
@@ -265,8 +271,9 @@ class PatientDetailsActivity : AppCompatActivity() {
                                 }, 1500)
                             } else {
                                 if (response.body()?.data != null) {
-                                    val hospitalNameAddress=  response.body()?.data?.name + ", " + response.body()?.data?.address
-                                    binding.patientHospital.text =hospitalNameAddress
+                                    val hospitalNameAddress =
+                                        response.body()?.data?.name + ", " + response.body()?.data?.address
+                                    binding.patientHospital.text = hospitalNameAddress
 
                                     allocatedHospital = response.body()?.data?.hospitalId
                                     binding.levelAllocatedText.text = level.capitalize()
@@ -322,7 +329,7 @@ class PatientDetailsActivity : AppCompatActivity() {
 
 
                         } else {
-                            val jsonObject=JSONObject(response.errorBody()?.string()!!)
+                            val jsonObject = JSONObject(response.errorBody()?.string()!!)
 
                             Snackbar.make(
                                 binding.coordinatorLayout,
@@ -378,15 +385,15 @@ class PatientDetailsActivity : AppCompatActivity() {
             TransitionManager.beginDelayedTransition(rel_layout)
         }
         popupWindow.showAtLocation(
-                rel_layout, // Location to display popup window
-                Gravity.CENTER, // Exact position of layout to display popup
-                0, // X offset
-                0 // Y offset
-            )
+            rel_layout, // Location to display popup window
+            Gravity.CENTER, // Exact position of layout to display popup
+            0, // X offset
+            0 // Y offset
+        )
 
-            Handler().postDelayed({
-                popupWindow.dismiss()
-            }, 2000)
+        Handler().postDelayed({
+            popupWindow.dismiss()
+        }, 2000)
 
 
     }
