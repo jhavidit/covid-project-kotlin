@@ -126,6 +126,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("LogNotTimber")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && null != data) {
@@ -292,6 +293,10 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
+                /*
+                In latest commits, additional Coroutine Scopes are launched on Main thread to avoid UI over IO thread exception
+                Also, 1-second delay is added on this page so that user can see the Network response SnackBar info.
+                */
             }
         }
     }
