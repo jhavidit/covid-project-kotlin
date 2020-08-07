@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +54,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
         binding.updateAddress.setText(doctorData?.getString("address"))
         binding.updateContact.setText(doctorData?.getString("contact"))
         binding.updateAge.setText(doctorData?.getString("age"))
-        binding.updateId.setText(doctorData?.getString("id"))
         doctorId = doctorData?.getString("doctorId").toString()
         Glide.with(this).load(doctorData?.getString("image"))
             .into(binding.doctorProfilePhoto)
@@ -80,8 +80,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
         }
 
         binding.btnUpdateProfile.setOnClickListener {
+
             if (!binding.updateName.text.isNullOrEmpty()
-                && !binding.updateId.text.isNullOrEmpty()
                 && !binding.updateAge.text.isNullOrEmpty()
                 && !binding.updateAbout.text.isNullOrEmpty()
                 && !binding.updateContact.text.isNullOrEmpty()
@@ -106,6 +106,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         1
                     )
                 } else {
+                    binding.btnUpdateProfile.visibility = View.GONE
+                    binding.updateProfileAnim.visibility = View.VISIBLE
                     when (NETWORK_METHOD_FLAG) {
                         0 -> updateDetailsWithoutPhoto()
                         1 -> updateDetailsWithPhoto()
@@ -155,7 +157,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
                 "application/json; charset=utf-8".toMediaTypeOrNull()
                 val body: RequestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
                     .addFormDataPart("name", binding.updateName.text.toString())
-                    .addFormDataPart("empId", binding.updateId.text.toString())
                     .addFormDataPart("age", binding.updateAge.text.toString())
                     .addFormDataPart(
                         "about",
@@ -185,6 +186,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
                 } else {
 
+                    binding.btnUpdateProfile.visibility = View.VISIBLE
+                    binding.updateProfileAnim.visibility = View.GONE
                     Snackbar.make(
                         binding.coordinatorLayout, "Something went wrong! Please try again later."
                         , Snackbar.LENGTH_SHORT
@@ -193,6 +196,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("okHttp exception", "${e.message}")
+                binding.btnUpdateProfile.visibility = View.VISIBLE
+                binding.updateProfileAnim.visibility = View.GONE
                 Snackbar.make(
                     binding.coordinatorLayout,
                     "Some error occurred! Please try again later.",
@@ -217,7 +222,6 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         File(path).asRequestBody("application/octet-stream".toMediaTypeOrNull())
                     )
                     .addFormDataPart("name", binding.updateName.text.toString())
-                    .addFormDataPart("empId", binding.updateId.text.toString())
                     .addFormDataPart("age", binding.updateAge.text.toString())
                     .addFormDataPart(
                         "about",
@@ -246,7 +250,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
                     startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
 
                 } else {
-
+                    binding.btnUpdateProfile.visibility = View.VISIBLE
+                    binding.updateProfileAnim.visibility = View.GONE
                     Snackbar.make(
                         binding.coordinatorLayout, "Something went wrong! Please try again later."
                         , Snackbar.LENGTH_SHORT
@@ -255,6 +260,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("okHttp exception", "${e.message}")
+                binding.btnUpdateProfile.visibility = View.VISIBLE
+                binding.updateProfileAnim.visibility = View.GONE
                 Snackbar.make(
                     binding.coordinatorLayout,
                     "Some error occurred! Please try again later.",
