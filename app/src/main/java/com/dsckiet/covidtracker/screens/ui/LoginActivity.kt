@@ -1,11 +1,15 @@
 package com.dsckiet.covidtracker.screens.ui
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -17,6 +21,7 @@ import com.dsckiet.covidtracker.authentication.model.ResponseModel
 import com.dsckiet.covidtracker.databinding.ActivityLoginBinding
 import com.dsckiet.covidtracker.utils.logs
 import com.dsckiet.covidtracker.utils.toasts
+import org.koin.android.ext.android.bind
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,6 +82,7 @@ class LoginActivity : AppCompatActivity() {
 
             binding.authButton.setOnClickListener {
 
+                hideKeyboard(it)
                 if (binding.usernameInput.text!!.isEmpty()) {
                     binding.invalidEmailId.visibility = VISIBLE
                     binding.invalidEmailId.setText(R.string.email_can_not_be_empty)
@@ -98,8 +104,8 @@ class LoginActivity : AppCompatActivity() {
                         ContextCompat.getColor(applicationContext, R.color.warning_red_color)
                 } else {
 
-                    binding.authButton.visibility = GONE
-                    binding.progressLogin.visibility = VISIBLE
+                    binding.authButton.visibility= GONE
+                    binding.authButtonAnim.visibility= VISIBLE
                     val email = binding.usernameInput.text.toString().trim()
                     val password = binding.passwordInput.text.toString().trim()
                     val user = RequestModel(
@@ -118,11 +124,11 @@ class LoginActivity : AppCompatActivity() {
 
                                 val h = response.headers()["x-auth-token"]
                                 tokenManager.saveAuthToken(h!!)
-                                binding.progressLogin.visibility = GONE
+                                binding.authButtonAnim.visibility = GONE
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finish()
                             } else {
-                                binding.progressLogin.visibility = GONE
+                                binding.authButtonAnim.visibility = GONE
                                 binding.authButton.visibility = VISIBLE
                                 binding.invalidPassword.visibility = VISIBLE
                                 binding.invalidPassword.setText(R.string.invalid_email_id_or_password)
@@ -130,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
                         }
 
                         override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                            binding.progressLogin.visibility = GONE
+                            binding.authButtonAnim.visibility = GONE
                             binding.authButton.visibility = VISIBLE
                             toasts(this@LoginActivity, "Network Problem")
                             logs("Request Failure: ${t.message}")
@@ -154,5 +160,11 @@ class LoginActivity : AppCompatActivity() {
             ContextCompat.getColor(applicationContext, R.color.light_grey)
         binding.passwordInputLayout.boxStrokeColor =
             ContextCompat.getColor(applicationContext, R.color.light_grey)
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
