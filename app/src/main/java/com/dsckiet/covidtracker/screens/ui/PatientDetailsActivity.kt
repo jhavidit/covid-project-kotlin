@@ -1,7 +1,6 @@
 package com.dsckiet.covidtracker.screens.ui
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -11,19 +10,15 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
-import android.text.Html
 import android.transition.Slide
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -37,7 +32,6 @@ import com.dsckiet.covidtracker.model.AvailableHospital
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.utils.InternetConnectivity
-import com.dsckiet.covidtracker.utils.logs
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_patient_details.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -56,42 +50,59 @@ class PatientDetailsActivity : AppCompatActivity() {
     private var allocatedHospital: String? = null
     private val availableHospital = ArrayList<AvailableHospital>()
 
-    @SuppressLint("LogNotTimber", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //content view
         binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_patient_details
         )
+        //late initialization
         level = ""
         comments = ""
+        //initial checkbox unchecked
+        binding.declineToCome.isChecked = false
+        //setup token manager
         tokenManager = TokenManager(this)
-
+        //getting intent bundles
         val patientData = intent.extras?.getBundle("patientData")
         val patientId = patientData?.getString("id")
         val caseId = patientData?.getString("caseId")
-        binding.patientId.text = caseId
-        binding.patientName.text = patientData?.getString("name")
         val patientAge = patientData?.getString("age")
         var patientGender = patientData?.getString("gender")
         if (patientGender == "M") patientGender = "Male"
-        binding.patientGA.text = "$patientGender | $patientAge years"
+        val pageToken = patientData?.getString("pageToken")
+        if (pageToken == "0") beginPatientDiagnosis(patientId.toString())
+        //setting bundles
+        binding.patientId.text = caseId
+        binding.patientName.text = patientData?.getString("name")
+        binding.patientGA.text = "$patientGender | $patientAge years" as String
         binding.patientPhoneNo.text = patientData?.getString("contact")
         binding.patientDistrict.text = patientData?.getString("district")
         binding.patientAddress.text = patientData?.getString("address")
         binding.labName.text = patientData?.getString("labName")
+        if (patientData?.getBoolean("isDeclined")!!) {
+            isDeclined = true
+            binding.declineToCome.isChecked = true
+        }
 
-        val pageToken = patientData?.getString("pageToken")
-        if (pageToken == "0") beginPatientDiagnosis(patientId.toString())
+        //handling custom back button
         binding.backBtn.setOnClickListener {
             onBackPressed()
+            finish()
         }
+
+        /* handling call button
+            -> check permission granted
+            ? call
+            : snack bar to ask grant permission
+          */
         binding.docProfileCard.setOnClickListener {
+
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.CALL_PHONE
-                )
-                == PackageManager.PERMISSION_GRANTED
+                ) == PackageManager.PERMISSION_GRANTED
             ) {
                 val intent =
                     Intent(Intent.ACTION_CALL, Uri.parse("tel:${binding.patientPhoneNo.text}"))
@@ -99,29 +110,35 @@ class PatientDetailsActivity : AppCompatActivity() {
             } else {
                 Snackbar.make(
                     binding.coordinatorLayout,
-                    "You have denied the permission kindly allow call permission from the settings",
+                    "Kindly allow call permission from setting",
                     Snackbar.LENGTH_LONG
-                ).setAction("go", View.OnClickListener {
+                ).setAction("go") {
                     val intent = Intent()
                     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                    val uri =
-                        Uri.fromParts("package", packageName, null)
+                    val uri = Uri.fromParts("package", packageName, null)
                     intent.data = uri
                     startActivity(intent)
-                }).show()
-
+                }.show()
             }
         }
 
-        binding.radioGroupDetails.setOnCheckedChangeListener { _, isCheckedID ->
-            var isChecked = binding.L1.isChecked || binding.L2.isChecked || binding.L3.isChecked
+        /* handling radio groups
+            -> check any radio button is checked
+            ? checkbox (if checked) -> unchecked
+            : no change
+         */
+        binding.radioGroupDetails.setOnCheckedChangeListener { _, _ ->
+            val isChecked = binding.L1.isChecked || binding.L2.isChecked || binding.L3.isChecked
             if (isChecked) {
                 binding.declineToCome.isChecked = false
             }
         }
-        //initial checkbox false
-        binding.declineToCome.isChecked = false
-        //Check box checks
+
+        /* handling check boxes
+            -> check any radio button is checked
+            ? radio group (if checked) -> unchecked
+            : no change
+         */
         binding.declineToCome.setOnCheckedChangeListener { _, isChecked ->
             isDeclined = if (isChecked) {
                 binding.radioGroupDetails.clearCheck()
@@ -130,33 +147,32 @@ class PatientDetailsActivity : AppCompatActivity() {
                 false
             }
         }
-        //Radio Button Checks
-        if(patientData?.getBoolean("isDeclined")==true) {
-            isDeclined = true
-            binding.declineToCome.isChecked=true
-        }
 
-
+        //handling submit button
         binding.submitForm.setOnClickListener {
-
+            /*
+            -> If internet is not available
+            -> else if any of the radio button or check box is not clicked
+            -> else show final alert dialog
+             */
             if (!InternetConnectivity.isNetworkAvailable(this)!!)
                 Snackbar.make(
                     binding.coordinatorLayout,
-                    "Internet Unavailable",
+                    "Network Problem",
                     Snackbar.LENGTH_LONG
                 ).show()
             else if (!binding.L1.isChecked && !binding.L2.isChecked && !binding.L3.isChecked && !binding.declineToCome.isChecked) {
                 Snackbar.make(
-                    binding.coordinatorLayout, "Please assign a severity level to the patient !",
+                    binding.coordinatorLayout, "Please assign a level/status to the patient",
                     Snackbar.LENGTH_LONG
                 ).show()
             } else {
-
+                //dialog box to confirm
                 val warning = AlertDialog.Builder(this)
-                warning.setTitle(Html.fromHtml("<font color='#008DB9'>Are you sure want to assign patient</font>"))
+                warning.setTitle("Assign Patient")
+                    .setMessage("Are you sure to assign patient?")
                     .setIcon(R.drawable.ic_profile)
-                    .setPositiveButton("Yes") { dialog, which ->
-                        Log.d("pat_id === ", patientId.toString())
+                    .setPositiveButton("Yes") { dialog, _ ->
                         when {
                             binding.L1.isChecked -> level = "l1"
                             binding.L2.isChecked -> level = "l2"
@@ -165,7 +181,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                         comments = binding.patientComment.text.toString()
                         sendPatientData(level, comments, isDeclined, patientId.toString())
                         dialog.dismiss()
-                    }.setNeutralButton("No") { dialog, which ->
+                    }.setNeutralButton("No") { dialog, _ ->
                         dialog.dismiss()
                     }
                 val dialog: AlertDialog = warning.create()
@@ -188,14 +204,13 @@ class PatientDetailsActivity : AppCompatActivity() {
                         binding.submitFormAnim.visibility = GONE
                         Snackbar.make(
                             binding.coordinatorLayout,
-                            "Patient can not be attended check network connection",
+                            "Network Problem",
                             Snackbar.LENGTH_LONG
                         )
                             .show()
                         onBackPressed()
                     }
 
-                    @SuppressLint("LogNotTimber")
                     override fun onResponse(
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
@@ -205,19 +220,15 @@ class PatientDetailsActivity : AppCompatActivity() {
                             binding.submitFormAnim.visibility = GONE
                             Snackbar.make(
                                 binding.coordinatorLayout,
-                                "Patient can not be attended check network connection",
+                                "Network Problem",
                                 Snackbar.LENGTH_LONG
                             )
                                 .show()
-
                             onBackPressed()
                         }
-
                     }
-
                 }
             )
-
     }
 
     private fun sendPatientData(
@@ -241,12 +252,11 @@ class PatientDetailsActivity : AppCompatActivity() {
                         binding.submitFormAnim.visibility = GONE
                         Snackbar.make(
                             binding.coordinatorLayout,
-                            "Check your network connection",
+                            "Network Problem",
                             Snackbar.LENGTH_LONG
                         ).show()
                     }
 
-                    @RequiresApi(Build.VERSION_CODES.KITKAT)
                     override fun onResponse(
                         call: Call<AssignPatient>,
                         response: Response<AssignPatient>
@@ -266,15 +276,14 @@ class PatientDetailsActivity : AppCompatActivity() {
                                 binding.titleChangeHospital.visibility = GONE
                                 showPopupWindow()
                                 Handler().postDelayed({
-                                    startActivity(
-                                        Intent(
-                                            this@PatientDetailsActivity,
-                                            MainActivity::class.java
-                                        )
-                                    )
+                                    finish()
                                 }, 1500)
                             } else {
                                 if (response.body()?.data != null) {
+                                    binding.titleHospital.visibility = VISIBLE
+                                    binding.patientHospital.visibility = VISIBLE
+                                    binding.titleChangeHospital.visibility = VISIBLE
+                                    binding.changeHospitalText.visibility = VISIBLE
                                     val hospitalNameAddress =
                                         response.body()?.data?.name + ", " + response.body()?.data?.address
                                     binding.patientHospital.text = hospitalNameAddress
@@ -284,12 +293,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                                     binding.submitForm.setOnClickListener {
                                         showPopupWindow()
                                         Handler().postDelayed({
-                                            startActivity(
-                                                Intent(
-                                                    this@PatientDetailsActivity,
-                                                    MainActivity::class.java
-                                                )
-                                            )
+                                            finish()
                                         }, 1500)
 
                                     }
@@ -309,9 +313,14 @@ class PatientDetailsActivity : AppCompatActivity() {
                                                 bundle
                                             )
                                         )
+                                        finish()
 
                                     }
                                 } else {
+                                    binding.titleHospital.visibility = GONE
+                                    binding.patientHospital.visibility = GONE
+                                    binding.titleChangeHospital.visibility = GONE
+                                    binding.changeHospitalText.visibility = GONE
                                     Toast.makeText(
                                         this@PatientDetailsActivity,
                                         "No hospitals available right now",
@@ -326,12 +335,8 @@ class PatientDetailsActivity : AppCompatActivity() {
                                             )
                                         )
                                     }, 1500)
-
-
                                 }
                             }
-
-
                         } else {
                             val jsonObject = JSONObject(response.errorBody()?.string()!!)
 
@@ -341,10 +346,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                                 Snackbar.LENGTH_LONG
                             ).show()
                         }
-
-
                     }
-
                 }
             )
     }
@@ -354,36 +356,31 @@ class PatientDetailsActivity : AppCompatActivity() {
         val inflater: LayoutInflater =
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-// Inflate a custom view using layout inflater
-        val view = inflater.inflate(R.layout.patient_submitted_popup, null)
+        // Inflate a custom view using layout inflater
+        val view = inflater.inflate(R.layout.patient_submitted_popup, null,false)
 
-// Initialize a new instance of popup window
+        // Initialize a new instance of popup window
         val popupWindow = PopupWindow(
             view, // Custom view to show in popup window
             LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
-            LinearLayout.LayoutParams.WRAP_CONTENT
-
-// Window height
+            LinearLayout.LayoutParams.WRAP_CONTENT // Window height
         )
 
-// Set an elevation for the popup window
+        // Set an elevation for the popup window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             popupWindow.elevation = 10.0F
         }
 
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-// Create a new slide animation for popup window enter transition
+            // Create a new slide animation for popup window enter transition
             val slideIn = Slide()
             slideIn.slideEdge = Gravity.TOP
             popupWindow.enterTransition = slideIn
 
-// Slide animation for popup window exit transition
+            // Slide animation for popup window exit transition
             val slideOut = Slide()
             slideOut.slideEdge = Gravity.RIGHT
-            popupWindow.exitTransition = slideOut
-// Finally, show the popup window on app
+            popupWindow.exitTransition = slideOut // Finally, show the popup window on app
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             TransitionManager.beginDelayedTransition(rel_layout)
@@ -398,7 +395,6 @@ class PatientDetailsActivity : AppCompatActivity() {
         Handler().postDelayed({
             popupWindow.dismiss()
         }, 2000)
-
 
     }
 }
