@@ -1,15 +1,15 @@
 package com.dsckiet.covidtracker.screens.ui
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
                         true
                     }
                     R.id.logout -> {
-                        Logout()
+                        logout()
                         true
                     }
                     else -> {
@@ -108,12 +108,11 @@ class ProfileFragment : Fragment() {
 
             ProfileAPI.retrofitService.getProfile(token)
                 .enqueue(object : Callback<ProfileResponse> {
-                    @SuppressLint("LogNotTimber")
                     override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                         binding.animationView.visibility = GONE
                         Snackbar.make(
                             binding.coordinatorLayout,
-                            "Some problem occurred check your network connection or restart the app",
+                            "Network Problem",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
@@ -136,7 +135,7 @@ class ProfileFragment : Fragment() {
                                 val age = profile.data?.age
                                 val gender = profile.data?.gender
                                 photoURL = profile.data?.image.toString()
-                                binding.docAgeGender.text = "$gender | $age years"
+                                binding.docAgeGender.text = "$gender | $age years" as String
                                 binding.docProfileDetails.text = profile.data?.about
                                 binding.docPhoneNum.text = profile.data?.contact
                                 binding.docAddressInfo.text = profile.data?.address
@@ -159,17 +158,18 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun Logout() {
+    private fun logout() {
         val warning = AlertDialog.Builder(requireContext())
-        warning.setTitle(Html.fromHtml("<font color='#008DB9'>Do you want to logout?</font>"))
+        warning.setTitle("Log out")
+            .setMessage("Do you want to logout?")
             .setIcon(R.drawable.ic_profile)
-            .setPositiveButton("Yes") { dialog, which ->
+            .setPositiveButton("Yes") { _, _ ->
                 tokenManager.deleteAuthToken()
                 val i = Intent(requireContext(), LoginActivity::class.java)
                 i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)
 
-            }.setNeutralButton("No") { dialog, which ->
+            }.setNeutralButton("No") { dialog, _ ->
                 dialog.dismiss()
             }
         val dialog: AlertDialog = warning.create()
