@@ -90,6 +90,7 @@
     <string name="click_here">Click here</string>
 
     <style name="patient_declined_count">
-        number_of_patients_who_were_declined_to_be_examined_by_the_doctor</style>
+        number_of_patients_who_were_declined_to_be_examined_by_the_doctor
+    </style>
 
 </resources>
