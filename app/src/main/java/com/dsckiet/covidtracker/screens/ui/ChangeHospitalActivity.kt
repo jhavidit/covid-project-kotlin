@@ -126,6 +126,7 @@ class ChangeHospitalActivity : AppCompatActivity() {
                                     MainActivity::class.java
                                 )
                             )
+                            finish()
                         }.show()
                     }
 

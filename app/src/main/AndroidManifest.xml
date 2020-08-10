@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dsckiet.covidtracker">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE/" />
@@ -20,9 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.ui.ChangeHospitalActivity"></activity>
+        <activity android:name=".screens.ui.LoginActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".screens.ui.ChangeHospitalActivity" />
         <activity
-            android:name=".screens.ui.LoginActivity"
+            android:name=".screens.ui.SplashActivity"
             android:launchMode="singleTask"
             android:noHistory="true"
             android:screenOrientation="portrait"
