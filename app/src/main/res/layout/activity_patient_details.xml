@@ -22,30 +22,31 @@
                     android:id="@+id/profile_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_32"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/back_btn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/dimen_32"
+                        android:layout_height="@dimen/dimen_32"
                         android:layout_gravity="center_vertical"
-                        android:foreground="?selectableItemBackground"
-                        android:paddingRight="10dp"
+                        android:contentDescription="@string/back_button"
+                        android:focusable="true"
+                        android:paddingRight="@dimen/dimen_8"
                         app:srcCompat="@drawable/ic_back_btn" />
 
                     <TextView
                         android:id="@+id/dp_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="@dimen/dimen_12"
+                        android:layout_marginLeft="@dimen/dimen_12"
                         android:fontFamily="@font/sen_extrabold"
                         android:text="@string/patient_details"
-                        android:textColor="#008DB9"
-                        android:textSize="28sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimen_text_28" />
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
@@ -53,13 +54,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/profile_group"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#008DB9"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="8dp">
+                    android:layout_marginStart="@dimen/dimen_32"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_24"
+                    android:layout_marginBottom="@dimen/dimen_12"
+                    app:cardBackgroundColor="@color/colorPrimaryDark"
+                    app:cardCornerRadius="@dimen/dimen_8"
+                    app:cardElevation="@dimen/dimen_8">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -69,7 +70,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="20dp">
+                            android:padding="@dimen/dimen_20">
 
                             <TextView
                                 android:id="@+id/patient_id"
@@ -77,40 +78,41 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/sen_bold"
                                 android:text="@string/pt51s1"
-                                android:textColor="#fff"
-                                android:textSize="16sp" />
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dimen_text_16" />
 
                             <TextView
                                 android:id="@+id/patient_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="@dimen/dimen_20"
                                 android:fontFamily="@font/sen_extrabold"
                                 android:text="@string/dummy"
-                                android:textColor="#fff"
-                                android:textSize="20sp" />
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dimen_text_20" />
 
                             <TextView
                                 android:id="@+id/patient_g_a"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
+                                android:layout_marginTop="@dimen/dimen_4"
+                                android:layout_marginBottom="@dimen/dimen_4"
                                 android:fontFamily="@font/sen_bold"
                                 android:text="@string/male_62_years_old"
-                                android:textColor="#fff"
-                                android:textSize="16sp" />
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dimen_text_16" />
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="@dimen/dimen_50"
+                            android:layout_height="@dimen/dimen_50"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="25dp"
-                            android:layout_marginRight="25dp"
-                            android:layout_weight="1"
+                            android:layout_marginEnd="@dimen/dimen_24"
+                            android:layout_marginRight="@dimen/dimen_24"
                             app:srcCompat="@drawable/ic_icon_phone" />
+
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -119,13 +121,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/doc_profile_card"
-                    android:layout_marginStart="41dp"
-                    android:layout_marginLeft="41dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="@dimen/dimen_40"
+                    android:layout_marginLeft="@dimen/dimen_40"
+                    android:layout_marginTop="@dimen/dimen_20"
                     android:fontFamily="@font/sen_bold"
                     android:text="@string/personal_information"
                     android:textColor="@color/dark_grey"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/dimen_text_20"
                     android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
@@ -133,10 +135,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/title_personInfo"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
-                    app:cardCornerRadius="8dp"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:layout_marginRight="@dimen/dimen_32"
+                    app:cardCornerRadius="@dimen/dimen_8"
                     app:cardElevation="@null">
 
                     <RelativeLayout
@@ -148,26 +150,26 @@
                             android:id="@+id/title_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_16"
                             android:fontFamily="@font/sen_reg"
                             android:text="@string/phone_no"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/dimen_text_12" />
 
                         <TextView
                             android:id="@+id/patient_phone_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/title_phone"
-                            android:layout_marginStart="16sp"
-                            android:layout_marginLeft="16sp"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_4"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/_9867412325"
                             android:textColor="@color/dark_grey"
-                            android:textSize="16sp" />
-
+                            android:textSize="@dimen/dimen_text_16" />
+                        <!-- TODO:: 166 dp needs to be optimized-->
                         <TextView
                             android:id="@+id/title_district"
                             android:layout_width="wrap_content"
@@ -197,26 +199,26 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/patient_district"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_16"
                             android:fontFamily="@font/sen_reg"
                             android:text="@string/address"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/dimen_text_12" />
 
                         <TextView
                             android:id="@+id/patient_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/title_adress"
-                            android:layout_marginStart="16sp"
-                            android:layout_marginLeft="16sp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_4"
+                            android:layout_marginBottom="@dimen/dimen_16"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/address_info"
                             android:textColor="@color/dark_grey"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/dimen_text_16" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -225,13 +227,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/patient_card_mid"
-                    android:layout_marginStart="41dp"
-                    android:layout_marginLeft="41dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="@dimen/dimen_40"
+                    android:layout_marginLeft="@dimen/dimen_40"
+                    android:layout_marginTop="@dimen/dimen_20"
                     android:fontFamily="@font/sen_bold"
                     android:text="@string/treatment_information"
                     android:textColor="@color/dark_grey"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/dimen_text_20"
                     android:textStyle="bold" />
 
 
@@ -240,11 +242,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/title_treatmentInfo"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginBottom="23dp"
-                    app:cardCornerRadius="8dp"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:layout_marginRight="@dimen/dimen_32"
+                    android:layout_marginBottom="@dimen/dimen_24"
+                    app:cardCornerRadius="@dimen/dimen_8"
                     app:cardElevation="@null">
 
                     <RelativeLayout
@@ -256,30 +258,29 @@
                             android:id="@+id/title_labName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_16"
                             android:fontFamily="@font/sen_reg"
                             android:text="@string/lab_name"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/dimen_text_12" />
 
                         <TextView
                             android:id="@+id/labName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/title_labName"
-                            android:layout_marginStart="16sp"
-                            android:layout_marginLeft="16sp"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_4"
                             android:fontFamily="@font/sen_bold"
                             android:text="@string/dayalchand_labs_its_muradnagar"
                             android:textColor="@color/dark_grey"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/dimen_text_16" />
 
                         <RelativeLayout
                             android:id="@+id/rl_assign_patient"
                             android:layout_width="match_parent"
-
                             android:layout_height="match_parent"
                             android:layout_below="@id/labName"
                             android:visibility="visible">
@@ -288,12 +289,12 @@
                                 android:id="@+id/title_severityLevel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_16"
                                 android:fontFamily="@font/sen_reg"
                                 android:text="@string/select_severity_level"
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/dimen_text_12" />
 
                             <LinearLayout
                                 android:id="@+id/radio_buttons"
@@ -312,43 +313,43 @@
                                         android:id="@+id/L1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="14dp"
-                                        android:layout_marginLeft="14dp"
-                                        android:layout_marginTop="4dp"
+                                        android:layout_marginStart="@dimen/dimen_16"
+                                        android:layout_marginLeft="@dimen/dimen_16"
+                                        android:layout_marginTop="@dimen/dimen_4"
                                         android:fontFamily="@font/sen_bold"
                                         android:scaleX="0.75"
                                         android:scaleY="0.75"
                                         android:text="@string/l1"
                                         android:textColor="@color/dark_grey"
-                                        android:textSize="20sp" />
+                                        android:textSize="@dimen/dimen_text_20" />
 
                                     <RadioButton
                                         android:id="@+id/L2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginLeft="8dp"
-                                        android:layout_marginTop="4dp"
+                                        android:layout_marginStart="@dimen/dimen_8"
+                                        android:layout_marginLeft="@dimen/dimen_8"
+                                        android:layout_marginTop="@dimen/dimen_4"
                                         android:fontFamily="@font/sen_bold"
                                         android:scaleX="0.75"
                                         android:scaleY="0.75"
                                         android:text="@string/l2"
                                         android:textColor="@color/dark_grey"
-                                        android:textSize="20sp" />
+                                        android:textSize="@dimen/dimen_text_20" />
 
                                     <RadioButton
                                         android:id="@+id/L3"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginLeft="8dp"
-                                        android:layout_marginTop="4dp"
+                                        android:layout_marginStart="@dimen/dimen_8"
+                                        android:layout_marginLeft="@dimen/dimen_8"
+                                        android:layout_marginTop="@dimen/dimen_4"
                                         android:fontFamily="@font/sen_bold"
                                         android:scaleX="0.75"
                                         android:scaleY="0.75"
                                         android:text="@string/l3"
                                         android:textColor="@color/dark_grey"
-                                        android:textSize="20sp" />
+                                        android:textSize="@dimen/dimen_text_20" />
                                 </RadioGroup>
                             </LinearLayout>
 
@@ -357,25 +358,25 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/radio_buttons"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="14dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_16"
                                 android:fontFamily="@font/sen_reg"
                                 android:text="@string/add_a_comment"
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/dimen_text_12" />
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/comment_box"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/title_comment"
-                                android:layout_marginStart="16dp"
-                                android:minHeight="60dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginEnd="16dp"
-                                android:layout_marginRight="16dp"
-                                app:cardCornerRadius="8dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_4"
+                                android:layout_marginEnd="@dimen/dimen_16"
+                                android:layout_marginRight="@dimen/dimen_16"
+                                android:minHeight="@dimen/dimen_60"
+                                app:cardCornerRadius="@dimen/dimen_8"
                                 app:cardElevation="@null">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -384,12 +385,9 @@
                                     android:layout_height="match_parent"
                                     android:background="@null"
                                     android:fontFamily="@font/sen_reg"
-                                    android:minHeight="60dp"
-                                    android:paddingLeft="12dp"
-                                    android:paddingTop="10dp"
-                                    android:paddingRight="12dp"
-                                    android:paddingBottom="11dp"
-                                    android:textSize="14sp" />
+                                    android:minHeight="@dimen/dimen_60"
+                                    android:padding="@dimen/dimen_12"
+                                    android:textSize="@dimen/dimen_text_14" />
                             </androidx.cardview.widget.CardView>
 
 
@@ -398,12 +396,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/comment_box"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_16"
                                 android:fontFamily="@font/sen_reg"
                                 android:text="@string/declined_to_come"
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/dimen_text_12" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:id="@+id/decline_to_come"
@@ -413,8 +411,8 @@
                                 android:layout_toEndOf="@id/title_declined"
                                 android:layout_toRightOf="@id/title_declined"
                                 android:fontFamily="@font/sen_bold"
-                                android:text="Yes"
-                                android:textSize="16sp" />
+                                android:text="@string/yes"
+                                android:textSize="@dimen/dimen_text_16" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -428,12 +426,12 @@
                                 android:id="@+id/title_level"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_16"
                                 android:fontFamily="@font/sen_reg"
-                                android:text="Patient assigned level"
-                                android:textSize="12sp"
+                                android:text="@string/patient_assigned_level"
+                                android:textSize="@dimen/dimen_text_12"
                                 android:visibility="visible" />
 
                             <TextView
@@ -441,13 +439,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/title_level"
-                                android:layout_marginStart="16sp"
-                                android:layout_marginLeft="16sp"
-                                android:layout_marginTop="4dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_4"
                                 android:fontFamily="@font/sen_bold"
-                                android:text="L1"
+                                android:text="@string/l1"
                                 android:textColor="@color/dark_grey"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/dimen_text_16"
                                 android:visibility="visible" />
 
                             <TextView
@@ -455,51 +453,52 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/level_allocated_text"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_16"
                                 android:fontFamily="@font/sen_reg"
                                 android:text="@string/assigned_hospital"
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/dimen_text_12" />
 
                             <TextView
                                 android:id="@+id/patient_hospital"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/title_hospital"
-                                android:layout_marginStart="16sp"
-                                android:layout_marginLeft="16sp"
-                                android:layout_marginTop="4dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_4"
                                 android:fontFamily="@font/sen_bold"
                                 android:text="@string/modi_hospital_china"
                                 android:textColor="@color/dark_grey"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/dimen_text_16" />
 
                             <TextView
                                 android:id="@+id/title_change_hospital"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/patient_hospital"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginStart="@dimen/dimen_16"
+                                android:layout_marginLeft="@dimen/dimen_16"
+                                android:layout_marginTop="@dimen/dimen_16"
                                 android:fontFamily="@font/sen_reg"
-                                android:text="To change Hospital,"
-                                android:textSize="12sp" />
+                                android:text="@string/to_change_hospital"
+                                android:textSize="@dimen/dimen_text_12" />
 
                             <TextView
                                 android:id="@+id/change_hospital_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/patient_hospital"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="14sp"
+                                android:layout_marginStart="@dimen/dimen_8"
+                                android:layout_marginLeft="@dimen/dimen_8"
+                                android:layout_marginTop="@dimen/dimen_16"
+                                android:layout_toEndOf="@id/title_change_hospital"
                                 android:layout_toRightOf="@id/title_change_hospital"
                                 android:fontFamily="@font/sen_bold"
-                                android:text="Click here"
+                                android:text="@string/click_here"
                                 android:textColor="@color/blue"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/dimen_text_16" />
 
                         </RelativeLayout>
 
@@ -508,24 +507,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/rl_level_assigned"
-                            android:layout_marginLeft="32dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginRight="32dp"
-                            android:layout_marginBottom="16dp"
-                            app:cardBackgroundColor="#008DB9"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            android:layout_marginLeft="@dimen/dimen_32"
+                            android:layout_marginTop="@dimen/dimen_24"
+                            android:layout_marginRight="@dimen/dimen_32"
+                            android:layout_marginBottom="@dimen/dimen_16"
+                            app:cardBackgroundColor="@color/colorPrimaryDark"
+                            app:cardCornerRadius="@dimen/dimen_8"
+                            app:cardElevation="@dimen/dimen_0">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="12dp"
-                                android:layout_marginBottom="12dp"
+                                android:layout_marginTop="@dimen/dimen_12"
+                                android:layout_marginBottom="@dimen/dimen_12"
                                 android:fontFamily="@font/sen_bold"
                                 android:text="@string/submit"
-                                android:textColor="#fff"
-                                android:textSize="16sp" />
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dimen_text_16" />
 
 
                         </androidx.cardview.widget.CardView>
@@ -533,16 +532,16 @@
                         <com.airbnb.lottie.LottieAnimationView
                             android:id="@+id/submit_form_anim"
                             android:layout_width="match_parent"
-                            android:layout_height="38dp"
+                            android:layout_height="@dimen/dimen_40"
                             android:layout_below="@id/rl_level_assigned"
-                            android:layout_marginLeft="32dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginRight="32dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginLeft="@dimen/dimen_32"
+                            android:layout_marginTop="@dimen/dimen_24"
+                            android:layout_marginRight="@dimen/dimen_32"
+                            android:layout_marginBottom="@dimen/dimen_16"
+                            android:visibility="gone"
                             app:lottie_autoPlay="true"
                             app:lottie_colorFilter="@color/button_blue"
                             app:lottie_loop="true"
-                            android:visibility="gone"
                             app:lottie_rawRes="@raw/btn_loading" />
 
                     </RelativeLayout>

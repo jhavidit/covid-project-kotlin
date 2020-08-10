@@ -84,6 +84,11 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="change_password">Change Password</string>
     <string name="logout">Logout</string>
+    <string name="back_button">back button</string>
+    <string name="yes">Yes</string>
+    <string name="patient_assigned_level">Patient assigned level</string>
+    <string name="to_change_hospital">To change Hospital</string>
+    <string name="click_here">Click here</string>
 
     <style name="patient_declined_count">
         number_of_patients_who_were_declined_to_be_examined_by_the_doctor</style>
