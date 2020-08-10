@@ -161,6 +161,22 @@
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/btn_loading" />
 
+            <LinearLayout
+                android:id="@+id/dsc_kiet_logo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/dsc_kiet_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/dimen_4"
+                    android:src="@drawable/covid_kiet_dsc_logo" />
+            </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 </layout>
