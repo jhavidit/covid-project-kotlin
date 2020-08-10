@@ -277,6 +277,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                                 showPopupWindow()
                                 Handler().postDelayed({
                                     finish()
+
                                 }, 1500)
                             } else {
                                 if (response.body()?.data != null) {

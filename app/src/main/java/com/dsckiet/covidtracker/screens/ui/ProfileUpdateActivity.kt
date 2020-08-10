@@ -267,6 +267,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         ).show()
                         delay(1000)
                         startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                        finish()
                     }
 
                 } else {
