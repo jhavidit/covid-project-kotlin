@@ -30,6 +30,8 @@ class DiagnosisPendingAdapter(val ctx: Context, private val listItem: List<Pendi
         holder.patientId.text = currentItem.caseId
         holder.patientAge.text = currentItem.age.toString()
         holder.patientName.text = currentItem.name
+
+        //sending patient details to patient details activity
         holder.patientCard.setOnClickListener {
             val caseId=currentItem.caseId
             val patientId = currentItem.patientId

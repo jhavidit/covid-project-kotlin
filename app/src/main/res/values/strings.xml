@@ -88,6 +88,14 @@
     <string name="patient_assigned_level">Patient assigned level</string>
     <string name="to_change_hospital">To change Hospital</string>
     <string name="click_here">Click here</string>
+    <string name="declinedToCome">Declined to come</string>
+    <string name="number_of_available_hospitals">Number of available Hospitals</string>
+    <string name="hospital_list">Hospital List</string>
+    <string name="click_the_card_to_change_the_hospital">Click the card to change the hospital</string>
+    <string name="change_hospital">Change Hospital</string>
+    <string name="xyz_hospital_sector_32_gurgaon">XYZ Hospital, Sector 32, Gurgaon</string>
+    <string name="next_button">next button</string>
+    <string name="_0">0</string>
 
     <style name="patient_declined_count">
         number_of_patients_who_were_declined_to_be_examined_by_the_doctor

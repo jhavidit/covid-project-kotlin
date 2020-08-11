@@ -18,7 +18,6 @@ import com.dsckiet.covidtracker.model.AvailableHospital
 import com.dsckiet.covidtracker.model.ChangeHospital
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.screens.ui.MainActivity
-import com.dsckiet.covidtracker.utils.logs
 import kotlinx.android.synthetic.main.hospital_list.view.*
 import org.json.JSONObject
 import retrofit2.Call
@@ -46,13 +45,15 @@ class HospitalListAdapter(
         val hospitalId = currentItem.hospitalId
         holder.hospitalName.text = hospitalNameAddress
         holder.hospitalCard.setOnClickListener {
+
+            //alert dialog when changing hospital
             val warning = AlertDialog.Builder(ctx)
-            warning.setTitle(Html.fromHtml("<font color='#008DB9'>Are you sure want to change hospital </font>"))
+            warning.setTitle("Are you sure want to change hospital ")
                 .setIcon(R.drawable.ic_profile)
-                .setPositiveButton("Yes") { dialog, which ->
+                .setPositiveButton("Yes") { dialog, _ ->
                     setHospital(hospitalId, assignedHospital)
                     dialog.dismiss()
-                }.setNeutralButton("No") { dialog, which ->
+                }.setNeutralButton("No") { dialog, _ ->
                     dialog.dismiss()
                 }
             val dialog: AlertDialog = warning.create()
@@ -71,10 +72,14 @@ class HospitalListAdapter(
 
     }
 
+    /*
+    function for changing hospital
+    if success-> hospital is changed success toast is shown and navigate to main activity
+    else -> toast is given for error message
+     */
     private fun setHospital(hospitalId: String, assignedHospital: String) {
         val changeHospital =
             ChangeHospital(assignedHospital, hospitalId)
-        logs("body ${changeHospital.toString()}")
         val tokenManager = TokenManager(ctx)
         PatientsApi.retrofitService.changeHospital(
             token = tokenManager.getAuthToken().toString(),
@@ -86,7 +91,7 @@ class HospitalListAdapter(
                     call: Call<AssignPatient>,
                     t: Throwable
                 ) {
-                    logs("changeHospital ${t.message}")
+                    Toast.makeText(ctx, "Something went wrong", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(

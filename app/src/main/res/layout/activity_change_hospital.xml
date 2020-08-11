@@ -25,16 +25,21 @@
                     android:layout_marginStart="36dp"
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="32dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:id="@+id/back_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/back_button"
                         android:foreground="?selectableItemBackground"
+                        android:paddingEnd="10dp"
                         android:paddingRight="10dp"
-                        app:srcCompat="@drawable/ic_back_btn" />
+                        app:srcCompat="@drawable/ic_back_btn"
+                        tools:ignore="RtlSymmetry,UnusedAttribute"
+                        tools:targetApi="m" />
 
                     <TextView
                         android:id="@+id/dp_text"
@@ -43,7 +48,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/sen_extrabold"
-                        android:text="Change Hospital"
+                        android:text="@string/change_hospital"
                         android:textColor="#008DB9"
                         android:textSize="28sp" />
                 </LinearLayout>
@@ -71,11 +76,11 @@
                             android:id="@+id/hospital_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/dimen_4"
                             android:layout_marginLeft="@dimen/dimen_4"
-                            android:layout_gravity="center_vertical"
+                            android:text=""
                             android:textColor="@color/white"
-                            android:text="0"
                             android:textSize="@dimen/dimen_text_40" />
 
                         <TextView
@@ -85,7 +90,7 @@
                             android:layout_marginStart="@dimen/dimen_20"
                             android:layout_marginLeft="@dimen/dimen_20"
                             android:fontFamily="@font/sen_bold"
-                            android:text="Number of available Hospitals"
+                            android:text="@string/number_of_available_hospitals"
                             android:textColor="@color/white"
                             android:textSize="@dimen/dimen_text_16" />
                     </LinearLayout>
@@ -100,7 +105,7 @@
                     android:layout_marginTop="@dimen/dimen_12"
                     android:layout_marginEnd="@dimen/dimen_32"
                     android:fontFamily="@font/sen_bold"
-                    android:text="Hospital List"
+                    android:text="@string/hospital_list"
                     android:textColor="@color/dark_grey"
                     android:textSize="@dimen/dimen_text_20" />
 
@@ -113,7 +118,7 @@
                     android:layout_marginTop="@dimen/dimen_4"
                     android:layout_marginEnd="@dimen/dimen_32"
                     android:fontFamily="@font/sen_regular"
-                    android:text="Click the card to change the hospital"
+                    android:text="@string/click_the_card_to_change_the_hospital"
                     android:textColor="@color/light_grey"
                     android:textSize="@dimen/dimen_text_14" />
 
@@ -122,23 +127,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     android:layout_below="@id/change_hospital_text"
-                    app:lottie_autoPlay="true"
                     android:visibility="gone"
+                    app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/heartbeat_loading" />
 
                 <TextView
                     android:id="@+id/open_settings"
-                    android:layout_below="@id/animationView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/animationView"
+                    android:layout_marginTop="-100dp"
                     android:fontFamily="@font/sen_regular"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:layout_marginTop="-100dp"
-                    android:textSize="@dimen/dimen_text_16"
                     android:text="@string/open_settings"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimen_text_16"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
@@ -152,7 +157,6 @@
                     tools:listitem="@layout/hospital_list" />
 
             </RelativeLayout>
-
 
 
         </androidx.core.widget.NestedScrollView>

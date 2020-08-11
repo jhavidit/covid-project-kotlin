@@ -53,7 +53,7 @@
                         android:layout_marginLeft="@dimen/dimen_4"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
-                        android:text="0"
+                        android:text="@string/_0"
                         android:textSize="@dimen/dimen_text_40" />
 
                     <TextView

@@ -38,18 +38,19 @@ class DiagnosisPendingFragment : Fragment() {
     private lateinit var tokenManager: TokenManager
     private lateinit var list: ArrayList<PendingPatient>
     private lateinit var tickerView: TickerView
-
     private lateinit var binding: FragmentDiagnosisPendingBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //content view
         binding =
             DataBindingUtil.inflate(
                 inflater,
                 R.layout.fragment_diagnosis_pending, container, false
             )
+        //ticker view for animation of pending patient count
         tickerView = binding.diagnosisPendingCount
         tickerView.animationInterpolator = OvershootInterpolator()
         tickerView.setCharacterLists(TickerUtils.provideNumberList())
@@ -59,6 +60,7 @@ class DiagnosisPendingFragment : Fragment() {
         tickerView.gravity = Gravity.START
         tickerView.animationDuration = 2000
 
+        //open setting for reconnection of network
         binding.openSettings.setOnClickListener {
             startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
         }
@@ -73,6 +75,7 @@ class DiagnosisPendingFragment : Fragment() {
         }
     }
 
+    //animation when network connection unavailable
     private fun offlineCase() {
         binding.animationView.setAnimation(R.raw.no_internet)
         binding.animationView.visibility = VISIBLE
@@ -83,12 +86,14 @@ class DiagnosisPendingFragment : Fragment() {
             }.show()
     }
 
+
+    //adding patient details to a list
     private fun generatePendingPatientList(data: JSONArray): ArrayList<PendingPatient> {
         val tempList = ArrayList<PendingPatient>()
 
         for (i in 0 until data.length()) {
             try {
-                var lab: String = if ((data.getJSONObject(i).isNull("lab")))
+                val lab: String = if ((data.getJSONObject(i).isNull("lab")))
                     "Not provided"
                 else
                     data.getJSONObject(i).getString("lab")
@@ -104,7 +109,7 @@ class DiagnosisPendingFragment : Fragment() {
                     data.getJSONObject(i).getString("caseId")
                 )
             } catch (e: JSONException) {
-                println("json exception : ${e.message}")
+               Snackbar.make(binding.coordinatorLayout,"Something went wrong",Snackbar.LENGTH_LONG).show()
             }
         }
         return tempList
@@ -115,6 +120,7 @@ class DiagnosisPendingFragment : Fragment() {
         val app: SocketInstance = activity?.application as SocketInstance
         mSocket = app.getMSocket() //socket instance
 
+        //connecting socket
         mSocket?.connect()
         val options = IO.Options()
         options.reconnection = true
@@ -136,6 +142,7 @@ class DiagnosisPendingFragment : Fragment() {
             e.printStackTrace()
         }
 
+        //accepting patient details from server
         mSocket!!.on("PATIENTS_POOL_FOR_DOCTOR") { args ->    //requesting patient details
             if (args[0] != null)
                 data = args[0] as JSONObject
@@ -146,6 +153,7 @@ class DiagnosisPendingFragment : Fragment() {
                 if (data?.getString("remainingPatients")!="0") {
                     patientData = data!!.getJSONArray("patients")
                     list = generatePendingPatientList(patientData!!)
+
                     activity?.runOnUiThread {
 
                         binding.animationView.visibility = GONE
@@ -174,7 +182,7 @@ class DiagnosisPendingFragment : Fragment() {
                     }
                 }
             }
-
+        //animation and message when socket disconnect
         }.on(Socket.EVENT_DISCONNECT) {
             activity?.runOnUiThread {
                 binding.recyclerView.visibility = GONE
@@ -193,10 +201,11 @@ class DiagnosisPendingFragment : Fragment() {
                         startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
                     }.show()
             }
-
+        //when socket reconnect
         }.on(Socket.EVENT_RECONNECT) {
             try {
                 mSocket?.connect()
+                //sending token
                 mSocket?.emit(
                     "patientsPoolForDoctor", jsonObjectToken
                 )
@@ -217,6 +226,7 @@ class DiagnosisPendingFragment : Fragment() {
         }
 
         try {
+            //sending token
             mSocket?.emit(
                 "patientsPoolForDoctor", jsonObjectToken
             )
@@ -225,6 +235,7 @@ class DiagnosisPendingFragment : Fragment() {
         }
     }
 
+    //disconnecting socket on disconnection
     override fun onDestroy() {
         super.onDestroy()
         mSocket?.disconnect()

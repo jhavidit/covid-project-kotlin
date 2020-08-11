@@ -32,7 +32,7 @@
                 android:fontFamily="@font/sen_bold"
                 android:paddingEnd="@dimen/dimen_4"
                 android:paddingRight="@dimen/dimen_4"
-                android:text="XYZ Hospital, Sector 32, Gurgaon"
+                android:text="@string/xyz_hospital_sector_32_gurgaon"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/dimen_text_15"
                 tools:ignore="RtlSymmetry" />
@@ -42,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.7"
-                app:srcCompat="@drawable/ic_proceed" />
+                app:srcCompat="@drawable/ic_proceed"
+                android:contentDescription="@string/next_button" />
 
 
         </LinearLayout>

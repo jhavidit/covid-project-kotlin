@@ -28,7 +28,6 @@ import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
 import com.dsckiet.covidtracker.model.AssignPatient
 import com.dsckiet.covidtracker.model.AssignPatientLevel
-import com.dsckiet.covidtracker.model.AvailableHospital
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.utils.InternetConnectivity
@@ -39,6 +38,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class PatientDetailsActivity : AppCompatActivity() {
@@ -48,7 +48,6 @@ class PatientDetailsActivity : AppCompatActivity() {
     private lateinit var comments: String
     private var isDeclined = false
     private var allocatedHospital: String? = null
-    private val availableHospital = ArrayList<AvailableHospital>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +75,8 @@ class PatientDetailsActivity : AppCompatActivity() {
         //setting bundles
         binding.patientId.text = caseId
         binding.patientName.text = patientData?.getString("name")
-        binding.patientGA.text = "$patientGender | $patientAge years" as String
+        val patientGA="$patientGender | $patientAge years"
+        binding.patientGA.text = patientGA
         binding.patientPhoneNo.text = patientData?.getString("contact")
         binding.patientDistrict.text = patientData?.getString("district")
         binding.patientAddress.text = patientData?.getString("address")
@@ -269,14 +269,20 @@ class PatientDetailsActivity : AppCompatActivity() {
                             binding.rlLevelAssigned.visibility = VISIBLE
 
                             if (level.isEmpty()) {
-                                binding.levelAllocatedText.text = "Declined to come"
+                                binding.levelAllocatedText.text = getString(R.string.declinedToCome)
                                 binding.patientHospital.visibility = GONE
                                 binding.titleHospital.visibility = GONE
                                 binding.changeHospitalText.visibility = GONE
                                 binding.titleChangeHospital.visibility = GONE
                                 showPopupWindow()
                                 Handler().postDelayed({
-                                    finish()
+                                    val intent = Intent(
+                                        this@PatientDetailsActivity,
+                                        MainActivity::class.java
+                                    )
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
 
                                 }, 1500)
                             } else {
@@ -294,7 +300,13 @@ class PatientDetailsActivity : AppCompatActivity() {
                                     binding.submitForm.setOnClickListener {
                                         showPopupWindow()
                                         Handler().postDelayed({
-                                            finish()
+                                            val intent = Intent(
+                                                this@PatientDetailsActivity,
+                                                MainActivity::class.java
+                                            )
+                                            intent.flags =
+                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            startActivity(intent)
                                         }, 1500)
 
                                     }
@@ -314,7 +326,7 @@ class PatientDetailsActivity : AppCompatActivity() {
                                                 bundle
                                             )
                                         )
-                                        finish()
+
 
                                     }
                                 } else {
@@ -329,12 +341,13 @@ class PatientDetailsActivity : AppCompatActivity() {
                                     ).show()
                                     showPopupWindow()
                                     Handler().postDelayed({
-                                        startActivity(
-                                            Intent(
-                                                this@PatientDetailsActivity,
-                                                MainActivity::class.java
-                                            )
+                                        val intent = Intent(
+                                            this@PatientDetailsActivity,
+                                            MainActivity::class.java
                                         )
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        startActivity(intent)
                                     }, 1500)
                                 }
                             }
@@ -358,7 +371,8 @@ class PatientDetailsActivity : AppCompatActivity() {
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         // Inflate a custom view using layout inflater
-        val view = inflater.inflate(R.layout.patient_submitted_popup, null,false)
+        val view =
+            inflater.inflate(R.layout.patient_submitted_popup, binding.coordinatorLayout, false)
 
         // Initialize a new instance of popup window
         val popupWindow = PopupWindow(
@@ -380,7 +394,7 @@ class PatientDetailsActivity : AppCompatActivity() {
 
             // Slide animation for popup window exit transition
             val slideOut = Slide()
-            slideOut.slideEdge = Gravity.RIGHT
+            slideOut.slideEdge = Gravity.END
             popupWindow.exitTransition = slideOut // Finally, show the popup window on app
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

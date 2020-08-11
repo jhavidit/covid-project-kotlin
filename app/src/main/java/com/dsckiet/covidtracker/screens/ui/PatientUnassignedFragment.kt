@@ -38,10 +38,12 @@ class PatientUnassignedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //content view
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_patient_unassigned, container, false
         )
+        //ticker view for total hospital animation
         tickerView = binding.unassignedPatientsCount
         tickerView.animationInterpolator = OvershootInterpolator()
         tickerView.setCharacterLists(TickerUtils.provideNumberList())
@@ -50,6 +52,8 @@ class PatientUnassignedFragment : Fragment() {
         tickerView.typeface = fontFace
         tickerView.gravity = Gravity.START
         tickerView.animationDuration = 2000
+
+        //open setting for reconnection of network
         binding.openSettings.setOnClickListener {
             startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
         }
@@ -61,6 +65,7 @@ class PatientUnassignedFragment : Fragment() {
         binding.animationView.visibility = View.VISIBLE
         authToken = TokenManager(requireContext())
 
+        //network connection check
         if (!InternetConnectivity.isNetworkAvailable(requireContext())!!) {
             offlineCase()
         } else {
@@ -68,6 +73,7 @@ class PatientUnassignedFragment : Fragment() {
         }
     }
 
+    //animation when network connection unavailable
     private fun offlineCase() {
         binding.animationView.setAnimation(R.raw.no_internet)
         binding.animationView.visibility = View.VISIBLE
@@ -77,6 +83,8 @@ class PatientUnassignedFragment : Fragment() {
                 startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
             }.show()
     }
+
+
 
     private fun getUnassignedPatientData() {
         val list = ArrayList<PatientDetails>()

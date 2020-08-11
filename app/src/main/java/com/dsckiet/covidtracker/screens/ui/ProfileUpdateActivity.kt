@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -25,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -190,7 +188,10 @@ class ProfileUpdateActivity : AppCompatActivity() {
                             Snackbar.LENGTH_SHORT
                         ).show()
                         delay(1000)
-                        startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
+                        val intent = Intent(this@ProfileUpdateActivity, MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
                     }
 
                 } else {
@@ -266,8 +267,11 @@ class ProfileUpdateActivity : AppCompatActivity() {
                             Snackbar.LENGTH_SHORT
                         ).show()
                         delay(1000)
-                        startActivity(Intent(this@ProfileUpdateActivity, MainActivity::class.java))
-                        finish()
+                        val intent = Intent(this@ProfileUpdateActivity, MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+
                     }
 
                 } else {

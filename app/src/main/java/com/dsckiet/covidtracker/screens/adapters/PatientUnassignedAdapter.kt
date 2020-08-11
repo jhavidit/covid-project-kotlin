@@ -32,6 +32,7 @@ class PatientUnassignedAdapter(val ctx: Context, private val patientDeclinedData
         holder.patientId.text = currentItem.caseId.toString()
         holder.patientAge.text = currentItem.age.toString()
         holder.patientName.text = currentItem.name.toString()
+        //sending patient details to patient details activity
         holder.patientCard.setOnClickListener {
             val patientId = currentItem.patientId.toString()
             val patientName = holder.patientName.text.toString()

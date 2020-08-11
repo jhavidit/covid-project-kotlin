@@ -55,7 +55,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/dimen_4"
                             android:layout_marginLeft="@dimen/dimen_4"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textColor="@color/white"
                             android:textSize="@dimen/dimen_text_40" />
 

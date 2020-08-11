@@ -39,25 +39,34 @@ class ChangeHospitalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        //content view
         binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_change_hospital
         )
+        //getting token
         tokenManager = TokenManager(this)
+
+        //getting hospital details from patient details activity
         val hospitalData = intent.extras?.getBundle("hospitalDetails")
         level = hospitalData?.getString("level").toString()
         allocatedHospital = hospitalData?.getString("allocatedHospital").toString()
         patientId = hospitalData?.getString("patientId").toString()
 
-
+        //loading animation
         binding.animationView.setAnimation(R.raw.heartbeat_loading)
         binding.animationView.visibility = VISIBLE
-        logs("level $level")
-        logs("allocatedHospital  $allocatedHospital")
+
 
         binding.backBtn.setOnClickListener {
             onBackPressed()
         }
+        /*
+        getting available hospital list
+        -> if hospital available (list)
+        -> if hospital unavailable (animation) & submit snackbar button
+        -> else error (animation) & snackbar message
+         */
         PatientsApi.retrofitService.getAvailableHospital(
             token = tokenManager.getAuthToken().toString(), level = level
         ).enqueue(object : Callback<HospitalList> {
@@ -78,7 +87,6 @@ class ChangeHospitalActivity : AppCompatActivity() {
                 response: Response<HospitalList>
             ) {
                 binding.animationView.visibility = GONE
-                logs("success ${response.body().toString()}")
 
                 if (response.code() == 200) {
                     if (response.body()?.data != null) {
@@ -100,6 +108,7 @@ class ChangeHospitalActivity : AppCompatActivity() {
                             LinearLayoutManager(this@ChangeHospitalActivity)
                         binding.recyclerView.setHasFixedSize(true)
 
+                        //ticker view for total hospital count animation
                         tickerView = binding.hospitalCount
                         tickerView.animationInterpolator = OvershootInterpolator()
                         tickerView.setCharacterLists(TickerUtils.provideNumberList())
@@ -145,6 +154,7 @@ class ChangeHospitalActivity : AppCompatActivity() {
 
     }
 
+    //animation when network connection unavailable
     private fun offlineCase() {
         binding.animationView.setAnimation(R.raw.no_internet)
         binding.animationView.visibility = VISIBLE
