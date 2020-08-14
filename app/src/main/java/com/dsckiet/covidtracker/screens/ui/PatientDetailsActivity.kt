@@ -14,6 +14,7 @@ import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.LinearLayout
@@ -28,17 +29,21 @@ import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.ActivityPatientDetailsBinding
 import com.dsckiet.covidtracker.model.AssignPatient
 import com.dsckiet.covidtracker.model.AssignPatientLevel
+import com.dsckiet.covidtracker.model.HospitalList
 import com.dsckiet.covidtracker.model.ResponseModel
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.utils.InternetConnectivity
+import com.dsckiet.covidtracker.utils.logs
+import com.dsckiet.covidtracker.utils.toasts
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_patient_details.*
+import kotlinx.android.synthetic.main.hospital_list_bottomsheet.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 
 class PatientDetailsActivity : AppCompatActivity() {
@@ -56,6 +61,7 @@ class PatientDetailsActivity : AppCompatActivity() {
             this,
             R.layout.activity_patient_details
         )
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
         //late initialization
         level = ""
         comments = ""
@@ -75,7 +81,7 @@ class PatientDetailsActivity : AppCompatActivity() {
         //setting bundles
         binding.patientId.text = caseId
         binding.patientName.text = patientData?.getString("name")
-        val patientGA="$patientGender | $patientAge years"
+        val patientGA = "$patientGender | $patientAge years"
         binding.patientGA.text = patientGA
         binding.patientPhoneNo.text = patientData?.getString("contact")
         binding.patientDistrict.text = patientData?.getString("district")
@@ -85,6 +91,50 @@ class PatientDetailsActivity : AppCompatActivity() {
             isDeclined = true
             binding.declineToCome.isChecked = true
         }
+
+        binding.showHospital.setOnClickListener {
+
+            getCompleteHospitalList()
+            if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+            button.setOnClickListener {
+                toasts(this,"clicked")
+            }
+
+        }
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+
+            override fun onStateChanged(view: View, state: Int) {
+                when (state) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        BottomSheetBehavior.SAVE_SKIP_COLLAPSED
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+
+                    }
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+
+                    }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+
+                    }
+                    BottomSheetBehavior.STATE_SETTLING -> {
+
+                    }
+                }
+            }
+
+            override fun onSlide(view: View, p1: Float) {
+            }
+        })
 
         //handling custom back button
         binding.backBtn.setOnClickListener {
@@ -229,6 +279,23 @@ class PatientDetailsActivity : AppCompatActivity() {
                     }
                 }
             )
+    }
+
+    private fun getCompleteHospitalList()
+    {
+        "application/json; charset=utf-8".toMediaTypeOrNull()
+        PatientsApi.retrofitService.getCompleteHospital(
+            token = tokenManager.getAuthToken().toString()
+        ).enqueue(object :Callback<HospitalList>{
+            override fun onFailure(call: Call<HospitalList>, t: Throwable) {
+                logs("error ${t.message}")
+            }
+
+            override fun onResponse(call: Call<HospitalList>, response: Response<HospitalList>) {
+                logs("hospital ${response.toString()}  \n ${response.body()} ")
+            }
+
+        })
     }
 
     private fun sendPatientData(

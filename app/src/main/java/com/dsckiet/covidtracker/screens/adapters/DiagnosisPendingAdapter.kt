@@ -33,7 +33,7 @@ class DiagnosisPendingAdapter(val ctx: Context, private val listItem: List<Pendi
 
         //sending patient details to patient details activity
         holder.patientCard.setOnClickListener {
-            val caseId=currentItem.caseId
+            val caseId = currentItem.caseId
             val patientId = currentItem.patientId
             val patientName = holder.patientName.text.toString()
             val patientAge = holder.patientAge.text.toString()
@@ -54,7 +54,12 @@ class DiagnosisPendingAdapter(val ctx: Context, private val listItem: List<Pendi
                 "caseId" to caseId,
                 "pageToken" to "0"
             )
-            ctx.startActivity(Intent(ctx, PatientDetailsActivity::class.java).putExtra("patientData", bundle))
+            ctx.startActivity(
+                Intent(
+                    ctx,
+                    PatientDetailsActivity::class.java
+                ).putExtra("patientData", bundle)
+            )
         }
     }
 

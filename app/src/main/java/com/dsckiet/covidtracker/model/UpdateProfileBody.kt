@@ -2,7 +2,6 @@ package com.dsckiet.covidtracker.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import okhttp3.MultipartBody
 
 @Parcelize
 data class UpdateProfileBody(
@@ -13,4 +12,4 @@ data class UpdateProfileBody(
     val empId: String,
     val hospital: String,
     val name: String
-): Parcelable
+) : Parcelable

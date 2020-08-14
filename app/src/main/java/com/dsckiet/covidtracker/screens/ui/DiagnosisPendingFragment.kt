@@ -109,7 +109,11 @@ class DiagnosisPendingFragment : Fragment() {
                     data.getJSONObject(i).getString("caseId")
                 )
             } catch (e: JSONException) {
-               Snackbar.make(binding.coordinatorLayout,"Something went wrong",Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    binding.coordinatorLayout,
+                    "Something went wrong",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
         return tempList
@@ -150,7 +154,7 @@ class DiagnosisPendingFragment : Fragment() {
             if (data != null) {
                 //to check size of data
                 logs(data.toString())
-                if (data?.getString("remainingPatients")!="0") {
+                if (data?.getString("remainingPatients") != "0") {
                     patientData = data!!.getJSONArray("patients")
                     list = generatePendingPatientList(patientData!!)
 
@@ -182,7 +186,7 @@ class DiagnosisPendingFragment : Fragment() {
                     }
                 }
             }
-        //animation and message when socket disconnect
+            //animation and message when socket disconnect
         }.on(Socket.EVENT_DISCONNECT) {
             activity?.runOnUiThread {
                 binding.recyclerView.visibility = GONE
@@ -201,7 +205,7 @@ class DiagnosisPendingFragment : Fragment() {
                         startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
                     }.show()
             }
-        //when socket reconnect
+            //when socket reconnect
         }.on(Socket.EVENT_RECONNECT) {
             try {
                 mSocket?.connect()

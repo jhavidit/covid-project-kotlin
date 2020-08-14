@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
@@ -56,11 +56,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/profile_group"
+                    android:layout_margin="@dimen/dimen_32"
                     android:layout_marginStart="@dimen/dimen_32"
                     android:layout_marginLeft="@dimen/dimen_32"
-                    android:layout_marginRight="@dimen/dimen_32"
-                    android:layout_margin="@dimen/dimen_32"
                     android:layout_marginTop="@dimen/dimen_24"
+                    android:layout_marginRight="@dimen/dimen_32"
                     android:layout_marginBottom="@dimen/dimen_12"
                     app:cardBackgroundColor="@color/colorPrimaryDark"
                     app:cardCornerRadius="@dimen/dimen_8"
@@ -282,11 +282,39 @@
                             android:textColor="@color/dark_grey"
                             android:textSize="@dimen/dimen_text_16" />
 
+                        <TextView
+                            android:id="@+id/show_hospital_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/labName"
+                            android:layout_marginStart="@dimen/dimen_16"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:layout_marginTop="@dimen/dimen_16"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="To see complete hospital list"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="@dimen/dimen_text_14" />
+
+                        <TextView
+                            android:id="@+id/show_hospital"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/labName"
+                            android:layout_marginStart="@dimen/dimen_8"
+                            android:layout_marginLeft="@dimen/dimen_8"
+                            android:layout_marginTop="@dimen/dimen_16"
+                            android:layout_toEndOf="@id/show_hospital_title"
+                            android:layout_toRightOf="@id/show_hospital_title"
+                            android:fontFamily="@font/sen_bold"
+                            android:text="@string/click_here"
+                            android:textColor="@color/blue"
+                            android:textSize="@dimen/dimen_text_16" />
+
                         <RelativeLayout
                             android:id="@+id/rl_assign_patient"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_below="@id/labName"
+                            android:layout_below="@id/show_hospital"
                             android:visibility="visible">
 
                             <TextView
@@ -555,5 +583,7 @@
 
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/hospital_list_bottomsheet" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -15,8 +15,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.R
+import com.dsckiet.covidtracker.authentication.TokenManager
 import com.dsckiet.covidtracker.databinding.FragmentPatientDeclinedBinding
 import com.dsckiet.covidtracker.model.PatientDetails
 import com.dsckiet.covidtracker.model.ResponseModel
@@ -157,9 +157,8 @@ class PatientDeclinedFragment : Fragment() {
                                 }
 
                             }
-                        }
-                        else{
-                            val jsonObject= JSONObject(response.errorBody()?.string()!!)
+                        } else {
+                            val jsonObject = JSONObject(response.errorBody()?.string()!!)
 
                             Snackbar.make(
                                 binding.coordinatorLayout,

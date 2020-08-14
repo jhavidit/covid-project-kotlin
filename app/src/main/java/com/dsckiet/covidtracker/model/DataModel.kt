@@ -6,22 +6,22 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class AssignPatient(
-    val message:String,
-    val error:Boolean,
-    val data:HospitalDetails?
-):Parcelable
+    val message: String,
+    val error: Boolean,
+    val data: HospitalDetails?
+) : Parcelable
 
 @Parcelize
 data class HospitalDetails(
-    @Json(name = "_id") val hospitalId: String="",
-    val name: String="",
-    val address: String="",
-    val category: String=""
-):Parcelable
+    @Json(name = "_id") val hospitalId: String = "",
+    val name: String = "",
+    val address: String = "",
+    val category: String = ""
+) : Parcelable
 
 
 @Parcelize
-data class ResponseModel (
+data class ResponseModel(
     val data: List<PatientDetails>?
 ) : Parcelable
 
@@ -30,19 +30,19 @@ data class ResponseModel (
 */
 @Parcelize
 data class PendingPatient(
-    val name:String="",
-    @Json(name = "_id") val patientId: String="",
-    val age:Int=0,
-    val gender:String="",
-    val phone:String="",
-    val address:String="",
-    val labName:String="",
-    val district: String="",
-    val caseId:String=""
-) :Parcelable
+    val name: String = "",
+    @Json(name = "_id") val patientId: String = "",
+    val age: Int = 0,
+    val gender: String = "",
+    val phone: String = "",
+    val address: String = "",
+    val labName: String = "",
+    val district: String = "",
+    val caseId: String = ""
+) : Parcelable
 
 @Parcelize
-data class PatientDetails (
+data class PatientDetails(
     @Json(name = "phone") val phoneNo: Long?,
     val district: String?,
     val address: String?,
@@ -51,17 +51,17 @@ data class PatientDetails (
     val gender: String?,
     val lab: String?,
     @Json(name = "_id") val patientId: String?,
-    val caseId :String?
+    val caseId: String?
 ) : Parcelable
 
 @Parcelize
-data class AssignPatientLevel (
+data class AssignPatientLevel(
     val level: String,
     val comments: String,
     val isDeclined: Boolean
 ) : Parcelable
 
 @Parcelize
-data class PatientLab (
+data class PatientLab(
     val name: String?
 ) : Parcelable

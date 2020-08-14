@@ -21,7 +21,6 @@ import com.dsckiet.covidtracker.authentication.model.ResponseModel
 import com.dsckiet.covidtracker.databinding.ActivityLoginBinding
 import com.dsckiet.covidtracker.utils.logs
 import com.dsckiet.covidtracker.utils.toasts
-import org.koin.android.ext.android.bind
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -104,8 +103,8 @@ class LoginActivity : AppCompatActivity() {
                         ContextCompat.getColor(applicationContext, R.color.warning_red_color)
                 } else {
 
-                    binding.authButton.visibility= GONE
-                    binding.authButtonAnim.visibility= VISIBLE
+                    binding.authButton.visibility = GONE
+                    binding.authButtonAnim.visibility = VISIBLE
                     val email = binding.usernameInput.text.toString().trim()
                     val password = binding.passwordInput.text.toString().trim()
                     val user = RequestModel(

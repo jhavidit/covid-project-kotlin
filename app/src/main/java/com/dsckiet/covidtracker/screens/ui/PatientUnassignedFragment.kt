@@ -85,7 +85,6 @@ class PatientUnassignedFragment : Fragment() {
     }
 
 
-
     private fun getUnassignedPatientData() {
         val list = ArrayList<PatientDetails>()
         binding.animationView.setAnimation(R.raw.heartbeat_loading)
@@ -158,8 +157,8 @@ class PatientUnassignedFragment : Fragment() {
                                     ).show()
                                 }
                             }
-                        }else{
-                            val jsonObject= JSONObject(response.errorBody()?.string()!!)
+                        } else {
+                            val jsonObject = JSONObject(response.errorBody()?.string()!!)
 
                             Snackbar.make(
                                 binding.coordinatorLayout,

@@ -15,7 +15,10 @@ data class HospitalList(
 data class HospitalData(
     @Json(name = "_id") val hospitalId: String,
     val name: String = "",
-    val address: String = ""
+    val address: String = "",
+    val category:String = "",
+    val contact:String= "",
+    val availableBeds:Int=0
 ) : Parcelable
 
 @Parcelize

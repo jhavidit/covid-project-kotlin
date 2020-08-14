@@ -44,18 +44,26 @@ interface ApiInterface {
         @Body patientLevel: AssignPatientLevel
     ): Call<AssignPatient>
 
-    @GET("api/v1/hospitals/available/{level}")
+    @GET("api/v1/hospitals/available")
     fun getAvailableHospital(
         @Header("x-auth-token") token: String,
-        @Path("level") level: String
-    ):Call<HospitalList>
+        @Query("level") level: String
+    ): Call<HospitalList>
+
+    @GET(
+        "api/v1/hospitals/available/"
+    )
+    fun getCompleteHospital(
+        @Header("x-auth-token") token: String
+
+        ): Call<HospitalList>
 
     @POST("api/v1/doctors/patients/change-hospital/{pid}")
     fun changeHospital(
         @Header("x-auth-token") token: String,
         @Path("pid") patientId: String,
         @Body changeHospital: ChangeHospital
-    ):Call<AssignPatient>
+    ): Call<AssignPatient>
 }
 
 object PatientsApi {

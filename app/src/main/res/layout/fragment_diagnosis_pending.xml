@@ -52,11 +52,11 @@
                             android:id="@+id/diagnosisPendingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/dimen_4"
                             android:layout_marginLeft="@dimen/dimen_4"
-                            android:layout_gravity="center_vertical"
-                            android:textColor="@color/white"
                             android:text="@string/_0"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/dimen_text_40" />
 
                         <TextView
@@ -158,16 +158,16 @@
 
                 <TextView
                     android:id="@+id/open_settings"
-                    android:layout_below="@id/animationView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/animationView"
+                    android:layout_marginTop="-100dp"
                     android:fontFamily="@font/sen_regular"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:layout_marginTop="-100dp"
-                    android:textSize="@dimen/dimen_text_16"
                     android:text="@string/open_settings"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimen_text_16"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"

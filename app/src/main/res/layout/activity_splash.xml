@@ -13,14 +13,14 @@
             android:src="@drawable/splash_icon" />
 
         <ImageView
-            android:layout_marginBottom="12dp"
             android:id="@+id/dsc_kiet_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/dimen_4"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:padding="@dimen/dimen_4"
             android:src="@drawable/covid_kiet_dsc_logo" />
     </RelativeLayout>
 </layout>

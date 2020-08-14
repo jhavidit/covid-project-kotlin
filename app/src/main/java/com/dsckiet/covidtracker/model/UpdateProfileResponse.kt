@@ -9,7 +9,7 @@ data class UpdateProfileResponse(
     val data: Data,
     val error: Boolean,
     val message: String
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class Data(
@@ -20,4 +20,4 @@ data class Data(
     val empId: String,
     val hospital: String,
     val name: String
-):Parcelable
+) : Parcelable

@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.dsckiet.covidtracker.R
 
-class TokenManager(context :Context) {
+class TokenManager(context: Context) {
 
-    private var prefs: SharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
+    private var prefs: SharedPreferences =
+        context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
 
     companion object {
         const val USER_TOKEN = "user_token"
@@ -22,9 +23,9 @@ class TokenManager(context :Context) {
         return prefs.getString(USER_TOKEN, null)
     }
 
-    fun deleteAuthToken(){
-        val editor =prefs.edit()
-        editor.putString(USER_TOKEN,null)
+    fun deleteAuthToken() {
+        val editor = prefs.edit()
+        editor.putString(USER_TOKEN, null)
         editor.apply()
     }
 }

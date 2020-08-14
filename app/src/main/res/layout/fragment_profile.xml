@@ -7,252 +7,255 @@
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:lottie_colorFilter="@color/colorPrimary"
-                app:lottie_autoPlay="true"
-                android:visibility="visible"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/heartbeat_loading"
-                app:lottie_speed="1" />
-        
-        <RelativeLayout
-            android:id="@+id/relative_layout_profile"
-            android:layout_below="@id/animationView"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".screens.ui.ProfileFragment">
+                android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/header_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/dp_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/sen_extrabold"
-                    android:text="@string/my_profile"
-                    android:textColor="#008DB9"
-                    android:textSize="28sp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:id="@+id/dropdown_btn"
-                    android:layout_width="8dp"
-                    android:layout_height="32dp"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/icon_dd"
-                    android:contentDescription="@string/overflow_button"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginRight="36dp"
-                    android:layout_marginEnd="36dp" />
-            </LinearLayout>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/doc_profile_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/header_group"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#008DB9"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    app:lottie_autoPlay="true"
+                    app:lottie_colorFilter="@color/colorPrimary"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/heartbeat_loading"
+                    app:lottie_speed="1" />
 
                 <RelativeLayout
+                    android:id="@+id/relative_layout_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/animationView"
+                    android:visibility="gone"
+                    tools:context=".screens.ui.ProfileFragment">
 
                     <LinearLayout
+                        android:id="@+id/header_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/doc_photo"
-                        android:orientation="vertical"
-                        android:padding="20dp"
-                        android:layout_toStartOf="@id/doc_photo">
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/doc_id"
+                            android:id="@+id/dp_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/sen_bold"
-                            android:textColor="#fff"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/doc_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginStart="36dp"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="32dp"
                             android:fontFamily="@font/sen_extrabold"
-                            android:textColor="#fff"
-                            android:textSize="20sp" />
+                            android:text="@string/my_profile"
+                            android:textColor="#008DB9"
+                            android:textSize="28sp" />
 
-                        <TextView
-                            android:id="@+id/doc_age_gender"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/sen_bold"
-                            android:textColor="#fff"
-                            android:textSize="16sp" />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <ImageButton
+                            android:id="@+id/dropdown_btn"
+                            android:layout_width="8dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="36dp"
+                            android:layout_marginRight="36dp"
+                            android:background="@drawable/icon_dd"
+                            android:contentDescription="@string/overflow_button"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="30dp"
+                            android:scaleType="centerCrop" />
                     </LinearLayout>
 
-                    <ImageView
 
-                       android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/doc_photo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/doct_img"
-                        android:layout_alignParentEnd="true" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/doc_profile_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/header_group"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginBottom="12dp"
+                        app:cardBackgroundColor="#008DB9"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@id/doc_photo"
+                                android:layout_toLeftOf="@id/doc_photo"
+                                android:orientation="vertical"
+                                android:padding="20dp">
+
+                                <TextView
+                                    android:id="@+id/doc_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/sen_bold"
+                                    android:textColor="#fff"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/doc_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:fontFamily="@font/sen_extrabold"
+                                    android:textColor="#fff"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/doc_age_gender"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:fontFamily="@font/sen_bold"
+                                    android:textColor="#fff"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                            <ImageView
+
+                                android:id="@+id/doc_photo"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginRight="20dp"
+                                android:src="@drawable/doct_img" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/about_me"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/doc_profile_card"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_bold"
+                        android:text="@string/about_me"
+                        android:textColor="#424242"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/doc_profile_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/about_me"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_regular"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/contact_information"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/doc_profile_details"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_bold"
+                        android:text="@string/contact_information"
+                        android:textColor="#424242"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/phone_no_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/contact_information"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_regular"
+                        android:text="@string/phone_no"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/doc_phone_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/phone_no_head"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_bold"
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/address_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/doc_phone_num"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_regular"
+                        android:text="@string/address"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/doc_address_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/address_head"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_bold"
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/hospital_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/doc_address_info"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_regular"
+                        android:text="@string/hospital"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/doc_hospital_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hospital_head"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/sen_bold"
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+
                 </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/about_me"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/doc_profile_card"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:text="@string/about_me"
-                android:textColor="#424242"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/doc_profile_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/about_me"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:textColor="#424242"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/contact_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/doc_profile_details"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:text="@string/contact_information"
-                android:textColor="#424242"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/phone_no_head"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/contact_information"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:text="@string/phone_no"
-                android:textColor="#424242"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/doc_phone_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/phone_no_head"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:textColor="#424242"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/address_head"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/doc_phone_num"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:text="@string/address"
-                android:textColor="#424242"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/doc_address_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/address_head"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:textColor="#424242"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/hospital_head"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/doc_address_info"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_regular"
-                android:text="@string/hospital"
-                android:textColor="#424242"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/doc_hospital_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/hospital_head"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/sen_bold"
-                android:textColor="#424242"
-                android:textSize="16sp" />
-
-        </RelativeLayout>
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

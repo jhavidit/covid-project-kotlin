@@ -16,7 +16,10 @@ import com.dsckiet.covidtracker.screens.ui.PatientDetailsActivity
 import com.dsckiet.covidtracker.utils.InternetConnectivity
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: ArrayList<PatientDetails>) :
+class PatientDeclinedAdapter(
+    val ctx: Context,
+    private val patientDeclinedData: ArrayList<PatientDetails>
+) :
     RecyclerView.Adapter<PatientDeclinedAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,7 +38,7 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
 
         //sending patient details to patient details activity
         holder.patientCard.setOnClickListener {
-            val isDeclined=true
+            val isDeclined = true
             val patientId = currentItem.patientId.toString()
             val patientName = holder.patientName.text.toString()
             val patientAge = holder.patientAge.text.toString()
@@ -44,7 +47,7 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
             val patientAddress = currentItem.address.toString()
             val patientLabName = currentItem.lab.toString()
             val patientDistrict = currentItem.district.toString()
-            val caseId=currentItem.caseId.toString()
+            val caseId = currentItem.caseId.toString()
             val bundle = bundleOf(
                 "id" to patientId,
                 "name" to patientName,
@@ -58,10 +61,15 @@ class PatientDeclinedAdapter(val ctx: Context, private val patientDeclinedData: 
                 "isDeclined" to isDeclined,
                 "pageToken" to "1"
             )
-            if(!InternetConnectivity.isNetworkAvailable(ctx)!!)
-                Toast.makeText(ctx,"Internet unavailable", Toast.LENGTH_LONG).show()
+            if (!InternetConnectivity.isNetworkAvailable(ctx)!!)
+                Toast.makeText(ctx, "Internet unavailable", Toast.LENGTH_LONG).show()
             else
-            ctx.startActivity(Intent(ctx, PatientDetailsActivity::class.java).putExtra("patientData", bundle))
+                ctx.startActivity(
+                    Intent(
+                        ctx,
+                        PatientDetailsActivity::class.java
+                    ).putExtra("patientData", bundle)
+                )
         }
     }
 

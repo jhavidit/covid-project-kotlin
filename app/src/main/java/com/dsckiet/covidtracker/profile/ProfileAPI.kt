@@ -21,7 +21,10 @@ interface profileAPIService {
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/users/change-pwd")
-    fun changePassword(@Header("x-auth-token") token: String,@Body newpassword : NewPasswordRequest): Call<PasswordResponse>
+    fun changePassword(
+        @Header("x-auth-token") token: String,
+        @Body newpassword: NewPasswordRequest
+    ): Call<PasswordResponse>
 
 }
 

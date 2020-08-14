@@ -19,7 +19,6 @@ import com.dsckiet.covidtracker.model.HospitalList
 import com.dsckiet.covidtracker.network.PatientsApi
 import com.dsckiet.covidtracker.screens.adapters.HospitalListAdapter
 import com.dsckiet.covidtracker.utils.InternetConnectivity
-import com.dsckiet.covidtracker.utils.logs
 import com.google.android.material.snackbar.Snackbar
 import com.robinhood.ticker.TickerUtils
 import com.robinhood.ticker.TickerView
@@ -129,7 +128,8 @@ class ChangeHospitalActivity : AppCompatActivity() {
                             "No Hospital available",
                             Snackbar.LENGTH_INDEFINITE
                         ).setAction("SUBMIT") {
-                            val intent=Intent(this@ChangeHospitalActivity,MainActivity::class.java)
+                            val intent =
+                                Intent(this@ChangeHospitalActivity, MainActivity::class.java)
                             intent.flags =
                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
@@ -137,9 +137,8 @@ class ChangeHospitalActivity : AppCompatActivity() {
                         }.show()
                     }
 
-                }
-                else{
-                    val jsonObject= JSONObject(response.errorBody()?.string()!!)
+                } else {
+                    val jsonObject = JSONObject(response.errorBody()?.string()!!)
 
                     Snackbar.make(
                         binding.coordinatorLayout,
