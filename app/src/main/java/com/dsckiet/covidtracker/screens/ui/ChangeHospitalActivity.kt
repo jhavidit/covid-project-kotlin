@@ -129,13 +129,11 @@ class ChangeHospitalActivity : AppCompatActivity() {
                             "No Hospital available",
                             Snackbar.LENGTH_INDEFINITE
                         ).setAction("SUBMIT") {
-                            startActivity(
-                                Intent(
-                                    this@ChangeHospitalActivity,
-                                    MainActivity::class.java
-                                )
-                            )
-                            finish()
+                            val intent=Intent(this@ChangeHospitalActivity,MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+
                         }.show()
                     }
 
