@@ -23,14 +23,17 @@
 <br>
 
 
+https://user-images.githubusercontent.com/54817177/168470296-925f3bd0-14bb-4419-8723-c9be56a34850.mp4
+
+
 ## Instructions to run
 
    -   Open doctors-app in Android Studio
    -   To generate APK, Go to `Build > Build Bundle(s)/APK > Build APK(s)`.
    -   To run directly, CLick on `Run` button.
    -   Login using default/test credentials
-	-   doctor@dsckiet.com
-    	-   123456
+		-   email: doctor@dsckiet.com
+    	        -   pass: 123456
 
 <br>
 <br>
